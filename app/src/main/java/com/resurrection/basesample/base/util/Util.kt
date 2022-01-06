@@ -51,7 +51,7 @@ fun Any.isValid(): Boolean {
     return isValid
 }
 
-fun View.setCustomAnimation(anim: Int) {
+fun View.startCustomAnimation(anim: Int) {
     this.startAnimation(AnimationUtils.loadAnimation(this.context, anim))
 }
 
