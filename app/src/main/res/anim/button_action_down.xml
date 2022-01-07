@@ -1,6 +1,6 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android" >
     <alpha
             android:interpolator="@android:anim/accelerate_interpolator"
-            android:fromAlpha="0.6" android:toAlpha="1.0"
+            android:fromAlpha="0.5" android:toAlpha="1.0"
             android:duration="500"/>
 </set>

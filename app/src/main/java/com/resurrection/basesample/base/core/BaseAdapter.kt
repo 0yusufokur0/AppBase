@@ -11,25 +11,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.resurrection.imkb.base.AppSession
 import javax.inject.Inject
 
-open class BaseAdapter<T, viewDataBinding : ViewDataBinding>(
-    var layoutResource: Int,
-    var currentList: ArrayList<T>,
-    var itemId: Int,
-    var onItemClick: (T) -> Unit
+open class BaseAdapter<T>(
+    private val layoutResource: Int,
+    private val  itemId: Int,
+    private val currentList: ArrayList<T>,
+    private val onItemClick: (T) -> Unit
 ) : RecyclerView.Adapter<BaseAdapter.BaseHolder<T>>(),Filterable {
 
     @Inject
-    lateinit var appSession: AppSession
-
-    lateinit var binding: viewDataBinding
+    lateinit var appSession: AppSession // TODO: Logger on click item in recycler view
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<T> {
-        binding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
-            layoutResource,
-            parent,
-            false
-        )
+       var binding:ViewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutResource, parent, false)
         return BaseHolder(binding, itemId, onItemClick)
     }
 
@@ -37,32 +30,15 @@ open class BaseAdapter<T, viewDataBinding : ViewDataBinding>(
 
     override fun getItemCount() = currentList.size
 
-    fun updateList(newList: ArrayList<T>) {
-        val diffCallBack = BaseDiffUtil<T>(currentList, newList)
-        val diffResult = DiffUtil.calculateDiff(diffCallBack)
-        diffResult.dispatchUpdatesTo(this)
-    }
-
     class BaseHolder<T>(
         private var binding: ViewDataBinding,
         private var itemId: Int,
         var onItemClick: (T) -> Unit
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: T) {
             binding.setVariable(itemId, item)
             itemView.setOnClickListener { onItemClick((item)) }
         }
-    }
-
-    class BaseDiffUtil<T>(
-        private val oldList: List<T>,
-        private val newList: List<T>
-    ) : DiffUtil.Callback() {
-        override fun getOldListSize(): Int = oldList.size
-        override fun getNewListSize(): Int = newList.size
-        override fun areItemsTheSame(oldPosition: Int, newPosition: Int) = oldList[oldPosition] == newList[newPosition]
-        override fun areContentsTheSame(oldPosition: Int, newPosition: Int) = oldList[oldPosition] == newList[newPosition]
     }
 
     override fun getFilter(): Filter {
@@ -91,5 +67,47 @@ open class BaseAdapter<T, viewDataBinding : ViewDataBinding>(
             }
         }
     }
+
+    class BaseDiffUtil<T>(
+        private val oldList: List<T>,
+        private val newList: List<T>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int = oldList.size
+        override fun getNewListSize(): Int = newList.size
+        override fun areItemsTheSame(oldPosition: Int, newPosition: Int) = oldList[oldPosition] == newList[newPosition]
+        override fun areContentsTheSame(oldPosition: Int, newPosition: Int) = oldList[oldPosition] == newList[newPosition]
+    }
+
+    fun addAll(list: List<T>) {
+        val diffUtil = BaseDiffUtil(currentList, list)
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
+        currentList.clear()
+        currentList.addAll(list)
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun add(item: T) {
+        currentList.add(item)
+        notifyItemInserted(currentList.size - 1)
+    }
+
+    fun remove(item: T) {
+        val position = currentList.indexOf(item)
+        currentList.remove(item)
+        notifyItemRemoved(position)
+    }
+
+    fun update(item: T) {
+        val position = currentList.indexOf(item)
+        currentList[position] = item
+        notifyItemChanged(position)
+    }
+
+    fun clear() {
+        currentList.clear()
+        notifyDataSetChanged()
+    }
+
+    fun getItem(position: Int) = currentList[position]
 }
 
