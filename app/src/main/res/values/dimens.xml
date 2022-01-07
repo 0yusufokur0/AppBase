@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<dimen name="rounded_button">20dp</dimen>
+    <dimen name="rounded_corner_radius">20dp</dimen>
+<dimen name="rounded_button">15dp</dimen>
+<dimen name="rounded_text">15dp</dimen>
+
 </resources>

@@ -5,7 +5,9 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.25555555555555554" />
         <entry key="app/src/main/res/drawable/bottom_sheet_bg.xml" value="0.25555555555555554" />
+        <entry key="app/src/main/res/drawable/rounded_button_bg.xml" value="0.16145833333333334" />
         <entry key="app/src/main/res/drawable/rounded_rectangle_bg.xml" value="0.2564814814814815" />
+        <entry key="app/src/main/res/drawable/rounded_text_bg.xml" value="0.17604166666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19882246376811594" />
       </map>
     </option>
