@@ -22,8 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hello World!"
+            android:visibility="invisible"
             android:id="@+id/appEditText" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.resurrection.basesample.base.widget.AppImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp" app:layout_constraintBottom_toBottomOf="@+id/button"
+            app:layout_constraintStart_toStartOf="@+id/button"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
