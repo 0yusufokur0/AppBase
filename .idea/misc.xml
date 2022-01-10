@@ -4,18 +4,21 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.25555555555555554" />
+        <entry key="../../Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.2791666666666667" />
         <entry key="app/src/main/res/drawable/bottom_sheet_bg.xml" value="0.25555555555555554" />
         <entry key="app/src/main/res/drawable/rounded_button_bg.xml" value="0.16145833333333334" />
         <entry key="app/src/main/res/drawable/rounded_rectangle_bg.xml" value="0.2564814814814815" />
         <entry key="app/src/main/res/drawable/rounded_text_bg.xml" value="0.17604166666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19882246376811594" />
+        <entry key="app/src/main/res/layout/list_horizontal_item.xml" value="0.15572916666666667" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.278125" />
       </map>
     </option>
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="jbr-11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

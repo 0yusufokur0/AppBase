@@ -1,23 +1,21 @@
 package com.resurrection.basesample
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import com.resurrection.basesample.base.general.toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.resurrection.basesample.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        findViewById<Button>(R.id.button).setOnClickListener {
-            toast("Hello World")
-        }
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
     }
 }
+
