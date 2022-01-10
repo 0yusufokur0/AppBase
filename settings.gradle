@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "BaseSample"
 include ':app'
+include ':LibraryIntro'
