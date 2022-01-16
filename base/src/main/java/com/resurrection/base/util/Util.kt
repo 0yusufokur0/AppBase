@@ -1,20 +1,35 @@
 package com.resurrection.base.util
 
-import android.app.Activity
+
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.resurrection.base.R
+import com.resurrection.base.databinding.ProgressBarLayoutBinding
 
 
+fun setUpLoadingIndicator(context: Context): AlertDialog {
+    val dialogBuilder = AlertDialog.Builder(context)
+    val alertBinding =  ProgressBarLayoutBinding.inflate(LayoutInflater.from(context.applicationContext))
+    dialogBuilder.setView(alertBinding.root)
+    val alertDialog = dialogBuilder.create()
+    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    alertDialog.hide()
+    return alertDialog
+}
 
 fun isNetworkAvailable(context: Context): Boolean {
     try {
@@ -54,11 +69,9 @@ fun Any.isValid(): Boolean {
     return isValid
 }
 
-fun View.startCustomAnimation(anim: Int) {
-    this.startAnimation(AnimationUtils.loadAnimation(this.context, anim))
-}
+fun View.startCustomAnimation(anim: Int) = this.startAnimation(AnimationUtils.loadAnimation(this.context, anim))
 
-fun Activity.changeStatusBarColor(color: Int = android.R.color.black) {
+fun AppCompatActivity.changeStatusBarColor(color: Int = android.R.color.black) {
     val window: Window = this.window
     window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

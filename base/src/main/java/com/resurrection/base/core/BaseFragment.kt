@@ -6,32 +6,44 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.resurrection.base.AppSession
+import com.resurrection.base.data.AppState
+import com.resurrection.base.data.DataHolderManager
+import com.resurrection.base.data.SharedPreferencesManager
+import com.resurrection.base.general.Logger
+import com.resurrection.base.util.isNetworkAvailable
+import com.resurrection.base.util.setUpLoadingIndicator
 import javax.inject.Inject
 
-
-abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>
-    (
+abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     @LayoutRes val resLayoutId: Int, private val viewModelClass: Class<VM>
 ) : Fragment() {
 
     @Inject
-    lateinit var appSession: AppSession
+    lateinit var appState: AppState
+    @Inject
+    lateinit var dataHolder: DataHolderManager
+    @Inject
+    lateinit var sharedPreferences: SharedPreferencesManager
+    @Inject
+    lateinit var logger: Logger
+
+    lateinit var loadingIndicator: AlertDialog
     private var _binding: VDB? = null
     val binding get() = _binding!!
+
     protected val viewModel by lazy { ViewModelProvider(this).get(viewModelClass) }
-    private var fragmentName = this.javaClass.simpleName
 
     abstract fun init(savedInstanceState: Bundle?)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appSession.logger.fragmentOnCreate(fragmentName)
+        logger.fragmentOnCreate()
     }
 
     @CallSuper
@@ -40,7 +52,6 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        appSession.logger.fragmentOnCreateView(fragmentName)
         _binding = DataBindingUtil.inflate(inflater, resLayoutId, container, false)
         return _binding!!.root
     }
@@ -48,41 +59,43 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            init(savedInstanceState)
-
+        loadingIndicator = setUpLoadingIndicator(requireContext())
+        logger.fragmentName = this.javaClass.simpleName
+        appState.isNetworkAvailable = isNetworkAvailable(requireContext())
+        init(savedInstanceState)
     }
 
     // region LifeCycle
     override fun onStart() {
         super.onStart()
-        appSession.logger.fragmentOnStart(fragmentName)
+        logger.fragmentOnStart()
     }
 
     override fun onResume() {
         super.onResume()
-        appSession.logger.fragmentOnResume(fragmentName)
+        logger.fragmentOnResume()
     }
 
     override fun onPause() {
         super.onPause()
-        appSession.logger.fragmentOnPause(fragmentName)
+        logger.fragmentOnPause()
     }
 
     override fun onStop() {
         super.onStop()
-        appSession.logger.fragmentOnStop(fragmentName)
+        logger.fragmentOnStop()
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
-        appSession.logger.fragmentOnDestroyView(fragmentName)
+        logger.fragmentOnDestroyView()
         _binding = null
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        appSession.logger.fragmentOnDestroy(fragmentName)
+        logger.fragmentOnDestroy()
     }
     // endregion
 }

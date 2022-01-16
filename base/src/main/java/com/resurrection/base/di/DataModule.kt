@@ -2,7 +2,6 @@ package com.resurrection.base.di
 
 import android.content.Context
 import android.os.Bundle
-import com.resurrection.base.AppSession
 import com.resurrection.base.data.AppState
 import com.resurrection.base.data.DataHolderManager
 import com.resurrection.base.data.SharedPreferencesManager
@@ -20,7 +19,7 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideAppState() = AppState(isAppForeground = true, isAppLightMode = true)
+    fun provideAppState() = AppState(isAppForeground = true, isAppLightMode = true,isNetworkAvailable = false)
 
     @Provides
     @Singleton
@@ -33,10 +32,5 @@ object DataModule {
     @Singleton
     @Provides
     fun provideLogger() = Logger()
-
-    @Singleton
-    @Provides
-    fun provideAppSession(appState: AppState,dataHolder: DataHolderManager, sharedPref: SharedPreferencesManager, logger: Logger) =
-        AppSession(appState,dataHolder,sharedPref,logger)
 
 }

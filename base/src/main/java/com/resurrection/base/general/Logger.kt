@@ -13,7 +13,8 @@ class Logger {
     private var saveState = false
     private val logList = mutableListOf<String>()
     private val LOG_TAG = "AppLogger"
-    private var activityName = ""
+    var activityName = ""
+    var fragmentName = ""
 
     private var rootPath = "" + Environment.getExternalStorageDirectory().absolutePath
     private var logPath = "" + Environment.getExternalStorageDirectory().absolutePath + "/IMKB/Logs"
@@ -55,13 +56,12 @@ class Logger {
 
     fun record(){
         saveState = true
-        activityOnCreate(activityName)
+        activityOnCreate()
         logList.clear()
     }
 
     // region Activity lifecycle
-    fun activityOnCreate(activityName: String) {
-        this.activityName = activityName
+    fun activityOnCreate() {
         if (saveState){
             rootPath = createFolder(rootPath, "IMKB")
             rootPath = createFolder(rootPath, "Logs")
@@ -78,28 +78,28 @@ class Logger {
               }*/
     }
 
-    fun activityOnStart(activityName: String) = this.d("Activity OnStart : $activityName")
-    fun activityOnResume(activityName: String) = this.d("Activity OnResume : $activityName")
-    fun activityOnPause(activityName: String) = this.d("Activity OnPause : $activityName")
-    fun activityOnStop(activityName: String) {
+    fun activityOnStart() = this.d("Activity OnStart : $activityName")
+    fun activityOnResume() = this.d("Activity OnResume : $activityName")
+    fun activityOnPause() = this.d("Activity OnPause : $activityName")
+    fun activityOnStop() {
         this.d("Activity OnStop : $activityName")
         if (saveState) createFile("$rootPath/$activityName", "Log", logList)
         logList.clear()
     }
 
-    fun activityOnDestroy(activityName: String) = this.d("Activity OnDestroy : $activityName")
-    fun activityOnRestart(activityName: String) = this.d("Activity OnRestart : $activityName")
+    fun activityOnDestroy() = this.d("Activity OnDestroy : $activityName")
+    fun activityOnRestart() = this.d("Activity OnRestart : $activityName")
     // endregion
 
     // region Fragment lifecycle
-    fun fragmentOnCreate(fragmentName: String) = logList.add("Fragment Create : $fragmentName")
-    fun fragmentOnCreateView(fragmentName: String) = logList.add("Fragment OnCreateView : $fragmentName")
-    fun fragmentOnStart(fragmentName: String) = this.d("Fragment OnStart : $fragmentName")
-    fun fragmentOnResume(fragmentName: String) = this.d("Fragment OnResume : $fragmentName")
-    fun fragmentOnPause(fragmentName: String) = this.d("Fragment OnPause : $fragmentName")
-    fun fragmentOnStop(fragmentName: String) = this.d("Fragment OnStop : $fragmentName")
-    fun fragmentOnDestroyView(fragmentName: String) = this.d("Fragment OnDestroyView : $fragmentName")
-    fun fragmentOnDestroy(fragmentName: String) = this.d("Fragment OnDestroy : $fragmentName")
+    fun fragmentOnCreate() = logList.add("Fragment Create : $fragmentName")
+    fun fragmentOnCreateView() = logList.add("Fragment OnCreateView : $fragmentName")
+    fun fragmentOnStart() = this.d("Fragment OnStart : $fragmentName")
+    fun fragmentOnResume() = this.d("Fragment OnResume : $fragmentName")
+    fun fragmentOnPause() = this.d("Fragment OnPause : $fragmentName")
+    fun fragmentOnStop() = this.d("Fragment OnStop : $fragmentName")
+    fun fragmentOnDestroyView() = this.d("Fragment OnDestroyView : $fragmentName")
+    fun fragmentOnDestroy() = this.d("Fragment OnDestroy : $fragmentName")
     // endregion
 
     @SuppressLint("SimpleDateFormat")

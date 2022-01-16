@@ -1,7 +1,7 @@
 package com.resurrection.appbase
 
 import android.annotation.SuppressLint
-import android.app.Activity
+
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -31,6 +31,6 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainActivtyViewModel>(R.la
 
     }
 
-    fun<T> Activity.dataBinder(@LayoutRes layoutRes: Int) = DataBindingUtil.setContentView(this, layoutRes) as T
+    fun<T> AppCompatActivity.dataBinder(@LayoutRes layoutRes: Int) = DataBindingUtil.setContentView(this, layoutRes) as T
 }
 
