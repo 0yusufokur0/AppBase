@@ -1,15 +1,19 @@
 package com.resurrection.base.core
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.resurrection.base.AppSession
-import com.resurrection.base.util.Constants
+import com.resurrection.base.databinding.ProgressBarLayoutBinding
 import javax.inject.Inject
 
 
@@ -18,22 +22,34 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>
     @LayoutRes private val layoutRes: Int,
     private val viewModelClass: Class<VM>
 ) : AppCompatActivity() {
+
     @Inject
     lateinit var appSession: AppSession
     lateinit var binding: VDB
     protected val viewModel by lazy { ViewModelProvider(this).get(viewModelClass) }
     private var activityName = ""
 
+    private lateinit var loadingIndicator: AlertDialog
+
     abstract fun init(savedInstanceState: Bundle?)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
             activityName = this@BaseActivity.localClassName
-        // show loading indicator
+            loadingIndicator = setUpLoadingIndicator()
             appSession.logger.activityOnCreate(this@BaseActivity.localClassName)
             binding = DataBindingUtil.setContentView(this@BaseActivity, layoutRes)
             init(savedInstanceState)
+    }
 
+    private fun setUpLoadingIndicator(): AlertDialog {
+        val dialogBuilder = AlertDialog.Builder(this)
+        val alertBinding =  ProgressBarLayoutBinding.inflate(LayoutInflater.from(this.applicationContext))
+        dialogBuilder.setView(alertBinding.root)
+        val alertDialog = dialogBuilder.create()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.show()
+        return alertDialog
     }
 
     fun requestPermission(permissions: Array<String>, requestCode: Int) {
@@ -45,7 +61,7 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>
     //region Lifecycle
     override fun onStart() {
         super.onStart()
-        appSession.dataHolder.putBoolean(Constants.IS_APP_FOREGROUND, true)
+        appSession.appState.isAppForeground = true
         appSession.logger.activityOnStart(activityName)
 
     }
@@ -62,7 +78,7 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>
 
     override fun onStop() {
         super.onStop()
-        appSession.dataHolder.putBoolean(Constants.IS_APP_FOREGROUND, false)
+        appSession.appState.isAppForeground = false
         appSession.logger.activityOnStop(activityName)
     }
 

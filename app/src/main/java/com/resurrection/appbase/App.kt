@@ -1,4 +1,4 @@
-package com.resurrection.basesample
+package com.resurrection.appbase
 
 import androidx.multidex.MultiDexApplication
 import dagger.hilt.android.HiltAndroidApp

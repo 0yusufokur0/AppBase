@@ -108,6 +108,14 @@ open class BaseAdapter<T>(
         notifyDataSetChanged()
     }
 
+
+    fun <T, R : Comparable<R>> MutableList<T>.sort( selector: (T) -> R?): Unit {
+
+    }
+
+
+
+
     fun getItem(position: Int) = currentList[position]
 }
 

@@ -9,7 +9,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.resurrection.basesample"
+        applicationId "com.resurrection.appbase"
         minSdk 23
         targetSdk 32
         versionCode 1
@@ -46,7 +46,11 @@ android {
 
 dependencies {
 
-    //implementation project(':base')
+
+    kapt 'com.android.databinding:compiler:3.2.0'
+
+
+    implementation project(':base')
 
 
     // Constraint Layout

@@ -9,8 +9,12 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
+import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import com.resurrection.base.R
+
+
 
 fun isNetworkAvailable(context: Context): Boolean {
     try {

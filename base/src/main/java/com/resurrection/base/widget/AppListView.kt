@@ -4,10 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.resurrection.base.BR
 import com.resurrection.base.R
 import com.resurrection.base.core.BaseAdapter
 import com.resurrection.base.data.model.Item
-
 
 class AppListView @JvmOverloads constructor(
     context: Context,
@@ -23,7 +23,7 @@ class AppListView @JvmOverloads constructor(
         list.forEach { itemList.add(Item(it)) }
         layoutManager = if(setVertical) LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         else LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-        mAdapter = BaseAdapter(layoutRes, 1, itemList) { listener(it.value) }
+        mAdapter = BaseAdapter(layoutRes, BR.data, itemList) { listener(it.value) }
         adapter = mAdapter
     }
 

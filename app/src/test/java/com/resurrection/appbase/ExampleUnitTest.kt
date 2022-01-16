@@ -1,4 +1,4 @@
-package com.resurrection.basesample
+package com.resurrection.appbase
 
 import org.junit.Test
 
