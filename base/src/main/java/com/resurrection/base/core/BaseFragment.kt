@@ -10,12 +10,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.resurrection.base.data.AppState
 import com.resurrection.base.data.DataHolderManager
 import com.resurrection.base.data.SharedPreferencesManager
 import com.resurrection.base.general.Logger
+import com.resurrection.base.general.ThrowableError
+import com.resurrection.base.util.Resource
+import com.resurrection.base.util.Status
 import com.resurrection.base.util.isNetworkAvailable
 import com.resurrection.base.util.setUpLoadingIndicator
 import javax.inject.Inject
@@ -63,6 +67,21 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
         logger.fragmentName = this.javaClass.simpleName
         appState.isNetworkAvailable = isNetworkAvailable(requireContext())
         init(savedInstanceState)
+    }
+
+    fun <T> LiveData<Resource<T>>.observeData(
+        success: (T?) -> Unit,
+        loading: (() -> Unit)?,
+        error: (() -> Unit)? = null
+    ) {
+        this.observe(this@BaseFragment) { data ->
+            when (data.status) {
+                Status.SUCCESS -> success.invoke(data.data)
+                Status.LOADING -> loading?.invoke()
+                Status.ERROR -> error?.invoke()
+                else ->  ThrowableError("${data.data} fetch error")
+            }
+        }
     }
 
     // region LifeCycle
