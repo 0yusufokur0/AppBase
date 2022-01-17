@@ -19,7 +19,7 @@ open class BaseAdapter<T>(
     private val itemId: Int,
     private var currentList: ArrayList<T>,
     private val onItemClick: (T) -> Unit
-) : RecyclerView.Adapter<BaseAdapter.BaseHolder<T>>(), Filterable {
+) : RecyclerView.Adapter<BaseAdapter.BaseHolder<T>>() {
 
     @Inject
     lateinit var appState: AppState
@@ -62,16 +62,22 @@ open class BaseAdapter<T>(
         }
     }
 
-    override fun getFilter(): Filter {
-        return object : Filter() {
+    fun <R>filterBy(constraint:CharSequence,selector: ((T) -> R?)? = null){
+
+        val mFilter = object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val filteredList = ArrayList<T>()
                 if (constraint == null || constraint.isEmpty()) {
                     filteredList.addAll(currentList)
                 } else {
                     val filterPattern = constraint.toString().toLowerCase().trim()
-                    for (item in currentList)
-                        if (item.toString().toLowerCase().contains(filterPattern)) filteredList.add(item)
+
+                    selector?.let {
+                        for (item in currentList)
+                            if (it.invoke(item).toString().toLowerCase().contains(filterPattern)) filteredList.add(item)
+                    }?:run {
+                        for (item in currentList)
+                            if (item.toString().toLowerCase().contains(filterPattern)) filteredList.add(item) }
                 }
                 val results = FilterResults()
                 results.values = filteredList
@@ -84,6 +90,7 @@ open class BaseAdapter<T>(
                 notifyDataSetChanged()
             }
         }
+        mFilter.filter(constraint)
     }
 
     class BaseDiffUtil<T>(

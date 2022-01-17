@@ -24,8 +24,9 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
         var adapter = BaseAdapter(R.layout.photo_item, BR.photoItem, arrayListOf<PhotoModelItem>()){
 
         }
+
         binding.appButton.setOnClickListener {
-         adapter.sort { it.title }
+            adapter.filterBy("harum"){ it.title }
         }
 
         viewModel.getPhotos()
