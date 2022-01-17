@@ -9,6 +9,7 @@ import com.resurrection.appbase.databinding.FragmentPhotosBinding
 import com.resurrection.base.core.BaseAdapter
 import com.resurrection.base.core.BaseFragment
 import com.resurrection.base.util.loadImage
+import com.veripark.instapark.data.model.photos.PhotoModelItem
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,8 +21,12 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
     override fun init(savedInstanceState: Bundle?) {
 
 
-        //binding.imageView.loadImage("https://miro.medium.com/max/700/1*BlKF-lVu3O8SSXwKPwjKsQ.png")
+        var adapter = BaseAdapter(R.layout.photo_item, BR.photoItem, arrayListOf<PhotoModelItem>()){
 
+        }
+        binding.appButton.setOnClickListener {
+         adapter.sort { it.title }
+        }
 
         viewModel.getPhotos()
         viewModel.photos.observeData(success = {
@@ -29,10 +34,12 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
                 binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-                binding.recyclerView.adapter = BaseAdapter(R.layout.photo_item, BR.photoItem, it) {
+                adapter.addAll(it)
+                binding.recyclerView.adapter = adapter
 
-                }
             }
-        })
+        }
+        )
     }
+
 }
