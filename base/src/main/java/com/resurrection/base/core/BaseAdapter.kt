@@ -8,6 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.resurrection.base.data.AppState
+import com.resurrection.base.data.DataHolderManager
+import com.resurrection.base.data.SharedPreferencesManager
+import com.resurrection.base.general.Logger
 import javax.inject.Inject
 
 open class BaseAdapter<T>(
@@ -18,7 +22,15 @@ open class BaseAdapter<T>(
 ) : RecyclerView.Adapter<BaseAdapter.BaseHolder<T>>(),Filterable {
 
     @Inject
-    lateinit var appSession: AppSession // TODO: Logger on click item in recycler view
+    lateinit var appState: AppState
+    @Inject
+    lateinit var dataHolder: DataHolderManager
+    @Inject
+    lateinit var sharedPreferences: SharedPreferencesManager
+    @Inject
+    lateinit var logger: Logger
+
+    // TODO: Logger on click item in recycler view
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<T> {
        var binding: ViewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutResource, parent, false)

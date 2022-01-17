@@ -46,6 +46,9 @@ android {
 
 dependencies {
 
+    implementation("io.coil-kt:coil:1.4.0")
+
+
     // Constraint Layout
     implementation "com.android.support.constraint:constraint-layout:2.0.4"
 

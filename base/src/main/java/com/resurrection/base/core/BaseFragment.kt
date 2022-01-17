@@ -71,7 +71,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
 
     fun <T> LiveData<Resource<T>>.observeData(
         success: (T?) -> Unit,
-        loading: (() -> Unit)?,
+        loading: (() -> Unit)? = null,
         error: (() -> Unit)? = null
     ) {
         this.observe(this@BaseFragment) { data ->

@@ -1,32 +1,32 @@
 package com.resurrection.appbase
 
-import android.annotation.SuppressLint
 
-import android.app.AlertDialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.View
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.resurrection.appbase.databinding.ActivityMainBinding
-import dagger.hilt.android.AndroidEntryPoint
-import android.widget.RelativeLayout
-
-import android.widget.ProgressBar
-
-
-import android.view.LayoutInflater
-import androidx.annotation.LayoutRes
 import com.resurrection.base.core.BaseActivity
-
-import com.resurrection.base.databinding.ProgressBarLayoutBinding
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.fragment.app.Fragment
+import com.resurrection.appbase.ui.main.photos.PhotosFragment
+import com.resurrection.base.general.toast
 
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding,MainActivtyViewModel>(R.layout.activity_main,MainActivtyViewModel::class.java) {
 
     override fun init(savedInstanceState: Bundle?) {
+
+
+        val newFragment: PhotosFragment = PhotosFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+
+
+        transaction.replace(binding.frameLayout.id, newFragment)
+        transaction.addToBackStack(null)
+
+        transaction.commit()
 
 
     }

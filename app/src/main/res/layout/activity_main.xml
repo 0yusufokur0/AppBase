@@ -9,5 +9,10 @@
         android:background="#6B6766"
         tools:context="com.resurrection.appbase.MainActivity">
 
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
