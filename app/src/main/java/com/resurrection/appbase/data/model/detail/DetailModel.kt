@@ -1,5 +1,8 @@
 package com.veripark.instapark.data.model.detail
 
+import com.resurrection.appbase.data.model.detail.Address
+import com.resurrection.appbase.data.model.detail.Company
+
 data class DetailModel(
     val address: Address,
     val company: Company,

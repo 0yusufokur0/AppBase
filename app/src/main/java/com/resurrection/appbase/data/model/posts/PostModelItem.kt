@@ -1,4 +1,4 @@
-package com.veripark.instapark.data.model.posts
+package com.resurrection.appbase.data.model.posts
 
 data class PostModelItem(
     val body: String,

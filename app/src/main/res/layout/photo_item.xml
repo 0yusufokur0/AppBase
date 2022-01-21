@@ -5,7 +5,7 @@
 
         <variable
             name="photoItem"
-            type="com.veripark.instapark.data.model.photos.PhotoModelItem" />
+            type="com.resurrection.appbase.data.model.photos.PhotoModelItem" />
     </data>
 
     <androidx.cardview.widget.CardView

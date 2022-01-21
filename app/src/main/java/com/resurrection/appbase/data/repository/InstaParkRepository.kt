@@ -1,10 +1,10 @@
 package com.veripark.instapark.data.repository
 
 import com.resurrection.base.util.Resource
-import com.veripark.instapark.data.model.photos.PhotoModel
-import com.veripark.instapark.data.model.posts.PostModel
+import com.resurrection.appbase.data.model.photos.PhotoModel
+import com.resurrection.appbase.data.model.posts.PostModel
 
-import com.veripark.instapark.data.model.users.UsersModel
+import com.resurrection.appbase.data.model.users.UsersModel
 import com.veripark.instapark.data.model.users.UsersModelItem
 import kotlinx.coroutines.flow.Flow
 

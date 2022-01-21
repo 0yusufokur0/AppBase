@@ -1,4 +1,4 @@
-package com.veripark.instapark.data.model.photos
+package com.resurrection.appbase.data.model.photos
 
 data class PhotoModelItem(
     val albumId: Int,

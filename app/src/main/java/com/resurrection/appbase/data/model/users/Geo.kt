@@ -1,4 +1,4 @@
-package com.veripark.instapark.data.model.users
+package com.resurrection.appbase.data.model.users
 
 data class Geo(
     val lat: String,

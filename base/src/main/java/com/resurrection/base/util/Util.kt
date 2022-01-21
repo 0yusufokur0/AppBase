@@ -27,6 +27,7 @@ fun setUpLoadingIndicator(context: Context): AlertDialog {
     dialogBuilder.setView(alertBinding.root)
     val alertDialog = dialogBuilder.create()
     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    alertDialog.setCanceledOnTouchOutside(false)
     alertDialog.hide()
     return alertDialog
 }
@@ -37,14 +38,14 @@ fun isNetworkAvailable(context: Context): Boolean {
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val capabilities =
         connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-    return if (capabilities != null) {
-        when {
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-            else -> true
-        }
-    }else false
+        return if (capabilities != null) {
+            when {
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> true
+            }
+        }else false
     }catch (e:Exception){
         return false
     }

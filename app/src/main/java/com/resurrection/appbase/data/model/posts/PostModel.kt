@@ -1,3 +1,3 @@
-package com.veripark.instapark.data.model.posts
+package com.resurrection.appbase.data.model.posts
 
 class PostModel : ArrayList<PostModelItem>()

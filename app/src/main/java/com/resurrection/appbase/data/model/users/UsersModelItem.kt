@@ -1,8 +1,7 @@
 package com.veripark.instapark.data.model.users
 
-import android.os.Parcelable
-
-import java.io.Serializable
+import com.resurrection.appbase.data.model.users.Address
+import com.resurrection.appbase.data.model.users.Company
 
 data class UsersModelItem(
     val address: Address,

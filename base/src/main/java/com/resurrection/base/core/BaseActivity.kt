@@ -1,5 +1,6 @@
 package com.resurrection.base.core
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.LayoutRes
@@ -53,6 +54,7 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
 
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     fun requestPermission(permissions: Array<String>, requestCode: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(permissions, requestCode)

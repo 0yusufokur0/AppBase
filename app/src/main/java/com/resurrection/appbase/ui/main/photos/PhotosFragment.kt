@@ -8,8 +8,7 @@ import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentPhotosBinding
 import com.resurrection.base.core.BaseAdapter
 import com.resurrection.base.core.BaseFragment
-import com.resurrection.base.util.loadImage
-import com.veripark.instapark.data.model.photos.PhotoModelItem
+import com.resurrection.appbase.data.model.photos.PhotoModelItem
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +26,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
 
         binding.appButton.setOnClickListener {
             adapter.filterBy("harum"){ it.title }
+            loadingIndicator.show()
         }
 
         viewModel.getPhotos()
