@@ -25,5 +25,18 @@ abstract class BaseViewModel : ViewModel(){
         }
     }
 
+    fun <T> MutableStateFlow<Resource<T>>.setData(
+        condition: Boolean = true,
+        request: suspend () -> Flow<Resource<T>>
+    ) = viewModelScope.launch {
+        if (condition) {
+            request()
+                .onStart { this@setData.value = Resource.Loading() }
+                .catch { this@setData.value = Resource.Error(it) }
+                .collect { this@setData.value = it }
+        } else {
+            this@setData.value = Resource.InValid(ThrowableError("request parameters is invalid"))
+        }
+    }
 
 }

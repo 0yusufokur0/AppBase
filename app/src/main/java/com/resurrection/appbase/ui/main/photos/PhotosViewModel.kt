@@ -8,6 +8,8 @@ import com.resurrection.appbase.data.model.photos.PhotoModel
 import com.veripark.instapark.data.repository.InstaParkRepository
 
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,6 +18,13 @@ class PhotosViewModel @Inject constructor(private val instaParkRepository: Insta
 
     private val _photos = MutableLiveData<Resource<PhotoModel>>()
     val photos: LiveData<Resource<PhotoModel>> = _photos
+
+    var testData = MutableStateFlow<Resource<PhotoModel>>(Resource.Loading())
+
+
+    init {
+        testData.setData { instaParkRepository.getPhotos() }
+    }
 
     fun getPhotos() = _photos.setData { instaParkRepository.getPhotos() }
 
