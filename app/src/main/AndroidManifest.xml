@@ -22,7 +22,7 @@
         android:usesCleartextTraffic="true"
         >
         <activity
-            android:name="com.resurrection.appbase.MainActivity"
+            android:name="com.resurrection.appbase.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

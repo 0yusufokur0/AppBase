@@ -1,6 +1,6 @@
 package com.resurrection.appbase.di
 
-import com.veripark.instapark.data.remote.InstaParkApiService
+import com.resurrection.appbase.data.remote.InstaParkApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.veripark.instapark.data.remote
+package com.resurrection.appbase.data.remote
 
 import com.resurrection.appbase.data.model.photos.PhotoModel
 import com.resurrection.appbase.data.model.posts.PostModel
@@ -20,14 +20,4 @@ interface InstaParkApiService {
     @GET("users/{id}")
     suspend fun getUser(@Path("id") id:String): Response<UsersModelItem>
 
-/*
-    @GET("3/movie/{id}")
-    fun getMovieById(
-        @Path("id") id: String,
-        @Query("api_key") apiKey: String = BuildConfig.MOVIE_TOKEN
-    ):Call<SearchDetailMovieResponse>*/
-
-/*
-    https://jsonplaceholder.typicode.com/users/1
-*/
 }

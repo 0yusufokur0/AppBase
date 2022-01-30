@@ -24,23 +24,16 @@ open class BaseAdapter<T>(
 
     @Inject
     lateinit var appState: AppState
-
     @Inject
     lateinit var dataHolder: DataHolderManager
-
     @Inject
     lateinit var sharedPreferences: SharedPreferencesManager
-
     @Inject
     lateinit var logger: Logger
+    lateinit var binding: ViewDataBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<T> {
-        val binding: ViewDataBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
-            layoutResource,
-            parent,
-            false
-        )
+         binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutResource, parent, false)
         return BaseHolder(binding, itemId, onItemClick)
     }
 

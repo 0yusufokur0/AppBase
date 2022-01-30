@@ -1,23 +1,19 @@
-package com.resurrection.appbase
+package com.resurrection.appbase.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import com.resurrection.appbase.data.model.photos.PhotoModel
+import com.resurrection.appbase.ui.photo.PhotosFragment
+import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.ActivityMainBinding
 import com.resurrection.base.core.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
-import com.resurrection.appbase.ui.main.photos.PhotosFragment
-import com.resurrection.base.util.Resource
-import com.resurrection.base.util.isValid
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding,MainActivityViewModel>(R.layout.activity_main,MainActivityViewModel::class.java) {
+class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(
+    R.layout.activity_main,
+    MainActivityViewModel::class.java) {
 
     override fun init(savedInstanceState: Bundle?) {
 

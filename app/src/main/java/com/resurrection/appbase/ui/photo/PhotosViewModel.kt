@@ -1,4 +1,4 @@
-package com.resurrection.appbase.ui.main.photos
+package com.resurrection.appbase.ui.photo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

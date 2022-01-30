@@ -17,27 +17,23 @@ import com.resurrection.base.general.Logger
 import com.resurrection.base.util.setUpLoadingIndicator
 import javax.inject.Inject
 
-
 abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
     @LayoutRes private val layoutRes: Int,
     private val viewModelClass: Class<VM>
-) : AppCompatActivity() {
+) : AppCompatActivity(){
 
     @Inject
     lateinit var appState: AppState
-
     @Inject
     lateinit var dataHolder: DataHolderManager
-
     @Inject
     lateinit var sharedPreferences: SharedPreferencesManager
-
     @Inject
     lateinit var logger: Logger
 
+
     lateinit var binding: VDB
     lateinit var loadingIndicator: AlertDialog
-
     protected val viewModel by lazy { ViewModelProvider(this).get(viewModelClass) }
 
     abstract fun init(savedInstanceState: Bundle?)

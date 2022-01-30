@@ -13,5 +13,4 @@ interface InstaParkRepository {
     suspend fun getUser(id:String): Flow<Resource<UsersModelItem>>
     suspend fun getPosts(): Flow<Resource<PostModel>>
     suspend fun getPhotos(): Flow<Resource<PhotoModel>>
-
 }

@@ -1,10 +1,24 @@
 package com.resurrection.base.core
 
+import com.resurrection.base.data.AppState
+import com.resurrection.base.data.DataHolderManager
+import com.resurrection.base.data.SharedPreferencesManager
+import com.resurrection.base.general.Logger
 import com.resurrection.base.util.Resource
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
+import javax.inject.Inject
 
 open class BaseRepository {
+
+    @Inject
+    lateinit var appState: AppState
+    @Inject
+    lateinit var dataHolder: DataHolderManager
+    @Inject
+    lateinit var sharedPreferences: SharedPreferencesManager
+    @Inject
+    lateinit var logger: Logger
 
     @JvmName("getData1")
     fun <T> getData(request: suspend () -> Response<T>) =  flow { emit(getResourceByNetworkRequest { request() }) }

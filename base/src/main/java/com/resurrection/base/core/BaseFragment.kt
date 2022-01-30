@@ -37,11 +37,9 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     lateinit var sharedPreferences: SharedPreferencesManager
     @Inject
     lateinit var logger: Logger
-
     lateinit var loadingIndicator: AlertDialog
     private var _binding: VDB? = null
     val binding get() = _binding!!
-
     protected val viewModel by lazy { ViewModelProvider(this).get(viewModelClass) }
 
     abstract fun init(savedInstanceState: Bundle?)

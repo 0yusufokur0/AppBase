@@ -1,7 +1,7 @@
 package com.resurrection.appbase.data.repository
 
 import com.resurrection.base.core.BaseRepository
-import com.veripark.instapark.data.remote.InstaParkApiService
+import com.resurrection.appbase.data.remote.InstaParkApiService
 import com.veripark.instapark.data.repository.InstaParkRepository
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.resurrection.appbase.ui.main.photos
+package com.resurrection.appbase.ui.photo
 
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager

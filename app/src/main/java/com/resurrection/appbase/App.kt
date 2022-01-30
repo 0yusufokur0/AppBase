@@ -1,7 +1,7 @@
 package com.resurrection.appbase
 
-import androidx.multidex.MultiDexApplication
+import com.resurrection.base.core.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class App : MultiDexApplication()
+class App : BaseApplication()
