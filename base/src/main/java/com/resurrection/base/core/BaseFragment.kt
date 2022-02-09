@@ -22,25 +22,22 @@ import com.resurrection.base.general.ThrowableError
 import com.resurrection.base.util.Resource
 import com.resurrection.base.util.Status
 import com.resurrection.base.util.isNetworkAvailable
-import com.resurrection.base.util.setUpLoadingIndicator
+import com.resurrection.base.widget.AppLoadingIndicator
 import javax.inject.Inject
 
 abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     @LayoutRes val resLayoutId: Int, private val viewModelClass: Class<VM>
 ) : Fragment() {
 
-    @Inject
-    lateinit var appState: AppState
-    @Inject
-    lateinit var dataHolder: DataHolderManager
-    @Inject
-    lateinit var sharedPreferences: SharedPreferencesManager
-    @Inject
-    lateinit var logger: Logger
-    lateinit var loadingIndicator: AlertDialog
+    @Inject lateinit var appState: AppState
+    @Inject lateinit var dataHolder: DataHolderManager
+    @Inject lateinit var sharedPreferences: SharedPreferencesManager
+    @Inject lateinit var logger: Logger
+    @Inject lateinit var loadingIndicator: AppLoadingIndicator
+
     private var _binding: VDB? = null
     val binding get() = _binding!!
-    protected val viewModel by lazy { ViewModelProvider(this).get(viewModelClass) }
+    protected val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
 
     abstract fun init(savedInstanceState: Bundle?)
 
@@ -62,7 +59,6 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadingIndicator = setUpLoadingIndicator(requireContext())
         logger.fragmentName = this.javaClass.simpleName
         appState.isNetworkAvailable = isNetworkAvailable(requireContext())
         init(savedInstanceState)

@@ -6,6 +6,7 @@ import com.resurrection.base.data.AppState
 import com.resurrection.base.data.DataHolderManager
 import com.resurrection.base.data.SharedPreferencesManager
 import com.resurrection.base.general.Logger
+import com.resurrection.base.widget.AppLoadingIndicator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,5 +33,9 @@ object DataModule {
     @Singleton
     @Provides
     fun provideLogger() = Logger()
+
+    @Singleton
+    @Provides
+    fun provideAppLoadingIndicator() = AppLoadingIndicator()
 
 }

@@ -5,12 +5,14 @@ import android.view.ViewGroup
 import android.widget.Filter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.resurrection.base.data.AppState
 import com.resurrection.base.data.DataHolderManager
 import com.resurrection.base.data.SharedPreferencesManager
 import com.resurrection.base.general.Logger
+import com.resurrection.base.widget.AppLoadingIndicator
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -22,14 +24,11 @@ open class BaseAdapter<T>(
     private val onItemClick: (T) -> Unit
 ) : RecyclerView.Adapter<BaseAdapter.BaseHolder<T>>() {
 
-    @Inject
-    lateinit var appState: AppState
-    @Inject
-    lateinit var dataHolder: DataHolderManager
-    @Inject
-    lateinit var sharedPreferences: SharedPreferencesManager
-    @Inject
-    lateinit var logger: Logger
+    @Inject lateinit var appState: AppState
+    @Inject lateinit var dataHolder: DataHolderManager
+    @Inject lateinit var sharedPreferences: SharedPreferencesManager
+    @Inject lateinit var logger: Logger
+    @Inject lateinit var loadingIndicator: AppLoadingIndicator
     lateinit var binding: ViewDataBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<T> {

@@ -21,16 +21,7 @@ import com.resurrection.base.R
 import com.resurrection.base.databinding.ProgressBarLayoutBinding
 
 
-fun setUpLoadingIndicator(context: Context): AlertDialog {
-    val dialogBuilder = AlertDialog.Builder(context)
-    val alertBinding =  ProgressBarLayoutBinding.inflate(LayoutInflater.from(context.applicationContext))
-    dialogBuilder.setView(alertBinding.root)
-    val alertDialog = dialogBuilder.create()
-    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    alertDialog.setCanceledOnTouchOutside(false)
-    alertDialog.hide()
-    return alertDialog
-}
+
 
 fun isNetworkAvailable(context: Context): Boolean {
     try {
