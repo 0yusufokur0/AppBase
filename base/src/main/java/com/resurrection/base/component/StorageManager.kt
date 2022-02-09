@@ -1,4 +1,4 @@
-package com.resurrection.base.data
+package com.resurrection.base.component
 
 /**
  * Created by Yusuf Okur on 01.04.2022

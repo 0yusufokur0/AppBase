@@ -1,12 +1,11 @@
 package com.resurrection.base.core
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.multidex.MultiDexApplication
-import com.resurrection.base.data.AppState
-import com.resurrection.base.data.DataHolderManager
-import com.resurrection.base.data.SharedPreferencesManager
-import com.resurrection.base.general.Logger
-import com.resurrection.base.widget.AppLoadingIndicator
+import com.resurrection.base.component.AppState
+import com.resurrection.base.component.DataHolderManager
+import com.resurrection.base.component.SharedPreferencesManager
+import com.resurrection.base.component.Logger
+import com.resurrection.base.component.AppLoadingIndicator
 import javax.inject.Inject
 
 open class BaseApplication  : MultiDexApplication(){

@@ -1,13 +1,13 @@
 package com.resurrection.base.core
 
 import androidx.lifecycle.*
-import com.resurrection.base.data.AppState
-import com.resurrection.base.data.DataHolderManager
-import com.resurrection.base.data.SharedPreferencesManager
-import com.resurrection.base.general.Logger
+import com.resurrection.base.component.AppState
+import com.resurrection.base.component.DataHolderManager
+import com.resurrection.base.component.SharedPreferencesManager
+import com.resurrection.base.component.Logger
 import com.resurrection.base.general.ThrowableError
 import com.resurrection.base.util.Resource
-import com.resurrection.base.widget.AppLoadingIndicator
+import com.resurrection.base.component.AppLoadingIndicator
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject

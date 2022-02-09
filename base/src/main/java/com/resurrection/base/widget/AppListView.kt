@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.resurrection.base.BR
 import com.resurrection.base.R
 import com.resurrection.base.core.BaseAdapter
-import com.resurrection.base.data.model.Item
+import com.resurrection.base.model.Item
 
 class AppListView @JvmOverloads constructor(
     context: Context,

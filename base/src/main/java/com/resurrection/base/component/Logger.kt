@@ -1,4 +1,4 @@
-package com.resurrection.base.general
+package com.resurrection.base.component
 
 import android.annotation.SuppressLint
 import android.os.Environment

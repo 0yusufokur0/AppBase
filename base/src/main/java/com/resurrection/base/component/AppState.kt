@@ -1,4 +1,4 @@
-package com.resurrection.base.data
+package com.resurrection.base.component
 
 import android.text.style.ForegroundColorSpan
 import javax.inject.Inject

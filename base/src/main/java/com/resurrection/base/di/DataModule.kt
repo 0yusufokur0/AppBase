@@ -2,11 +2,11 @@ package com.resurrection.base.di
 
 import android.content.Context
 import android.os.Bundle
-import com.resurrection.base.data.AppState
-import com.resurrection.base.data.DataHolderManager
-import com.resurrection.base.data.SharedPreferencesManager
-import com.resurrection.base.general.Logger
-import com.resurrection.base.widget.AppLoadingIndicator
+import com.resurrection.base.component.AppState
+import com.resurrection.base.component.DataHolderManager
+import com.resurrection.base.component.SharedPreferencesManager
+import com.resurrection.base.component.Logger
+import com.resurrection.base.component.AppLoadingIndicator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

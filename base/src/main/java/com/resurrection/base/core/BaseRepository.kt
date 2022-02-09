@@ -1,17 +1,16 @@
 package com.resurrection.base.core
 
-import androidx.lifecycle.ViewModelProvider
-import com.resurrection.base.data.AppState
-import com.resurrection.base.data.DataHolderManager
-import com.resurrection.base.data.SharedPreferencesManager
-import com.resurrection.base.general.Logger
+import com.resurrection.base.component.AppState
+import com.resurrection.base.component.DataHolderManager
+import com.resurrection.base.component.SharedPreferencesManager
+import com.resurrection.base.component.Logger
 import com.resurrection.base.util.Resource
-import com.resurrection.base.widget.AppLoadingIndicator
+import com.resurrection.base.component.AppLoadingIndicator
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 import javax.inject.Inject
 
-open class BaseRepository {
+abstract class BaseRepository {
 
     @Inject lateinit var appState: AppState
     @Inject lateinit var dataHolder: DataHolderManager

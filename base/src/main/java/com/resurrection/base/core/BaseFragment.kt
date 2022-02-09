@@ -6,23 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.resurrection.base.data.AppState
-import com.resurrection.base.data.DataHolderManager
-import com.resurrection.base.data.SharedPreferencesManager
-import com.resurrection.base.general.Logger
+import com.resurrection.base.component.AppState
+import com.resurrection.base.component.DataHolderManager
+import com.resurrection.base.component.SharedPreferencesManager
+import com.resurrection.base.component.Logger
 import com.resurrection.base.general.ThrowableError
 import com.resurrection.base.util.Resource
 import com.resurrection.base.util.Status
 import com.resurrection.base.util.isNetworkAvailable
-import com.resurrection.base.widget.AppLoadingIndicator
+import com.resurrection.base.component.AppLoadingIndicator
 import javax.inject.Inject
 
 abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(

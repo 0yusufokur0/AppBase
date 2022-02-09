@@ -1,4 +1,4 @@
-package com.resurrection.base.widget
+package com.resurrection.base.component
 
 import android.content.Context
 import android.graphics.Color

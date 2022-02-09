@@ -9,7 +9,7 @@ import com.resurrection.appbase.databinding.FragmentPhotosBinding
 import com.resurrection.base.core.BaseAdapter
 import com.resurrection.base.core.BaseFragment
 import com.resurrection.appbase.data.model.photos.PhotoModelItem
-import com.resurrection.base.data.Cryptography
+import com.resurrection.base.component.Cryptography
 
 import dagger.hilt.android.AndroidEntryPoint
 

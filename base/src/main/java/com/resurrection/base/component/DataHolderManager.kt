@@ -1,4 +1,4 @@
-package com.resurrection.base.data
+package com.resurrection.base.component
 
 import android.os.Bundle
 import android.os.Parcelable

@@ -1,4 +1,4 @@
-package com.resurrection.base.data
+package com.resurrection.base.component
 
 import android.content.Context
 import javax.inject.Inject
