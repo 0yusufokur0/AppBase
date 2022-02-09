@@ -12,15 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.resurrection.base.component.AppState
-import com.resurrection.base.component.DataHolderManager
-import com.resurrection.base.component.SharedPreferencesManager
-import com.resurrection.base.component.Logger
+import com.resurrection.base.component.*
 import com.resurrection.base.general.ThrowableError
 import com.resurrection.base.util.Resource
 import com.resurrection.base.util.Status
-import com.resurrection.base.util.isNetworkAvailable
-import com.resurrection.base.component.AppLoadingIndicator
 import javax.inject.Inject
 
 abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
@@ -32,6 +27,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     @Inject lateinit var sharedPreferences: SharedPreferencesManager
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
+    @Inject lateinit var networkManager: NetworkManager
 
     private var _binding: VDB? = null
     val binding get() = _binding!!
@@ -58,7 +54,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logger.fragmentName = this.javaClass.simpleName
-        appState.isNetworkAvailable = isNetworkAvailable(requireContext())
+        appState.isNetworkAvailable = networkManager.isNetworkAvailable()
         init(savedInstanceState)
     }
 

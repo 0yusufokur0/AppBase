@@ -7,6 +7,7 @@ import com.resurrection.base.component.DataHolderManager
 import com.resurrection.base.component.SharedPreferencesManager
 import com.resurrection.base.component.Logger
 import com.resurrection.base.component.AppLoadingIndicator
+import com.resurrection.base.component.NetworkManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +25,7 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideDataHolder(@ApplicationContext context: Context) = DataHolderManager(Bundle())
+    fun provideDataHolder() = DataHolderManager(Bundle())
 
     @Singleton
     @Provides
@@ -37,5 +38,9 @@ object DataModule {
     @Singleton
     @Provides
     fun provideAppLoadingIndicator() = AppLoadingIndicator()
+
+    @Singleton
+    @Provides
+    fun provideNetworkManger(@ApplicationContext context: Context) = NetworkManager(context)
 
 }

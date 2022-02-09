@@ -1,46 +1,12 @@
 package com.resurrection.base.util
 
-
-import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
-import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
-import com.resurrection.base.R
-import com.resurrection.base.databinding.ProgressBarLayoutBinding
-
-
-
-
-fun isNetworkAvailable(context: Context): Boolean {
-    try {
-    val connectivityManager =
-        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val capabilities =
-        connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-        return if (capabilities != null) {
-            when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                else -> true
-            }
-        }else false
-    }catch (e:Exception){
-        return false
-    }
-}
 
 fun Any.isValid(): Boolean {
     var isValid = true
