@@ -4,10 +4,17 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
+apply plugin: 'kotlin-android'
 
 android {
     compileSdk 32
 
+/*    android.applicationVariants.all { variant ->
+         def variantName = variant.buildType.name.toString()
+        // add BuildConfig
+        buildConfigField "String", "VARIANT_NAME", '"' + variantName + '"'
+        buildConfigField "String", "VARIANT_NAME"+'' + variantName + '', '"' + variantName + '"'
+    }*/
     defaultConfig {
         applicationId "com.resurrection.appbase"
         minSdk 23
@@ -16,7 +23,10 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
+
+
 
     buildTypes {
         release {
@@ -41,6 +51,15 @@ android {
     lintOptions {
         abortOnError false
         checkReleaseBuilds false
+    }
+    flavorDimensions 'test'
+    productFlavors {
+        development {
+            dimension 'test'
+        }
+        production {
+            dimension 'test'
+        }
     }
 }
 

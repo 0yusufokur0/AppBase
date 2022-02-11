@@ -9,11 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.resurrection.base.component.AppState
-import com.resurrection.base.component.DataHolderManager
-import com.resurrection.base.component.SharedPreferencesManager
-import com.resurrection.base.component.Logger
-import com.resurrection.base.component.AppLoadingIndicator
+import com.resurrection.base.component.*
 import javax.inject.Inject
 
 abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
@@ -26,6 +22,8 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
     @Inject lateinit var sharedPreferences: SharedPreferencesManager
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
+    @Inject lateinit var configuration: Configuration
+
     protected val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
     lateinit var binding: VDB
 

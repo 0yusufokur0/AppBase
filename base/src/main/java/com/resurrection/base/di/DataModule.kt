@@ -2,12 +2,7 @@ package com.resurrection.base.di
 
 import android.content.Context
 import android.os.Bundle
-import com.resurrection.base.component.AppState
-import com.resurrection.base.component.DataHolderManager
-import com.resurrection.base.component.SharedPreferencesManager
-import com.resurrection.base.component.Logger
-import com.resurrection.base.component.AppLoadingIndicator
-import com.resurrection.base.component.NetworkManager
+import com.resurrection.base.component.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +13,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataModule {
+
+    @Provides
+    @Singleton
+    fun provideConfiguration() = Configuration()
 
     @Provides
     @Singleton

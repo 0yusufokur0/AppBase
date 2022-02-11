@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.resurrection.appbase.App
 import com.resurrection.appbase.ui.photo.PhotosFragment
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.ActivityMainBinding
 import com.resurrection.base.core.BaseActivity
+import com.resurrection.base.general.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +27,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(
 
         transaction.commit()
 
+        configuration.config?.let { toast(it) }
     }
 
     fun <T> AppCompatActivity.dataBinder(@LayoutRes layoutRes: Int) = DataBindingUtil.setContentView(this, layoutRes) as T
