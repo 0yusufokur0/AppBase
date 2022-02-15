@@ -1,0 +1,112 @@
+
+android {
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
+
+    defaultConfig{
+        multiDexEnabled true
+    }
+
+
+    def variantConfig = new VariantConfig("dev", "https://jsonplaceholder.typicode.com", false, true, ".");
+    flavorDimensions 'productFlavors'
+
+    productFlavors{
+        dev{
+            variantConfig.setVariantName("dev")
+            variantConfig.setCheckRootEnabled(true)
+            variantConfig.setLoggerEnabled(true)
+            variantConfig.setGoogleApiKey("asdasd")
+        }
+        preProd{
+            variantConfig.setVariantName("preProd")
+            variantConfig.setCheckRootEnabled(true)
+            variantConfig.setLoggerEnabled(true)
+            variantConfig.setGoogleApiKey("asd")
+        }
+        prod{
+            variantConfig.setVariantName("prod")
+            variantConfig.setCheckRootEnabled(true)
+            variantConfig.setLoggerEnabled(true)
+            variantConfig.setGoogleApiKey("asdasd")
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.buildConfigField("String", "VARIANT_NAME", '"'+variantConfig.getVariantName()+'"' )
+        variant.buildConfigField("String", "API_URL", '"'+String.valueOf(variantConfig.getApiUrl())+'"' )
+        variant.buildConfigField("Boolean", "CHECK_ROOT_ENABLED", String.valueOf(variantConfig.getCheckRootEnabled().toString()) )
+        variant.buildConfigField("Boolean", "LOGGER_ENABLED", String.valueOf(variantConfig.getLoggerEnabled()))
+        variant.buildConfigField("String", "GOOGLE_API_KEY",'"'+ String.valueOf(variantConfig.getGoogleApiKey())+'"' )
+    }
+
+}
+
+
+class VariantConfig{
+    private String variantName;
+    private String apiUrl;
+    private boolean loggerEnabled;
+    private boolean checkRootEnabled;
+    private String googleApiKey;
+
+    VariantConfig(String variantName, String apiUrl, boolean loggerEnabled, boolean checkRootEnabled, String googleApiKey) {
+        this.variantName = variantName
+        this.apiUrl = apiUrl
+        this.loggerEnabled = loggerEnabled
+        this.checkRootEnabled = checkRootEnabled
+        this.googleApiKey = googleApiKey
+    }
+
+    String getVariantName() {
+        return variantName
+    }
+
+    void setVariantName(String variantName) {
+        this.variantName = variantName
+    }
+
+    String getApiUrl() {
+        return apiUrl
+    }
+
+    void setApiUrl(String apiUrl) {
+        this.apiUrl = apiUrl
+    }
+
+    boolean getLoggerEnabled() {
+        return loggerEnabled
+    }
+
+    void setLoggerEnabled(boolean loggerEnabled) {
+        this.loggerEnabled = loggerEnabled
+    }
+
+    boolean getCheckRootEnabled() {
+        return checkRootEnabled
+    }
+
+    void setCheckRootEnabled(boolean checkRootEnabled) {
+        this.checkRootEnabled = checkRootEnabled
+    }
+
+    String getGoogleApiKey() {
+        return googleApiKey
+    }
+
+    void setGoogleApiKey(String googleApiKey) {
+        this.googleApiKey = googleApiKey
+    }
+}

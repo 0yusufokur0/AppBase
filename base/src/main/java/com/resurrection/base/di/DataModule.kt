@@ -16,10 +16,6 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideConfiguration() = Configuration()
-
-    @Provides
-    @Singleton
     fun provideAppState() = AppState(isAppForeground = true, isAppLightMode = true,isNetworkAvailable = false)
 
     @Provides

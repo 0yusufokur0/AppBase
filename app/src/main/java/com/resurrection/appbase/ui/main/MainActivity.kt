@@ -5,6 +5,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.resurrection.appbase.App
+import com.resurrection.appbase.BuildConfig
 import com.resurrection.appbase.ui.photo.PhotosFragment
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.ActivityMainBinding
@@ -27,7 +28,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(
 
         transaction.commit()
 
-        configuration.config?.let { toast(it) }
+        toast(BuildConfig.API_URL)
+
+
     }
 
     fun <T> AppCompatActivity.dataBinder(@LayoutRes layoutRes: Int) = DataBindingUtil.setContentView(this, layoutRes) as T

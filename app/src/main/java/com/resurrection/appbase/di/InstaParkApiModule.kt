@@ -1,5 +1,6 @@
 package com.resurrection.appbase.di
 
+import com.resurrection.appbase.BuildConfig
 import com.resurrection.appbase.data.remote.InstaParkApiService
 import dagger.Module
 import dagger.Provides
@@ -12,21 +13,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object InstaParkApiModule {
-    private const val BASE_URL = "http://jsonplaceholder.typicode.com/"
 
-/*
-    https://jsonplaceholder.typicode.com/users
-    https://jsonplaceholder.typicode.com/posts
-*/
     @Provides
     @Singleton
-    fun retrofitClient(): Retrofit {
-
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
+    fun retrofitClient(): Retrofit = Retrofit.Builder()
+        .baseUrl(BuildConfig.API_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
     @Provides
     @Singleton

@@ -5,28 +5,20 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 apply plugin: 'kotlin-android'
+apply from:"scripts/setup_gradle.gradle"
 
 android {
     compileSdk 32
 
-/*    android.applicationVariants.all { variant ->
-         def variantName = variant.buildType.name.toString()
-        // add BuildConfig
-        buildConfigField "String", "VARIANT_NAME", '"' + variantName + '"'
-        buildConfigField "String", "VARIANT_NAME"+'' + variantName + '', '"' + variantName + '"'
-    }*/
     defaultConfig {
         applicationId "com.resurrection.appbase"
         minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.debug
     }
-
-
 
     buildTypes {
         release {
@@ -41,26 +33,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    dataBinding {
-        enabled true
-    }
-    buildFeatures {
-        viewBinding true
-    }
 
-    lintOptions {
-        abortOnError false
-        checkReleaseBuilds false
-    }
-    flavorDimensions 'test'
-    productFlavors {
-        development {
-            dimension 'test'
-        }
-        production {
-            dimension 'test'
-        }
-    }
 }
 
 dependencies {

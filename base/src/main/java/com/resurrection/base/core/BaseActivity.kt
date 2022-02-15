@@ -22,7 +22,6 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
     @Inject lateinit var sharedPreferences: SharedPreferencesManager
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
-    @Inject lateinit var configuration: Configuration
 
     protected val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
     lateinit var binding: VDB
