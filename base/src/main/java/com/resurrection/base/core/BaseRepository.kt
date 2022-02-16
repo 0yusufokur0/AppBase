@@ -1,11 +1,7 @@
 package com.resurrection.base.core
 
-import com.resurrection.base.component.AppState
-import com.resurrection.base.component.DataHolderManager
-import com.resurrection.base.component.SharedPreferencesManager
-import com.resurrection.base.component.Logger
+import com.resurrection.base.component.*
 import com.resurrection.base.util.Resource
-import com.resurrection.base.component.AppLoadingIndicator
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 import javax.inject.Inject
@@ -17,6 +13,7 @@ abstract class BaseRepository {
     @Inject lateinit var sharedPreferences: SharedPreferencesManager
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
+    @Inject lateinit var networkManager: NetworkManager
 
 
     @JvmName("getData1")

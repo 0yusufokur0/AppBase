@@ -7,7 +7,7 @@ import com.veripark.instapark.data.model.users.UsersModelItem
 import retrofit2.Response
 import retrofit2.http.*
 
-interface InstaParkApiService {
+interface InstaParkApiService{
     @GET("users")
     suspend fun getUsers(): Response<UsersModel>
 

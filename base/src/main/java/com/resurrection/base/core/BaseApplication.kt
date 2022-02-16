@@ -12,6 +12,6 @@ abstract class BaseApplication() : MultiDexApplication(){
     @Inject lateinit var sharedPreferences: SharedPreferencesManager
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
-
+    @Inject lateinit var networkManager: NetworkManager
 }
 

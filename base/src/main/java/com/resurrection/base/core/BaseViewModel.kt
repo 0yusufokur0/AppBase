@@ -1,13 +1,9 @@
 package com.resurrection.base.core
 
 import androidx.lifecycle.*
-import com.resurrection.base.component.AppState
-import com.resurrection.base.component.DataHolderManager
-import com.resurrection.base.component.SharedPreferencesManager
-import com.resurrection.base.component.Logger
+import com.resurrection.base.component.*
 import com.resurrection.base.general.ThrowableError
 import com.resurrection.base.util.Resource
-import com.resurrection.base.component.AppLoadingIndicator
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,6 +15,7 @@ abstract class BaseViewModel : ViewModel(){
     @Inject lateinit var sharedPreferences: SharedPreferencesManager
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
+    @Inject lateinit var networkManager: NetworkManager
 
     fun <T> MutableLiveData<Resource<T>>.setData(
         condition: Boolean = true,

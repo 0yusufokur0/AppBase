@@ -4,6 +4,10 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import dagger.hilt.android.qualifiers.ApplicationContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 class NetworkManager @Inject constructor(@ApplicationContext val context: Context) {

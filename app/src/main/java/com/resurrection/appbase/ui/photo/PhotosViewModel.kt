@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.resurrection.base.core.BaseViewModel
 import com.resurrection.base.util.Resource
 import com.resurrection.appbase.data.model.photos.PhotoModel
-import com.veripark.instapark.data.repository.InstaParkRepository
+import com.resurrection.appbase.data.repository.InstaParkRepository
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -2,6 +2,7 @@ package com.resurrection.appbase.di
 
 import com.resurrection.appbase.BuildConfig
 import com.resurrection.appbase.data.remote.InstaParkApiService
+import com.resurrection.base.component.NetworkManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

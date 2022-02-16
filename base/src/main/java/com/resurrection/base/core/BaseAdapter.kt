@@ -7,11 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.resurrection.base.component.AppState
-import com.resurrection.base.component.DataHolderManager
-import com.resurrection.base.component.SharedPreferencesManager
-import com.resurrection.base.component.Logger
-import com.resurrection.base.component.AppLoadingIndicator
+import com.resurrection.base.component.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -28,6 +24,7 @@ open class BaseAdapter<T>(
     @Inject lateinit var sharedPreferences: SharedPreferencesManager
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
+    @Inject lateinit var networkManager: NetworkManager
     lateinit var binding: ViewDataBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<T> {
