@@ -23,6 +23,7 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
+    @Inject lateinit var securityManager: SecurityManager
 
     protected val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
     lateinit var binding: VDB
@@ -31,14 +32,12 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appState.isRooted = securityManager.isRooted()
         loadingIndicator.setUpLoadingIndicator(this)
-
         logger.activityOnCreate()
         logger.activityName = this@BaseActivity.localClassName
-
         binding = DataBindingUtil.setContentView(this@BaseActivity, layoutRes)
         init(savedInstanceState)
-
     }
 
     @SuppressLint("ObsoleteSdkInt")

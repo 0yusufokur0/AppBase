@@ -2,7 +2,6 @@ package com.resurrection.base.core
 
 import androidx.multidex.MultiDexApplication
 import com.resurrection.base.component.*
-import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 abstract class BaseApplication() : MultiDexApplication(){
@@ -13,5 +12,6 @@ abstract class BaseApplication() : MultiDexApplication(){
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
+    @Inject lateinit var securityManager: SecurityManager
 }
 

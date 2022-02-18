@@ -28,6 +28,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
+    @Inject lateinit var securityManager: SecurityManager
 
     private var _binding: VDB? = null
     val binding get() = _binding!!

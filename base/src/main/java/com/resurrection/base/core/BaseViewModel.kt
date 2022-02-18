@@ -16,6 +16,7 @@ abstract class BaseViewModel : ViewModel(){
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
+    @Inject lateinit var securityManager: SecurityManager
 
     fun <T> MutableLiveData<Resource<T>>.setData(
         condition: Boolean = true,

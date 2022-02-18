@@ -25,6 +25,7 @@ open class BaseAdapter<T>(
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
+    @Inject lateinit var securityManager: SecurityManager
     lateinit var binding: ViewDataBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<T> {

@@ -14,7 +14,7 @@ abstract class BaseRepository {
     @Inject lateinit var logger: Logger
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
-
+    @Inject lateinit var securityManager: SecurityManager
 
     @JvmName("getData1")
     fun <T> getData(request: suspend () -> Response<T>) =  flow { emit(getResourceByNetworkRequest { request() }) }

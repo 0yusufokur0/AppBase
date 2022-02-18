@@ -16,7 +16,7 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideAppState() = AppState(isAppForeground = true, isAppLightMode = true,isNetworkAvailable = false)
+    fun provideAppState() = AppState(isAppForeground = true, isAppLightMode = true,isNetworkAvailable = false,isRooted = false)
 
     @Provides
     @Singleton
@@ -37,5 +37,9 @@ object DataModule {
     @Singleton
     @Provides
     fun provideNetworkManger(@ApplicationContext context: Context) = NetworkManager(context)
+
+    @Singleton
+    @Provides
+    fun provideSecurityManager(@ApplicationContext context: Context) = SecurityManager(context)
 
 }
