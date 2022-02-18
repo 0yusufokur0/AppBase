@@ -32,7 +32,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
         val decrypted = Cryptography.decrypt(pass, encrypted)
         println(decrypted)
 
-
+        toast(networkManager.isNetworkAvailable())
 
         var adapter = BaseAdapter(R.layout.photo_item, BR.photoItem, arrayListOf<PhotoModelItem>()){
 
