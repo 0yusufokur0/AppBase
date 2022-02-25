@@ -13,5 +13,7 @@ abstract class BaseApplication() : MultiDexApplication(){
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
     @Inject lateinit var securityManager: SecurityManager
+    @Inject lateinit var biometricManager: BiometricManager
+
 }
 

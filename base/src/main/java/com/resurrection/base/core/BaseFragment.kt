@@ -55,7 +55,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logger.fragmentName = this.javaClass.simpleName
-        appState.isNetworkAvailable = networkManager.isNetworkAvailable()
+        appState.isNetworkAvailable = networkManager.checkNetworkAvailable()
         init(savedInstanceState)
     }
 

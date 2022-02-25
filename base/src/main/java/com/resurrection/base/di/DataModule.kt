@@ -42,4 +42,8 @@ object DataModule {
     @Provides
     fun provideSecurityManager(@ApplicationContext context: Context) = SecurityManager(context)
 
+    @Singleton
+    @Provides
+    fun provideBiometricManage() = BiometricManager()
+
 }

@@ -1,9 +1,14 @@
 package com.resurrection.base.core
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.LayoutRes
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -24,6 +29,7 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
     @Inject lateinit var securityManager: SecurityManager
+    @Inject lateinit var biometricManager: BiometricManager
 
     protected val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
     lateinit var binding: VDB
@@ -36,6 +42,8 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
         loadingIndicator.setUpLoadingIndicator(this)
         logger.activityOnCreate()
         logger.activityName = this@BaseActivity.localClassName
+        networkManager.init(this)
+        biometricManager.init(this)
         binding = DataBindingUtil.setContentView(this@BaseActivity, layoutRes)
         init(savedInstanceState)
     }
