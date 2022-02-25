@@ -50,8 +50,9 @@ dependencies {
     implementation 'androidx.biometric:biometric:1.1.0'
     // Check Root
     implementation 'com.scottyab:rootbeer-lib:0.1.0'
+
     // Coil
-    implementation("io.coil-kt:coil:1.4.0")
+    implementation "io.coil-kt:coil:1.4.0"
 
     // Constraint Layout
     implementation "com.android.support.constraint:constraint-layout:2.0.4"
