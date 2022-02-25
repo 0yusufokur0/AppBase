@@ -1,5 +1,6 @@
 package com.resurrection.base.core
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -90,15 +91,6 @@ open class BaseAdapter<T>(
             }
         }
         mFilter.filter(constraint)
-
-    class BaseDiffUtil<T>(
-        private val oldList: List<T>,
-        private val newList: List<T>
-    ) : DiffUtil.Callback() {
-        override fun getOldListSize(): Int = oldList.size
-        override fun getNewListSize(): Int = newList.size
-        override fun areItemsTheSame(oldPosition: Int, newPosition: Int) = oldList[oldPosition] == newList[newPosition]
-        override fun areContentsTheSame(oldPosition: Int, newPosition: Int) = oldList[oldPosition] == newList[newPosition]
     }
 
     fun addAll(list: List<T>) = currentList?.let {
@@ -138,12 +130,10 @@ open class BaseAdapter<T>(
         addAll(mutable?.toList() as ArrayList<T>)
     }
 
-        fun getItem(position: Int) = currentList?.let { currentList!![position] }
+    fun getItem(position: Int) = currentList?.let { currentList!![position] }
 
-        fun getItems() = currentList?.let { currentList!!.toList() }
+    fun getItems() = currentList?.let { currentList!!.toList() }
 
-        fun getItems(predicate: (T) -> Boolean) = currentList?.let { currentList!!.filter(predicate) }
-
-    }
+    fun getItems(predicate: (T) -> Boolean) = currentList?.let { currentList!!.filter(predicate) }
 
 }
