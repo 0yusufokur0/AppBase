@@ -2,14 +2,13 @@ package com.resurrection.appbase.ui.photo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.resurrection.base.core.BaseViewModel
+import com.resurrection.base.core.viewmodel.BaseViewModel
 import com.resurrection.base.util.Resource
 import com.resurrection.appbase.data.model.photos.PhotoModel
 import com.resurrection.appbase.data.repository.InstaParkRepository
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
 
 @HiltViewModel

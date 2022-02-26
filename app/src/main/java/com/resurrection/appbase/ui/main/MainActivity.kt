@@ -6,8 +6,8 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.ActivityMainBinding
-import com.resurrection.base.component.BiometricManager
-import com.resurrection.base.core.BaseActivity
+import com.resurrection.appbase.ui.photo.PhotosFragment
+import com.resurrection.base.core.activity.BaseActivity
 import com.resurrection.base.general.toast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +21,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun init(savedInstanceState: Bundle?) {
-/*
         val fragment = PhotosFragment()
         val transaction = supportFragmentManager.beginTransaction()
 
@@ -29,7 +28,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(
         transaction.addToBackStack(null)
 
         transaction.commit()
-*/
 
 
         biometricManager.setup(

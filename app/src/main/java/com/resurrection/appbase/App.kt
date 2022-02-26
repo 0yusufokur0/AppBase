@@ -1,6 +1,6 @@
 package com.resurrection.appbase
 
-import com.resurrection.base.core.BaseApplication
+import com.resurrection.base.core.application.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
