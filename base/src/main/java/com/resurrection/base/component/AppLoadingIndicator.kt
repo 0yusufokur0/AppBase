@@ -14,12 +14,12 @@ class AppLoadingIndicator {
     var isShowing = false
         private set
 
-
-    fun setUpLoadingIndicator(context: Context) {
-        if (!this::context.isInitialized){
+    fun init(context: Context) {
+        if (!this::context.isInitialized) {
             this.context = context
             val dialogBuilder = AlertDialog.Builder(context)
-            val alertBinding =  ProgressBarLayoutBinding.inflate(LayoutInflater.from(context.applicationContext))
+            val alertBinding =
+                ProgressBarLayoutBinding.inflate(LayoutInflater.from(context.applicationContext))
             dialogBuilder.setView(alertBinding.root)
             alertDialog = dialogBuilder.create()
             alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -28,19 +28,17 @@ class AppLoadingIndicator {
         }
     }
 
-    fun show(){
-        if (this::alertDialog.isInitialized){
+    fun show() {
+        if (this::alertDialog.isInitialized) {
             alertDialog.show()
             isShowing = true
         }
     }
 
-    fun hide(){
-        if (this::alertDialog.isInitialized){
+    fun hide() {
+        if (this::alertDialog.isInitialized) {
             alertDialog.hide()
             isShowing = false
         }
     }
-
-
 }
