@@ -5,10 +5,6 @@ import android.os.Parcelable
 import java.io.Serializable
 import javax.inject.Inject
 
-/**
-* Created by Yusuf Okur on 01.04.2022
-**/
-
 class DataHolderManager @Inject constructor(val manager: Bundle) : StorageManager<Unit> {
 
     fun remove(key: String) = manager.remove(key)
@@ -42,19 +38,22 @@ class DataHolderManager @Inject constructor(val manager: Bundle) : StorageManage
     override fun getLong(key: String, defValue: Long) = manager.getLong(key, defValue)
 
     fun putSerializable(key: String, value: Serializable) = manager.putSerializable(key, value)
-    fun <R:Serializable>getSerializable(key: String) = manager.getSerializable(key) as R
+    fun <R : Serializable> getSerializable(key: String) = manager.getSerializable(key) as R
 
     fun putParcelable(key: String, value: Parcelable) = manager.putParcelable(key, value)
     fun <R : Parcelable> getParcelable(key: String) = manager.getParcelable<R>(key)
 
     //region Array List
     fun putIntegerArrayList(key: String, value: ArrayList<Int>) = manager.putIntegerArrayList(key, value)
+
     fun getIntegerArrayList(key: String) = manager.getIntegerArrayList(key)
 
     fun putStringArrayList(key: String, value: ArrayList<String>) = manager.putStringArrayList(key, value)
+
     fun getStringArrayList(key: String) = manager.getStringArrayList(key)
 
     fun putParcelableArrayList(key: String, value: ArrayList<out Parcelable?>) = manager.putParcelableArrayList(key, value)
+
     fun <T : Parcelable> getParcelableArrayList(key: String) = manager.getParcelableArrayList<T>(key)
     // endregion
 
@@ -78,13 +77,15 @@ class DataHolderManager @Inject constructor(val manager: Bundle) : StorageManage
     fun putShortArray(key: String, value: ShortArray) = manager.putShortArray(key, value)
 
     fun getCharSequenceArray(key: String) = manager.getCharSequenceArray(key)
-    fun putCharSequenceArray(key: String, value: Array<CharSequence?>) = manager.putCharSequenceArray(key, value)
+    fun putCharSequenceArray(key: String, value: Array<CharSequence?>) =
+        manager.putCharSequenceArray(key, value)
 
     fun getStringArray(key: String) = manager.getStringArray(key)
     fun putStringArray(key: String, value: Array<String>) = manager.putStringArray(key, value)
 
     fun getParcelableArray(key: String) = manager.getParcelableArray(key)
-    fun putParcelableArray(key: String, value: Array<Parcelable?>) = manager.putParcelableArray(key, value)
+    fun putParcelableArray(key: String, value: Array<Parcelable?>) =
+        manager.putParcelableArray(key, value)
 
     fun getBooleanArray(key: String) = manager.getBooleanArray(key)
     fun putBooleanArray(key: String, value: BooleanArray) = manager.putBooleanArray(key, value)
@@ -94,8 +95,6 @@ class DataHolderManager @Inject constructor(val manager: Bundle) : StorageManage
 
     fun getLongArray(key: String) = manager.getLongArray(key)
     fun putLongArray(key: String, value: LongArray) = manager.putLongArray(key, value)
-
-
     //endregion
 
 }
