@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataModule {
+object CoreModule {
 
     @Provides
     @Singleton
@@ -28,7 +28,11 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideLogger() = Logger()
+    fun provideCryptographyManager() = CryptographyManager()
+
+    @Singleton
+    @Provides
+    fun provideLogger() = LoggerManager()
 
     @Singleton
     @Provides
@@ -44,6 +48,6 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideBiometricManage() = BiometricManager()
+    fun provideBiometricManager() = BiometricManager()
 
 }
