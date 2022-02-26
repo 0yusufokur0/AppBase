@@ -1,4 +1,4 @@
-package com.resurrection.base.core
+package com.resurrection.base.core.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -23,7 +23,7 @@ open class BaseAdapter<T>(
     @Inject lateinit var appState: AppState
     @Inject lateinit var dataHolder: DataHolderManager
     @Inject lateinit var sharedPreferences: SharedPreferencesManager
-    @Inject lateinit var logger: Logger
+    @Inject lateinit var loggerManager: LoggerManager
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
     @Inject lateinit var securityManager: SecurityManager
