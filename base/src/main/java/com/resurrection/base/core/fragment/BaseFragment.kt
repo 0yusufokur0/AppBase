@@ -1,4 +1,4 @@
-package com.resurrection.base.core
+package com.resurrection.base.core.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.resurrection.base.component.*
 import com.resurrection.base.general.ThrowableError
 import com.resurrection.base.util.Resource
@@ -20,12 +18,12 @@ import javax.inject.Inject
 
 abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     @LayoutRes val resLayoutId: Int, private val viewModelClass: Class<VM>
-) : Fragment() {
+) : CoreFragment() {
 
     @Inject lateinit var appState: AppState
     @Inject lateinit var dataHolder: DataHolderManager
     @Inject lateinit var sharedPreferences: SharedPreferencesManager
-    @Inject lateinit var logger: Logger
+    @Inject lateinit var loggerManager: LoggerManager
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
     @Inject lateinit var securityManager: SecurityManager
@@ -35,11 +33,6 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     protected val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
 
     abstract fun init(savedInstanceState: Bundle?)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        logger.fragmentOnCreate()
-    }
 
     @CallSuper
     override fun onCreateView(
@@ -54,8 +47,6 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        logger.fragmentName = this.javaClass.simpleName
-        appState.isNetworkAvailable = networkManager.checkNetworkAvailable()
         init(savedInstanceState)
     }
 
@@ -74,37 +65,40 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
         }
     }
 
-    // region LifeCycle
-    override fun onStart() {
-        super.onStart()
-        logger.fragmentOnStart()
+    override fun onStateChanged(event: FragmentLifecycleEvent) {
+        when(event){
+            FragmentLifecycleEvent.ON_CREATE -> {
+                loggerManager.fragmentOnCreate()
+            }
+            FragmentLifecycleEvent.ON_CREATE_VIEW -> {
+            }
+            FragmentLifecycleEvent.ON_VIEW_CREATED -> {
+                loggerManager.initFragment(this)
+                appState.isNetworkAvailable = networkManager.checkNetworkAvailable()
+            }
+            FragmentLifecycleEvent.ON_START -> {
+                loggerManager.fragmentOnStart()
+            }
+            FragmentLifecycleEvent.ON_RESUME -> {
+                loggerManager.fragmentOnResume()
+
+            }
+            FragmentLifecycleEvent.ON_PAUSE -> {
+                loggerManager.fragmentOnPause()
+
+            }
+            FragmentLifecycleEvent.ON_STOP -> {
+                loggerManager.fragmentOnStop()
+
+            }
+            FragmentLifecycleEvent.ON_DESTROY_VIEW -> {
+                loggerManager.fragmentOnDestroyView()
+                _binding = null
+            }
+            FragmentLifecycleEvent.ON_DESTROY -> {
+                loggerManager.fragmentOnDestroy()
+            }
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        logger.fragmentOnResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        logger.fragmentOnPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        logger.fragmentOnStop()
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        logger.fragmentOnDestroyView()
-        _binding = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        logger.fragmentOnDestroy()
-    }
-    // endregion
 }
