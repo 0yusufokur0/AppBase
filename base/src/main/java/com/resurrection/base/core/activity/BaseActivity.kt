@@ -1,31 +1,25 @@
-package com.resurrection.base.core
+package com.resurrection.base.core.activity
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.Network
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.LayoutRes
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.resurrection.base.component.*
 import javax.inject.Inject
 
 abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
     @LayoutRes private val layoutRes: Int,
     private val viewModelClass: Class<VM>
-) : AppCompatActivity(){
+) : AppCompatActivity(),LifecycleEventObserver{
 
     @Inject lateinit var appState: AppState
     @Inject lateinit var dataHolder: DataHolderManager
     @Inject lateinit var sharedPreferences: SharedPreferencesManager
-    @Inject lateinit var logger: Logger
+    @Inject lateinit var loggerManager: LoggerManager
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
     @Inject lateinit var securityManager: SecurityManager
@@ -38,12 +32,6 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appState.isRooted = securityManager.isRooted()
-        loadingIndicator.setUpLoadingIndicator(this)
-        logger.activityOnCreate()
-        logger.activityName = this@BaseActivity.localClassName
-        networkManager.init(this)
-        biometricManager.init(this)
         binding = DataBindingUtil.setContentView(this@BaseActivity, layoutRes)
         init(savedInstanceState)
     }
@@ -55,38 +43,36 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
         }
     }
 
-    //region Lifecycle
-    override fun onStart() {
-        super.onStart()
-        appState.isAppForeground = true
-        logger.activityOnStart()
 
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        when(event){
+            Lifecycle.Event.ON_CREATE -> {
+                appState.isRooted = securityManager.isRooted()
+                loadingIndicator.init(this)
+                loggerManager.activityOnCreate()
+                loggerManager.initActivity(this)
+                biometricManager.init(this)
+            }
+            Lifecycle.Event.ON_START -> {
+                appState.isAppForeground = true
+                loggerManager.activityOnStart()
+            }
+            Lifecycle.Event.ON_RESUME -> {
+                loggerManager.activityOnResume()
+            }
+            Lifecycle.Event.ON_PAUSE -> {
+                loggerManager.activityOnPause()
+            }
+            Lifecycle.Event.ON_STOP -> {
+                appState.isAppForeground = false
+                loggerManager.activityOnStop()
+            }
+            Lifecycle.Event.ON_DESTROY -> {
+                loggerManager.activityOnDestroy()
+            }
+            Lifecycle.Event.ON_ANY -> {
+                loggerManager.activityOnRestart()
+            }
+        }
     }
-
-    override fun onResume() {
-        super.onResume()
-        logger.activityOnResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        logger.activityOnPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        appState.isAppForeground = false
-        logger.activityOnStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        logger.activityOnDestroy()
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        logger.activityOnRestart()
-    }
-    //endregion
 }
