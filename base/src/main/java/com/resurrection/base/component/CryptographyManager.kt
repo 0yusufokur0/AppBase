@@ -5,20 +5,19 @@ import java.io.UnsupportedEncodingException
 import java.nio.charset.StandardCharsets
 import java.security.GeneralSecurityException
 import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
-import kotlin.Throws
 
-object Cryptography {
-    private const val AES_MODE = "AES/CBC/PKCS7Padding"
-    private const val CHARSET = "UTF-8"
-    private const val HASH_ALGORITHM = "SHA-256"
-    private val ivBytes =
-        byteArrayOf(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+class CryptographyManager {
 
-    @Throws(NoSuchAlgorithmException::class, UnsupportedEncodingException::class)
+    companion object {
+        private const val AES_MODE = "AES/CBC/PKCS7Padding"
+        private const val CHARSET = "UTF-8"
+        private const val HASH_ALGORITHM = "SHA-256"
+        private val ivBytes = byteArrayOf(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+    }
+
     private fun generateKey(password: String): SecretKeySpec {
         val digest = MessageDigest.getInstance(HASH_ALGORITHM)
         val bytes = password.toByteArray(StandardCharsets.UTF_8)
@@ -38,7 +37,6 @@ object Cryptography {
         }
     }
 
-    @Throws(GeneralSecurityException::class)
     fun encrypt(key: SecretKeySpec?, iv: ByteArray?, message: ByteArray?): ByteArray {
         val cipher = Cipher.getInstance(AES_MODE)
         val ivSpec = IvParameterSpec(iv)
@@ -58,7 +56,6 @@ object Cryptography {
         }
     }
 
-    @Throws(GeneralSecurityException::class)
     fun decrypt(key: SecretKeySpec?, iv: ByteArray?, decodedCipherText: ByteArray?): ByteArray {
         val cipher = Cipher.getInstance(AES_MODE)
         val ivSpec = IvParameterSpec(iv)
