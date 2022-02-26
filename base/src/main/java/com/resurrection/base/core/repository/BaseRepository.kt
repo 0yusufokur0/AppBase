@@ -1,4 +1,4 @@
-package com.resurrection.base.core
+package com.resurrection.base.core.repository
 
 import com.resurrection.base.component.*
 import com.resurrection.base.util.Resource
@@ -11,7 +11,7 @@ abstract class BaseRepository {
     @Inject lateinit var appState: AppState
     @Inject lateinit var dataHolder: DataHolderManager
     @Inject lateinit var sharedPreferences: SharedPreferencesManager
-    @Inject lateinit var logger: Logger
+    @Inject lateinit var loggerManager: LoggerManager
     @Inject lateinit var loadingIndicator: AppLoadingIndicator
     @Inject lateinit var networkManager: NetworkManager
     @Inject lateinit var securityManager: SecurityManager
