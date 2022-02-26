@@ -3,9 +3,6 @@ package com.resurrection.base.component
 import android.content.Context
 import javax.inject.Inject
 
-/**
- * Created by Yusuf Okur on 01.04.2022
- **/
 
 class SharedPreferencesManager @Inject constructor(context: Context) : StorageManager<Unit> {
     val manager = context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
@@ -17,7 +14,6 @@ class SharedPreferencesManager @Inject constructor(context: Context) : StorageMa
     fun keySet() = manager.all.keys
     fun contains(key: String) = manager.all.containsKey(key)
     fun get(key: String) = manager.all[key]
-
 
     override fun clearAll() = editor.clear().apply()
 
@@ -38,6 +34,5 @@ class SharedPreferencesManager @Inject constructor(context: Context) : StorageMa
 
     override fun putDouble(key: String, value: Double) = editor.putString(key, value.toString()).apply()
     override fun getDouble(key: String, defValue: Double) = manager.getString(key, defValue.toString())?.toDouble()
-
 
 }
