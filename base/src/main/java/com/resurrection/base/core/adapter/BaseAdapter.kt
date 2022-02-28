@@ -18,7 +18,7 @@ open class BaseAdapter<T>(
     private val itemId: Int,
     private var currentList: ArrayList<T>? = null,
     private val onItemClick: (T) -> Unit
-) : RecyclerView.Adapter<BaseAdapter.BaseHolder<T>>() {
+) : RecyclerView.Adapter<BaseHolder<T>>() {
 
     @Inject lateinit var appState: AppState
     @Inject lateinit var dataHolder: DataHolderManager
@@ -40,26 +40,42 @@ open class BaseAdapter<T>(
 
     override fun getItemCount() = currentList?.let { currentList!!.size } ?: run { 0 }
 
-    class BaseHolder<T>(
-        private var binding: ViewDataBinding,
-        private var itemId: Int,
-        var onItemClick: (T) -> Unit
-    ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: T) {
-            binding.setVariable(itemId, item)
-            itemView.setOnClickListener { onItemClick((item)) }
-        }
+    fun addAll(list: List<T>) = currentList?.let {
+        val diffUtil = BaseDiffUtil(currentList!!, list)
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
+        currentList!!.clear()
+        currentList!!.addAll(list)
+        diffResult.dispatchUpdatesTo(this)
     }
 
-    class BaseDiffUtil<T>(
-        private val oldList: List<T>,
-        private val newList: List<T>
-    ) : DiffUtil.Callback() {
-        override fun getOldListSize(): Int = oldList.size
-        override fun getNewListSize(): Int = newList.size
-        override fun areItemsTheSame(oldPosition: Int, newPosition: Int) = oldList[oldPosition] == newList[newPosition]
-        override fun areContentsTheSame(oldPosition: Int, newPosition: Int) = oldList[oldPosition] == newList[newPosition]
+    fun add(item: T) = currentList?.let {
+        currentList!!.add(item)
+        notifyItemInserted(currentList!!.size - 1)
     }
+
+    fun remove(item: T) = currentList?.let {
+        val position = currentList!!.indexOf(item)
+        currentList!!.remove(item)
+        notifyItemRemoved(position)
+    }
+
+    fun update(item: T) = currentList?.let {
+        val position = currentList!!.indexOf(item)
+        currentList!![position] = item
+        notifyItemChanged(position)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun clear() {
+        currentList?.clear()
+        notifyDataSetChanged()
+    }
+
+    fun getItem(position: Int) = currentList?.let { currentList!![position] }
+
+    fun getItems() = currentList?.let { currentList!!.toList() }
+
+    fun getItems(predicate: (T) -> Boolean) = currentList?.let { currentList!!.filter(predicate) }
 
     fun <R> filterBy(constraint: CharSequence, selector: ((T) -> R?)? = null) = currentList?.let {
         val mFilter = object : Filter() {
@@ -93,47 +109,10 @@ open class BaseAdapter<T>(
         mFilter.filter(constraint)
     }
 
-    fun addAll(list: List<T>) = currentList?.let {
-        val diffUtil = BaseDiffUtil(currentList!!, list)
-        val diffResult = DiffUtil.calculateDiff(diffUtil)
-        currentList!!.clear()
-        currentList!!.addAll(list)
-        diffResult.dispatchUpdatesTo(this)
-    }
-
-    fun add(item: T) = currentList?.let {
-        currentList!!.add(item)
-        notifyItemInserted(currentList!!.size - 1)
-    }
-
-    fun remove(item: T) = currentList?.let {
-        val position = currentList!!.indexOf(item)
-        currentList!!.remove(item)
-        notifyItemRemoved(position)
-    }
-
-    fun update(item: T) = currentList?.let {
-        val position = currentList!!.indexOf(item)
-        currentList!![position] = item
-        notifyItemChanged(position)
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun clear() {
-        currentList?.clear()
-        notifyDataSetChanged()
-    }
-
     fun <R : Comparable<R>> sort(selector: (T) -> R?) {
         val mutable = currentList?.toMutableList()
         mutable?.sortBy { selector(it) }
         addAll(mutable?.toList() as ArrayList<T>)
     }
-
-    fun getItem(position: Int) = currentList?.let { currentList!![position] }
-
-    fun getItems() = currentList?.let { currentList!!.toList() }
-
-    fun getItems(predicate: (T) -> Boolean) = currentList?.let { currentList!!.filter(predicate) }
 
 }
