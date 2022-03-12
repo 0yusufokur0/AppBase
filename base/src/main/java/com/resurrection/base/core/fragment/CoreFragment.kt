@@ -4,60 +4,53 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import com.resurrection.base.component.*
+import com.resurrection.base.general.ThrowableError
+import com.resurrection.base.util.Resource
+import com.resurrection.base.util.Status
+import javax.inject.Inject
 
-open class CoreFragment : Fragment()  {
+abstract class CoreFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        onStateChanged(FragmentLifecycleEvent.ON_CREATE)
-    }
+    @Inject
+    lateinit var appState: AppState
+    @Inject
+    lateinit var dataHolder: DataHolderManager
+    @Inject
+    lateinit var sharedPreferences: SharedPreferencesManager
+    @Inject
+    lateinit var loggerManager: LoggerManager
+    @Inject
+    lateinit var loadingIndicator: AppLoadingIndicator
+    @Inject
+    lateinit var networkManager: NetworkManager
+    @Inject
+    lateinit var securityManager: SecurityManager
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        onStateChanged(FragmentLifecycleEvent.ON_CREATE_VIEW)
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
+    abstract fun init(savedInstanceState: Bundle?)
 
+    @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onStateChanged(FragmentLifecycleEvent.ON_VIEW_CREATED)
+        init(savedInstanceState)
     }
 
-    override fun onStart() {
-        super.onStart()
-        onStateChanged(FragmentLifecycleEvent.ON_START)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        onStateChanged(FragmentLifecycleEvent.ON_RESUME)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        onStateChanged(FragmentLifecycleEvent.ON_PAUSE)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        onStateChanged(FragmentLifecycleEvent.ON_STOP)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        onStateChanged(FragmentLifecycleEvent.ON_DESTROY_VIEW)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        onStateChanged(FragmentLifecycleEvent.ON_DESTROY)
-    }
-
-
-    open fun onStateChanged(event: FragmentLifecycleEvent) {
+    fun <T> LiveData<Resource<T>>.observeData(
+        success: (T?) -> Unit,
+        loading: (() -> Unit)? = null,
+        error: (() -> Unit)? = null
+    ) {
+        this.observe(this@CoreFragment) { data ->
+            when (data.status) {
+                Status.SUCCESS -> success.invoke(data.data)
+                Status.LOADING -> loading?.invoke()
+                Status.ERROR -> error?.invoke()
+                else -> ThrowableError("${data.data} fetch error")
+            }
+        }
     }
 }
