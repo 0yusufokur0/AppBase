@@ -18,27 +18,7 @@ open class BaseAdapter<T>(
     private val itemId: Int,
     private var currentList: ArrayList<T>? = null,
     private val onItemClick: (T) -> Unit
-) : RecyclerView.Adapter<BaseHolder<T>>() {
-
-    @Inject lateinit var appState: AppState
-    @Inject lateinit var dataHolder: DataHolderManager
-    @Inject lateinit var sharedPreferences: SharedPreferencesManager
-    @Inject lateinit var loggerManager: LoggerManager
-    @Inject lateinit var loadingIndicator: AppLoadingIndicator
-    @Inject lateinit var networkManager: NetworkManager
-    @Inject lateinit var securityManager: SecurityManager
-    @Inject lateinit var biometricManager: BiometricManager
-
-    lateinit var binding: ViewDataBinding
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<T> {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutResource, parent, false)
-        return BaseHolder(binding, itemId, onItemClick)
-    }
-
-    override fun onBindViewHolder(holder: BaseHolder<T>, position: Int) { currentList?.let { holder.bind(currentList!![position]) } }
-
-    override fun getItemCount() = currentList?.let { currentList!!.size } ?: run { 0 }
+) : CoreAdapter<T>(layoutResource, itemId, currentList, onItemClick) {
 
     fun addAll(list: List<T>) = currentList?.let {
         val diffUtil = BaseDiffUtil(currentList!!, list)
