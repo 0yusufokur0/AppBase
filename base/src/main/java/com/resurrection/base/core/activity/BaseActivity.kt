@@ -14,7 +14,7 @@ import javax.inject.Inject
 abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
     @LayoutRes private val layoutRes: Int,
     private val viewModelClass: Class<VM>
-) : CoreActivity() {
+) : LifecycleActivity() {
 
     private val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
     val  binding: VDB by lazy { DataBindingUtil.setContentView(this@BaseActivity, layoutRes) }
