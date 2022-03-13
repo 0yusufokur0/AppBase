@@ -1,6 +1,8 @@
 package com.resurrection.base.component
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.os.Environment
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -10,33 +12,23 @@ import com.resurrection.base.util.createFolder
 import java.text.SimpleDateFormat
 import java.util.*
 
-class LoggerManager {
+class LoggerManager(private val context: Context) {
 
     private var saveState = false
     private val _logList = mutableListOf<String>()
     private val LOG_TAG = "AppLogger"
-    private var appName = ""
+    private val appName = getApplicationName(context)
     private var activityName = ""
     private var fragmentName = ""
     private var rootPath = "" + Environment.getExternalStorageDirectory().absolutePath
-    private var logPath = ""
+    private val logPath = Environment.getExternalStorageDirectory().absolutePath + "/" + appName + "/Logs"
     val logList: List<String> = _logList
 
-    fun init(saveState: Boolean) {
-        this.saveState = saveState
-    }
+    fun init(saveState: Boolean) { this.saveState = saveState }
 
-    fun initActivity(activity: AppCompatActivity) {
-        activityName = activity.localClassName
-        activity.apply {
-            appName = applicationInfo.loadLabel(packageManager).toString()
-            logPath = Environment.getExternalStorageDirectory().absolutePath + "/" + appName + "/Logs"
-        }
-    }
+    fun initActivity(activityName: String) { this.activityName = activityName }
 
-    fun initFragment(fragment: Fragment) {
-        fragmentName = fragment.javaClass.simpleName
-    }
+    fun initFragment(fragmentName:String) { this.fragmentName = fragmentName }
 
     // region log
     fun d(message: String) {
@@ -115,4 +107,10 @@ class LoggerManager {
 
     @SuppressLint("SimpleDateFormat")
     private fun getDateTime() = SimpleDateFormat("dd_mm_yyyy-hh_mm_ss").format(Date())
+
+    private fun getApplicationName(context: Context): String {
+        val applicationInfo: ApplicationInfo = context.applicationInfo
+        val stringId: Int = applicationInfo.labelRes
+        return if (stringId == 0) applicationInfo.nonLocalizedLabel.toString() else context.getString(stringId)
+    }
 }

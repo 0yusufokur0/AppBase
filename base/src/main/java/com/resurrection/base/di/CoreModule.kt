@@ -32,7 +32,7 @@ object CoreModule {
 
     @Singleton
     @Provides
-    fun provideLogger() = LoggerManager()
+    fun provideLogger(@ApplicationContext context: Context) = LoggerManager(context)
 
     @Singleton
     @Provides

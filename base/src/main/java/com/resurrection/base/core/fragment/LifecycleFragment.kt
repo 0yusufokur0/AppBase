@@ -15,7 +15,7 @@ abstract class LifecycleFragment : CoreFragment() {
             FragmentLifecycleEvent.ON_CREATE_VIEW -> {
             }
             FragmentLifecycleEvent.ON_VIEW_CREATED -> {
-                loggerManager.initFragment(this)
+                loggerManager.initFragment(this.javaClass.simpleName)
                 appState.isNetworkAvailable = networkManager.checkNetworkAvailable()
             }
             FragmentLifecycleEvent.ON_START -> {

@@ -11,7 +11,7 @@ abstract class LifecycleActivity: CoreActivity() {
                 appState.isRooted = securityManager.isRooted()
                 loadingIndicator.init(this)
                 loggerManager.activityOnCreate()
-                loggerManager.initActivity(this)
+                loggerManager.initActivity(localClassName)
                 biometricManager.init(this)
             }
             Lifecycle.Event.ON_START -> {
