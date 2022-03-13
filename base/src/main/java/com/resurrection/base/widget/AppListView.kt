@@ -17,7 +17,7 @@ class AppListView @JvmOverloads constructor(
 
     var mAdapter: BaseAdapter<Item>? = null
 
-    fun setUp(setVertical: Boolean = true, list: ArrayList<String>, listener: (String) -> Unit) {
+    fun init(setVertical: Boolean = true, list: ArrayList<String>, listener: (String) -> Unit) {
         val layoutRes = if (!setVertical) R.layout.list_horizontal_item else R.layout.list_vertical_item
         val itemList = arrayListOf<Item>()
         list.forEach { itemList.add(Item(it)) }

@@ -15,7 +15,6 @@ class AppButton @JvmOverloads constructor(
 ) : MaterialButton(context, attrs, defStyleAttr) {
 
     init {
-
         setBackgroundResource(R.drawable.rounded_text_bg)
         setOnTouchListener { v, event ->
             background.alpha = 200

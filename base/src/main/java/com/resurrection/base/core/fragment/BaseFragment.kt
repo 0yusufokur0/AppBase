@@ -8,13 +8,8 @@ import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
-import com.resurrection.base.component.*
-import com.resurrection.base.general.ThrowableError
-import com.resurrection.base.util.Resource
-import com.resurrection.base.util.Status
-import javax.inject.Inject
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
 abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     @LayoutRes val resLayoutId: Int, private val viewModelClass: Class<VM>

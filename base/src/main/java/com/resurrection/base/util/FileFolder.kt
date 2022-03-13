@@ -1,11 +1,11 @@
 package com.resurrection.base.util
 
-import com.resurrection.base.general.onlyTry
+import com.resurrection.base.general.tryCatch
 import java.io.File
 import java.io.FileWriter
 
 fun createFile(path: String, sFileName: String?, sBody: MutableList<String>) {
-    onlyTry {
+    tryCatch {
         val gpxfile = File(path, "$sFileName.txt")
         val writer = FileWriter(gpxfile)
         sBody.forEach {

@@ -1,17 +1,9 @@
 package com.resurrection.base.core.adapter
 
 import android.annotation.SuppressLint
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.widget.Filter
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import com.resurrection.base.component.*
 import java.util.*
-import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 open class BaseAdapter<T>(
     private val layoutResource: Int,

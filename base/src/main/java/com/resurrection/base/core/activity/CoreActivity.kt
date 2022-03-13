@@ -4,12 +4,9 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import com.resurrection.base.component.*
-import com.resurrection.base.general.ThrowableError
 import com.resurrection.base.util.Resource
 import com.resurrection.base.util.Status
 import javax.inject.Inject
@@ -56,7 +53,7 @@ abstract class CoreActivity : AppCompatActivity(), LifecycleEventObserver {
                 Status.SUCCESS -> success.invoke(data.data)
                 Status.LOADING -> loading?.invoke()
                 Status.ERROR -> error?.invoke()
-                else -> ThrowableError("${data.data} fetch error")
+                else -> Throwable("${data.data} fetch error")
             }
         }
     }

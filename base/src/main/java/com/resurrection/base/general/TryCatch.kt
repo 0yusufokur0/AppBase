@@ -10,16 +10,7 @@ fun tryCatch(func: () -> Unit) {
     try {
         func()
     } catch (e: Exception) {
-        ThrowableError(e.toString())
-    }
-}
-
-
-fun onlyTry(func: () -> Unit) {
-    try {
-        func()
-    } catch (e: Exception) {
-        ThrowableError(e.toString())
+        Throwable(e.toString())
     }
 }
 
@@ -30,13 +21,7 @@ fun <T> LifecycleOwner.tryCatch(defaultValue: T?= null,func: suspend CoroutineSc
         this.lifecycleScope.launch { result = func() }
         return result
     } catch (e: Exception) {
-        ThrowableError(e.toString())
+        Throwable(e.toString())
     }
     return null
-}
-
-class ThrowableError(msg: String) : Throwable(msg) {
-    init {
-        Log.e("ThrowableError", msg)
-    }
 }

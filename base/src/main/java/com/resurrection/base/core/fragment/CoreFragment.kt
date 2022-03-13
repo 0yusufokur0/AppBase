@@ -1,15 +1,11 @@
 package com.resurrection.base.core.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import com.resurrection.base.component.*
-import com.resurrection.base.general.ThrowableError
 import com.resurrection.base.util.Resource
 import com.resurrection.base.util.Status
 import javax.inject.Inject
@@ -49,7 +45,7 @@ abstract class CoreFragment : Fragment() {
                 Status.SUCCESS -> success.invoke(data.data)
                 Status.LOADING -> loading?.invoke()
                 Status.ERROR -> error?.invoke()
-                else -> ThrowableError("${data.data} fetch error")
+                else -> Throwable("${data.data} fetch error")
             }
         }
     }

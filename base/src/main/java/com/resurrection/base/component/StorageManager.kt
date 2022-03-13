@@ -1,9 +1,5 @@
 package com.resurrection.base.component
 
-/**
- * Created by Yusuf Okur on 01.04.2022
- **/
-
 interface StorageManager <T> {
    fun putInt(key: String, value: Int):T?
    fun getInt(key: String,defValue: Int): Int?

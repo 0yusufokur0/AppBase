@@ -1,7 +1,6 @@
 package com.resurrection.base.component
 
 import android.app.KeyguardManager
-import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager

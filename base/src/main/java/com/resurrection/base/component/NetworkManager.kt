@@ -6,7 +6,6 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

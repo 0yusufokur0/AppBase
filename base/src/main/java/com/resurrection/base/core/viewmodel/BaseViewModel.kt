@@ -1,8 +1,9 @@
 package com.resurrection.base.core.viewmodel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.resurrection.base.component.*
-import com.resurrection.base.general.ThrowableError
 import com.resurrection.base.util.Resource
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -30,7 +31,7 @@ abstract class BaseViewModel : ViewModel(){
                 .catch { this@setData.postValue(Resource.Error(it)) }
                 .collect { this@setData.postValue(it) }
         } else {
-            this@setData.postValue(Resource.InValid(ThrowableError("request parameters is invalid")))
+            this@setData.postValue(Resource.InValid(Throwable("request parameters is invalid")))
         }
     }
 
@@ -44,7 +45,7 @@ abstract class BaseViewModel : ViewModel(){
                 .catch { this@setData.value = Resource.Error(it) }
                 .collect { this@setData.value = it }
         } else {
-            this@setData.value = Resource.InValid(ThrowableError("request parameters is invalid"))
+            this@setData.value = Resource.InValid(Throwable("request parameters is invalid"))
         }
     }
 
