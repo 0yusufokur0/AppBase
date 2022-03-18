@@ -1,1 +1,0 @@
-/Users/yusuf.okur/StudioProjects/AppBase/annotation/build/classes/kotlin/main/com/example/processor/AppConstant.class:/Users/yusuf.okur/StudioProjects/AppBase/annotation/build/classes/kotlin/main/com/example/processor/ConstantProcessor$Companion.class:/Users/yusuf.okur/StudioProjects/AppBase/annotation/build/classes/kotlin/main/com/example/processor/ConstantProcessor.class

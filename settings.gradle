@@ -10,6 +10,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "AppBase"
 include ':app'
-
 include ':base'
-include ':annotation'
