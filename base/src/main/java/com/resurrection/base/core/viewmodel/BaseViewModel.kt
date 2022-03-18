@@ -9,27 +9,38 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-abstract class BaseViewModel : ViewModel(){
+abstract class BaseViewModel : ViewModel() {
 
-    @Inject lateinit var appState: AppState
-    @Inject lateinit var dataHolder: DataHolderManager
-    @Inject lateinit var sharedPreferences: SharedPreferencesManager
-    @Inject lateinit var loggerManager: LoggerManager
-    @Inject lateinit var loadingIndicator: AppLoadingIndicator
-    @Inject lateinit var networkManager: NetworkManager
-    @Inject lateinit var securityManager: SecurityManager
-    @Inject lateinit var biometricManager: BiometricManager
+    @Inject
+    lateinit var appState: AppState
+    @Inject
+    lateinit var dataHolder: DataHolderManager
+    @Inject
+    lateinit var sharedPreferences: SharedPreferencesManager
+    @Inject
+    lateinit var loggerManager: LoggerManager
+    @Inject
+    lateinit var loadingIndicator: AppLoadingIndicator
+    @Inject
+    lateinit var networkManager: NetworkManager
+    @Inject
+    lateinit var securityManager: SecurityManager
+    @Inject
+    lateinit var biometricManager: BiometricManager
 
 
     fun <T> MutableLiveData<Resource<T>>.setData(
         condition: Boolean = true,
-        request: suspend () -> Flow<Resource<T>>
+        request: suspend () -> Flow<Resource<T>>,
+        success: (Resource<T>) -> Unit = { this@setData.postValue(it) },
+        loading: () -> Unit = { this@setData.postValue(Resource.Loading()) },
+        error: (Throwable) -> Unit = { this@setData.postValue(Resource.Error(it)) }
     ) = viewModelScope.launch {
         if (condition) {
             request()
-                .onStart { this@setData.postValue(Resource.Loading()) }
-                .catch { this@setData.postValue(Resource.Error(it)) }
-                .collect { this@setData.postValue(it) }
+                .onStart { loading.invoke() }
+                .catch { error.invoke(it) }
+                .collect { success.invoke(it) }
         } else {
             this@setData.postValue(Resource.InValid(Throwable("request parameters is invalid")))
         }

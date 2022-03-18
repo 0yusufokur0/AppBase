@@ -25,6 +25,6 @@ class PhotosViewModel @Inject constructor(private val instaParkRepository: Insta
         testData.setData { instaParkRepository.getPhotos() }
     }
 
-    fun getPhotos() = _photos.setData { instaParkRepository.getPhotos() }
+    fun getPhotos() = _photos.setData(request = { instaParkRepository.getPhotos() })
 
 }
