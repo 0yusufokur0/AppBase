@@ -12,31 +12,24 @@ import javax.lang.model.element.TypeElement
 @AutoService(Processor::class)
 class ConstantProcessor : AbstractProcessor() {
 
-    override fun getSupportedSourceVersion(): SourceVersion {
-        return SourceVersion.latestSupported()
+    companion object {
+        const val KAPT_KOTLIN_GENERATED = "kapt.kotlin.generated"
     }
 
-    override fun getSupportedAnnotationTypes(): MutableSet<String> {
-        return mutableSetOf(AppConstant::class.java.name)
-    }
+    override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
+
+    override fun getSupportedAnnotationTypes() = mutableSetOf(AppConstant::class.java.name)
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
-        if (roundEnv == null)  return true
+        val elements = roundEnv?.getElementsAnnotatedWith(AppConstant::class.java) ?: run { return true }
+        val generatedSource = processingEnv.options[KAPT_KOTLIN_GENERATED] ?: run { return true }
+        var objectBuilder: TypeSpec.Builder? = null
 
         if (annotations == null || annotations.isEmpty()) return true
-
-        val elements = roundEnv.getElementsAnnotatedWith(AppConstant::class.java)
         if (elements.isEmpty()) return true
-
-        val generatedSource = processingEnv.options[KAPT_KOTLIN_GENERATED] ?: run {
-            return true
-        }
 
         val packageName = "com.example"
         var fileName = ""
-
-        // create object builder
-        var objectBuilder: TypeSpec.Builder? = null
 
         for (element in elements) {
             val annotated = element.getAnnotation(AppConstant::class.java)
@@ -44,7 +37,6 @@ class ConstantProcessor : AbstractProcessor() {
             val propValue = annotated.propValue
             fileName = "${element.simpleName}".capitalize()
 
-            // crate property
             val propBuilder = PropertySpec.builder(
                 name = propName,
                 type = ClassName("kotlin", "String"),
@@ -56,7 +48,6 @@ class ConstantProcessor : AbstractProcessor() {
             }
         }
 
-        // create a file
         val file = FileSpec.builder(packageName, fileName)
             .addType(objectBuilder!!.build())
             .build()
@@ -65,7 +56,4 @@ class ConstantProcessor : AbstractProcessor() {
         return true
     }
 
-    companion object {
-        const val KAPT_KOTLIN_GENERATED = "kapt.kotlin.generated"
-    }
 }
