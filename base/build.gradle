@@ -12,8 +12,6 @@ android {
     defaultConfig {
         minSdk 23
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,14 +35,18 @@ android {
     buildFeatures {
         viewBinding true
     }
-
-    lintOptions {
+    lint {
         abortOnError false
         checkReleaseBuilds false
     }
+
 }
 
 dependencies {
+
+    // okhttp
+    implementation('com.squareup.okhttp3:okhttp:4.9.1')
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 
     //Biometric
     implementation 'androidx.biometric:biometric:1.1.0'
