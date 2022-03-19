@@ -31,11 +31,6 @@ abstract class CoreActivity : AppCompatActivity(), LifecycleEventObserver {
 
     abstract fun init(savedInstanceState: Bundle?)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        init(savedInstanceState)
-    }
-
     @SuppressLint("ObsoleteSdkInt")
     fun requestPermission(permissions: Array<String>, requestCode: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

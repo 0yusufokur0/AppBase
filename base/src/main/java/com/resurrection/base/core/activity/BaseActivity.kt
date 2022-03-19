@@ -1,5 +1,6 @@
 package com.resurrection.base.core.activity
 
+import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -13,5 +14,10 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
 
     private val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
     val  binding: VDB by lazy { DataBindingUtil.setContentView(this@BaseActivity, layoutRes) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        init(savedInstanceState)
+    }
 
 }

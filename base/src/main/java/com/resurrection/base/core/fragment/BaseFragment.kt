@@ -29,6 +29,12 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
         return _binding!!.root
     }
 
+    @CallSuper
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init(savedInstanceState)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

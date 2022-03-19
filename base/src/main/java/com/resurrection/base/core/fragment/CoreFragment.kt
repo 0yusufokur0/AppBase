@@ -29,12 +29,6 @@ abstract class CoreFragment : Fragment() {
 
     abstract fun init(savedInstanceState: Bundle?)
 
-    @CallSuper
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        init(savedInstanceState)
-    }
-
     fun <T> LiveData<Resource<T>>.observeData(
         success: (T?) -> Unit,
         loading: (() -> Unit)? = null,
