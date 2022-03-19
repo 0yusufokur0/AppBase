@@ -2,6 +2,7 @@ package com.resurrection.appbase.di
 
 import com.resurrection.appbase.data.remote.InstaParkApiService
 import com.resurrection.appbase.data.repository.InstaParkRepository
+import com.resurrection.base.component.NetworkManager
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -15,6 +16,7 @@ object  RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMovieRepository(instaParkApiService: InstaParkApiService) = InstaParkRepository(instaParkApiService)
+    fun provideMovieRepository(instaParkApiService: InstaParkApiService,networkManager: NetworkManager) =
+        InstaParkRepository(instaParkApiService,networkManager)
 
 }

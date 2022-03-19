@@ -40,7 +40,7 @@ object CoreModule {
 
     @Singleton
     @Provides
-    fun provideNetworkManger(@ApplicationContext context: Context) = NetworkManager(context)
+    fun provideNetworkManger(@ApplicationContext context: Context,typeConverter: TypeConverter) = NetworkManager(context,typeConverter)
 
     @Singleton
     @Provides
@@ -49,5 +49,9 @@ object CoreModule {
     @Singleton
     @Provides
     fun provideBiometricManager() = BiometricManager()
+
+    @Singleton
+    @Provides
+    fun provideTypeConverter() = TypeConverter()
 
 }
