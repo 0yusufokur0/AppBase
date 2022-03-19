@@ -1,7 +1,4 @@
-package com.veripark.instapark.data.model.users
-
-import com.resurrection.appbase.data.model.users.Address
-import com.resurrection.appbase.data.model.users.Company
+package com.resurrection.appbase.data.model.users
 
 data class UsersModelItem(
     val address: Address,

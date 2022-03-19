@@ -3,7 +3,7 @@ package com.resurrection.appbase.data.remote
 import com.resurrection.appbase.data.model.photos.PhotoModel
 import com.resurrection.appbase.data.model.posts.PostModel
 import com.resurrection.appbase.data.model.users.UsersModel
-import com.veripark.instapark.data.model.users.UsersModelItem
+import com.resurrection.appbase.data.model.users.UsersModelItem
 import retrofit2.Response
 import retrofit2.http.*
 
