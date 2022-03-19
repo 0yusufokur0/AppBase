@@ -58,6 +58,10 @@ dependencies {
     // Base
     implementation project(':base')
 
+    // Okhttp
+    implementation('com.squareup.okhttp3:okhttp:4.9.1')
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
     // DataBinding
     kapt 'com.android.databinding:compiler:3.2.0'
 
