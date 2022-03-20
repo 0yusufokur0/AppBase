@@ -11,7 +11,7 @@ class AppTextView @JvmOverloads constructor(
     defStyleAttr: Int = android.R.attr.textViewStyle
 ) : MaterialTextView(context, attrs, defStyleAttr){
     init {
-        setBackgroundResource(R.drawable.rounded_text_bg)
+        setBackgroundResource(R.drawable.rounded_view_bg)
         setPadding(50, 43, 50, 43)
         textSize = 18f
     }
