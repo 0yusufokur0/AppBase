@@ -20,7 +20,7 @@ class InstaParkRepository @Inject constructor(
             path = "https://jsonplaceholder.typicode.com/photos",
             responseType = PhotoModel::class.java,
             map = {
-                Resource.Success(networkManager.typeConverter.fromJson(it, PhotoModel::class.java))
+                networkManager.typeConverter.fromJson(it, PhotoModel::class.java)
             }
         )
 

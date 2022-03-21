@@ -49,7 +49,7 @@ class NetworkManager @Inject constructor(
         headers: Map<String, String>? = null,
         path: String,
         responseType: Class<T>,
-        map:(responseBody: String) -> Resource<T> =  { Resource.Success(typeConverter.fromJson(it, responseType)) }
+        map:(responseBody: String) -> T =  { typeConverter.fromJson(it, responseType) }
     ) = flow {
         val requestBuilder = Request.Builder()
             .url(baseUrl + path)
@@ -64,7 +64,9 @@ class NetworkManager @Inject constructor(
             val response = okHttpClient.newCall(request).execute()
             if (response.isSuccessful) {
                 response.body?.apply {
-                    resultResource = map(this.string())
+                    val mapResult = map(this.string())
+                    resultResource = if (map != null) Resource.Success(mapResult)
+                    else Resource.Error(Exception("map is null"))
                 }
             }
         } catch (e: Exception) {
