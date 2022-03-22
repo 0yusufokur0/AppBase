@@ -1,5 +1,6 @@
 package com.resurrection.base.core.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -59,5 +60,7 @@ abstract class BaseViewModel : ViewModel() {
             this@setData.value = Resource.InValid(Throwable("request parameters is invalid"))
         }
     }
+
+    fun <T> MutableLiveData<T>.toLiveData():LiveData<T> = this
 
 }
