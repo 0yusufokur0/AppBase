@@ -32,6 +32,8 @@ open class CoreAdapter<T>(
     lateinit var securityManager: SecurityManager
     @Inject
     lateinit var biometricManager: BiometricManager
+    @Inject
+    lateinit var typeConverter: TypeConverter
 
     open lateinit var binding: ViewDataBinding
 

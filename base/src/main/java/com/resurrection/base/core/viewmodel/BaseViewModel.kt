@@ -28,6 +28,8 @@ abstract class BaseViewModel : ViewModel() {
     lateinit var securityManager: SecurityManager
     @Inject
     lateinit var biometricManager: BiometricManager
+    @Inject
+    lateinit var typeConverter: TypeConverter
 
 
     fun <T> MutableLiveData<Resource<T>>.setData(
