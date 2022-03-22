@@ -15,7 +15,6 @@ fun RecyclerView.setHorizontalLinearLayoutManager(reverseLayout:Boolean = false)
     LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, reverseLayout).also { this.layoutManager = it }
 
 fun <T> RecyclerView.init(adapter: BaseAdapter<T>,layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)){
-    hasFixedSize()
     this.layoutManager = layoutManager
     this.adapter = adapter
 }
