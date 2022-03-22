@@ -8,7 +8,7 @@ fun RecyclerView.setGridLayoutManager(spanCount:Int) =
     GridLayoutManager(this.context, spanCount).also { this.layoutManager = it }
 
 fun RecyclerView.setVerticalLinearLayoutManager(reverseLayout:Boolean = false) =
-    LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, reverseLayout)
+    LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, reverseLayout).also { this.layoutManager = it }
 
 fun RecyclerView.setHorizontalLinearLayoutManager(reverseLayout:Boolean = false) =
-    LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, reverseLayout)
+    LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, reverseLayout).also { this.layoutManager = it }
