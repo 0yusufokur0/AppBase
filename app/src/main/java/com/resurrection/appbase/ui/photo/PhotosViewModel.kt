@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.resurrection.base.core.viewmodel.BaseViewModel
 import com.resurrection.base.util.Resource
 import com.resurrection.appbase.data.model.photos.PhotoModel
+import com.resurrection.appbase.data.model.photos.PhotoModelItem
 import com.resurrection.appbase.data.repository.InstaParkRepository
 
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,9 +17,9 @@ class PhotosViewModel @Inject constructor(private val instaParkRepository: Insta
     BaseViewModel() {
 
     private val _photos = MutableLiveData<Resource<PhotoModel>>()
-    val photos: LiveData<Resource<PhotoModel>> = _photos
+    val photos = _photos.toLiveData()
 
-    var testData = MutableStateFlow<Resource<PhotoModel>>(Resource.Loading())
+    var testData = MutableStateFlow<Resource<ArrayList<PhotoModelItem>>>(Resource.Loading())
 
 
     init {

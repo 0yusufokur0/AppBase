@@ -11,9 +11,9 @@ import javax.inject.Inject
 
 open class CoreAdapter<T>(
     private val layoutResource: Int,
-    private val itemId: Int,
+    private val itemId: Int?,
     private var currentList: ArrayList<T>? = null,
-    private val onItemClick: (T) -> Unit
+    private val onItemClick: ((T) -> Unit)? = null
 ) : RecyclerView.Adapter<BaseHolder<T>>() {
 
     @Inject
@@ -33,7 +33,7 @@ open class CoreAdapter<T>(
     @Inject
     lateinit var biometricManager: BiometricManager
 
-    lateinit var binding: ViewDataBinding
+    open lateinit var binding: ViewDataBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<T> {
         binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutResource, parent, false)

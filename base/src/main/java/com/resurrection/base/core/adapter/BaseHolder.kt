@@ -4,12 +4,12 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
 class BaseHolder<T>(
-    private var binding: ViewDataBinding,
-    private var itemId: Int,
-    var onItemClick: (T) -> Unit
+    val binding: ViewDataBinding,
+    val itemId: Int?,
+    val onItemClick: ((T) -> Unit)? = null
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: T) {
-        binding.setVariable(itemId, item)
-        itemView.setOnClickListener { onItemClick((item)) }
+        itemId?.let { binding.setVariable(it, item) }
+        itemView.setOnClickListener { onItemClick?.invoke((item)) }
     }
 }
