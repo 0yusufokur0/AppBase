@@ -22,7 +22,7 @@ fun ImageView.loadImage(image: Any?) {
     image?.let {
         loadAny(image, this.context.imageLoader) {
             placeholder(circularProgressDrawable)
-            transformations(RoundedCornersTransformation(12f))
+            transformations(RoundedCornersTransformation(8f))
         }
     }
 }
