@@ -25,7 +25,7 @@
                 android:orientation="vertical">
 
                 <com.resurrection.base.widget.AppImageView
-                    loadImage="@{photoItem.url}"
+                    loadImageWithRoundedCorner="@{photoItem.url}"
                     android:layout_width="200dp"
                     android:layout_height="200dp" />
 
