@@ -11,8 +11,8 @@ import coil.loadAny
 import coil.transform.RoundedCornersTransformation
 import com.resurrection.base.R
 
-@BindingAdapter("loadImage")
-fun ImageView.loadImage(image: Any?) {
+@BindingAdapter("loadImageWithRoundedCorner")
+fun ImageView.loadImageWithRoundedCorner(image: Any?) {
     val circularProgressDrawable = CircularProgressDrawable(this.context)
     circularProgressDrawable.strokeWidth = 10f
     circularProgressDrawable.centerRadius = 30f
