@@ -20,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
     (R.layout.fragment_photos, PhotosViewModel::class.java) {
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun init(savedInstanceState: Bundle?) {
 
         binding.recyclerView.setGridLayoutManager(2)
@@ -30,6 +29,11 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
         binding.recyclerView.layoutManager = llm
         val adapter = PhotoAdapter()
         binding.recyclerView.adapter = adapter
+
+
+        adapter.onItemClick = {
+            toast(it.title)
+        }
 
         viewModel.getPhotos()
         viewModel.photos.observeData(success = {
@@ -42,6 +46,11 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
             toast("error")
         }
         )
+
+    }
+
+
+    fun <T> test(item: T){
 
     }
 

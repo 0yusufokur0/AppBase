@@ -13,7 +13,6 @@ open class CoreAdapter<T>(
     private val layoutResource: Int,
     private val itemId: Int?,
     private var currentList: ArrayList<T>? = null,
-    private val onItemClick: ((T) -> Unit)? = null
 ) : RecyclerView.Adapter<BaseHolder<T>>() {
 
     @Inject
@@ -35,6 +34,7 @@ open class CoreAdapter<T>(
     @Inject
     lateinit var typeConverter: TypeConverter
 
+    open var onItemClick: ((T) -> Unit)? = null
     open lateinit var binding: ViewDataBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<T> {

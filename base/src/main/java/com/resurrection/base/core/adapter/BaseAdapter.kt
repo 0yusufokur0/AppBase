@@ -6,18 +6,17 @@ import androidx.recyclerview.widget.DiffUtil
 import java.util.*
 
 open class BaseAdapter<T>(
-    private val layoutResource: Int,
-    private val itemId: Int? = null,
-    private val currentList: ArrayList<T>? = arrayListOf(),
-    private val onItemClick: ((T) -> Unit)? = null
-) : CoreAdapter<T>(layoutResource, itemId, currentList, onItemClick) {
+    private var layoutResource: Int,
+     private var itemId: Int? = null,
+     private var currentList: ArrayList<T>? = arrayListOf(),
+) : CoreAdapter<T>(layoutResource, itemId, currentList) {
 
     @SuppressLint("NotifyDataSetChanged")
     fun addAll(list: List<T>) = currentList?.let {
-        val diffUtil = BaseDiffUtil(currentList, list)
+        val diffUtil = BaseDiffUtil(currentList!!, list)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
-        currentList.clear()
-        currentList.addAll(list)
+        currentList!!.clear()
+        currentList!!.addAll(list)
         diffResult.dispatchUpdatesTo(this)
     }?: run {
         currentList?.addAll(list)
@@ -25,22 +24,22 @@ open class BaseAdapter<T>(
     }
 
     fun add(item: T) = currentList?.let {
-        currentList.add(item)
-        notifyItemInserted(currentList.size - 1)
+        currentList!!.add(item)
+        notifyItemInserted(currentList!!.size - 1)
     }?: run {
         currentList?.add(item)
         notifyItemInserted(0)
     }
 
     fun remove(item: T) = currentList?.let {
-        val position = currentList.indexOf(item)
-        currentList.remove(item)
+        val position = currentList!!.indexOf(item)
+        currentList!!.remove(item)
         notifyItemRemoved(position)
     }
 
     fun update(item: T) = currentList?.let {
-        val position = currentList.indexOf(item)
-        currentList[position] = item
+        val position = currentList!!.indexOf(item)
+        currentList!![position] = item
         notifyItemChanged(position)
     }
 
@@ -50,25 +49,25 @@ open class BaseAdapter<T>(
         notifyDataSetChanged()
     }
 
-    fun getItem(position: Int) = currentList?.let { currentList[position] }
+    fun getItem(position: Int) = currentList?.let { currentList!![position] }
 
-    fun getItems() = currentList?.let { currentList.toList() }
+    fun getItems() = currentList?.let { currentList!!.toList() }
 
-    fun getItems(predicate: (T) -> Boolean) = currentList?.let { currentList.filter(predicate) }
+    fun getItems(predicate: (T) -> Boolean) = currentList?.let { currentList!!.filter(predicate) }
 
     fun <R> filterBy(constraint: CharSequence, selector: ((T) -> R?)? = null) = currentList?.let {
         val mFilter = object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val filteredList = ArrayList<T>()
-                if (constraint == null || constraint.isEmpty()) filteredList.addAll(currentList)
+                if (constraint == null || constraint.isEmpty()) filteredList.addAll(currentList!!)
                 else {
                     val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim()
                     selector?.let {
-                        for (item in currentList)
+                        for (item in currentList!!)
                             if (it.invoke(item).toString().lowercase(Locale.getDefault()).contains(filterPattern))
                                 filteredList.add(item)
                     } ?: run {
-                        for (item in currentList)
+                        for (item in currentList!!)
                             if (item.toString().lowercase(Locale.getDefault()).contains(filterPattern))
                                 filteredList.add(item)
                     }
@@ -80,9 +79,11 @@ open class BaseAdapter<T>(
 
             @SuppressLint("NotifyDataSetChanged")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                currentList.clear()
-                currentList.addAll(results?.values as ArrayList<T>)
+                currentList?: run {
+                currentList!!.clear()
+                currentList!!.addAll(results?.values as ArrayList<T>)
                 notifyDataSetChanged()
+                }
             }
         }
         mFilter.filter(constraint)

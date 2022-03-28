@@ -9,8 +9,5 @@ import com.resurrection.base.core.adapter.BaseHolder
 
 class PhotoAdapter : BaseAdapter<PhotoModelItem>(R.layout.photo_item,BR.photoItem){
 
-    override fun onBindViewHolder(holder: BaseHolder<PhotoModelItem>, position: Int) {
-        super.onBindViewHolder(holder, position)
 
-    }
 }
