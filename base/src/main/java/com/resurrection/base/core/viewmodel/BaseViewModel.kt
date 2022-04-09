@@ -32,21 +32,23 @@ abstract class BaseViewModel : ViewModel() {
     lateinit var typeConverter: TypeConverter
 
 
-    fun <T> MutableLiveData<Resource<T>>.setData(
+    fun <T> fetchLiveData(
         condition: Boolean = true,
+        liveData: MutableLiveData<Resource<T>>,
         request: suspend () -> Flow<Resource<T>>,
-        success: (Resource<T>) -> Unit = { this@setData.postValue(it) },
-        loading: () -> Unit = { this@setData.postValue(Resource.Loading()) },
-        error: (Throwable) -> Unit = { this@setData.postValue(Resource.Error(it)) }
+        success: (Resource<T>) -> Unit = { liveData.postValue(it) },
+        loading: () -> Unit = { liveData.postValue(Resource.Loading()) },
+        error: (Throwable) -> Unit = { liveData.postValue(Resource.Error(it)) }
     ) = viewModelScope.launch {
         if (condition) {
             request()
-                .onStart { loading.invoke() }
-                .catch { error.invoke(it) }
-                .collect { success.invoke(it) }
+                .onStart { loading() }
+                .catch { error(it) }
+                .collect { success(it)}
         } else {
-            this@setData.postValue(Resource.InValid(Throwable("request parameters is invalid")))
+            liveData.postValue(Resource.InValid(Throwable("request parameters is invalid")))
         }
+
     }
 
     fun <T> MutableStateFlow<Resource<T>>.setData(
