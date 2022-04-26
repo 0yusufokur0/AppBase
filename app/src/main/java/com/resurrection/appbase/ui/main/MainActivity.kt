@@ -21,6 +21,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun init(savedInstanceState: Bundle?) {
+
+        dataStoreManager.putInt(
+            key = "intKey",
+            value = 133,
+            success = {
+
+            }, error = {
+
+            }
+        )
+
         val fragment = PhotosFragment()
         val transaction = supportFragmentManager.beginTransaction()
 

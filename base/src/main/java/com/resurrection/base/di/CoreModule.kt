@@ -54,4 +54,8 @@ object CoreModule {
     @Provides
     fun provideTypeConverter() = TypeConverter()
 
+    @Singleton
+    @Provides
+    fun provideDataStoreManager(@ApplicationContext context: Context) = DataStoreManager(context)
+
 }

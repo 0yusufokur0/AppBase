@@ -3,6 +3,7 @@ package com.resurrection.appbase.ui.photo
 import android.os.Bundle
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentPhotosBinding
+import com.resurrection.base.component.DataStoreManager
 import com.resurrection.base.core.fragment.BaseFragment
 import com.resurrection.base.general.toast
 import com.resurrection.base.widget.init
@@ -19,6 +20,22 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
         initPhotoAdapterOnItemClick()
         initPhotosObserver()
         getPhotos()
+
+        val dataStore = DataStoreManager(requireContext())
+
+        dataStore.getInt(
+            key = "intKey",
+            success = {
+                requireActivity().runOnUiThread {
+                    toast(it)
+                }
+            }, error = {
+                requireActivity().runOnUiThread {
+                    toast("hata verdi")
+                }
+            }
+        )
+
     }
 
     private fun initPhotoRecyclerView(){

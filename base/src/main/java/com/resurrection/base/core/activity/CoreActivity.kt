@@ -30,6 +30,8 @@ abstract class CoreActivity : AppCompatActivity(), LifecycleEventObserver {
     lateinit var biometricManager: BiometricManager
     @Inject
     lateinit var typeConverter: TypeConverter
+    @Inject
+    lateinit var dataStoreManager: DataStoreManager
 
     abstract fun init(savedInstanceState: Bundle?)
 

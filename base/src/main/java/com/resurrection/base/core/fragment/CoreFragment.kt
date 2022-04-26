@@ -28,6 +28,8 @@ abstract class CoreFragment : Fragment() {
     lateinit var securityManager: SecurityManager
     @Inject
     lateinit var typeConverter: TypeConverter
+    @Inject
+    lateinit var dataStoreManager: DataStoreManager
 
     abstract fun init(savedInstanceState: Bundle?)
 
