@@ -1,21 +1,11 @@
 package com.resurrection.appbase.ui.photo
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.MotionEvent
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.resurrection.appbase.BR
 import com.resurrection.appbase.R
-import com.resurrection.appbase.data.model.photos.PhotoModel
-import com.resurrection.appbase.data.model.photos.PhotoModelItem
 import com.resurrection.appbase.databinding.FragmentPhotosBinding
-import com.resurrection.base.core.adapter.BaseAdapter
 import com.resurrection.base.core.fragment.BaseFragment
 import com.resurrection.base.general.toast
-import com.resurrection.base.util.startCustomAnimation
 import com.resurrection.base.widget.init
-import com.resurrection.base.widget.setGridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
