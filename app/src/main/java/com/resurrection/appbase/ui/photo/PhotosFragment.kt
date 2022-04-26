@@ -3,6 +3,7 @@ package com.resurrection.appbase.ui.photo
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resurrection.appbase.BR
 import com.resurrection.appbase.R
@@ -13,6 +14,7 @@ import com.resurrection.base.core.adapter.BaseAdapter
 import com.resurrection.base.core.fragment.BaseFragment
 import com.resurrection.base.general.toast
 import com.resurrection.base.util.startCustomAnimation
+import com.resurrection.base.widget.init
 import com.resurrection.base.widget.setGridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,38 +22,38 @@ import dagger.hilt.android.AndroidEntryPoint
 class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
     (R.layout.fragment_photos, PhotosViewModel::class.java) {
 
+    private val photoAdapter = PhotoAdapter()
+
     override fun init(savedInstanceState: Bundle?) {
+        initPhotoRecyclerView()
+        initPhotoAdapterOnItemClick()
+        initPhotosObserver()
+        getPhotos()
+    }
 
-        binding.recyclerView.setGridLayoutManager(2)
+    private fun initPhotoRecyclerView(){
+        binding.photoRecyclerView.init(photoAdapter)
+    }
 
-        val llm = LinearLayoutManager(requireContext())
-        llm.orientation = LinearLayoutManager.VERTICAL
-        binding.recyclerView.layoutManager = llm
-        val adapter = PhotoAdapter()
-        binding.recyclerView.adapter = adapter
-
-
-        adapter.onItemClick = {
+    private fun initPhotoAdapterOnItemClick(){
+        photoAdapter.onItemClick = {
             toast(it.title)
         }
+    }
 
-        viewModel.getPhotos()
+    private fun initPhotosObserver(){
         viewModel.photos.observeData(success = {
             it?.let {
                 toast(it)
-                adapter.addAll(it)
+                photoAdapter.addAll(it)
 
             }
         }, error = {
             toast("error")
         }
         )
-
     }
-
-
-    fun <T> test(item: T){
-
+    private fun getPhotos(){
+        viewModel.getPhotos()
     }
-
 }
