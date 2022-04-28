@@ -27,7 +27,6 @@ open class LoggerInterceptor(private val loggerManager: LoggerManager) : Interce
 
 
         val responseLogString =
-                    "Request url: ${response.request.url } \n" +
                     "Request headers: ${ response.headers} \n" +
                     "Request body: ${response.body?.string() } \n"
                     "Request code: ${ response.code} \n"
