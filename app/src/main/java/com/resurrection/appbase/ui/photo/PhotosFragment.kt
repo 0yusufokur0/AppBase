@@ -56,7 +56,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
 
             }
         }, error = {
-            toast("error")
+            toast(it?.message)
         }
         )
     }

@@ -36,14 +36,14 @@ abstract class CoreFragment : Fragment() {
     fun <T> LiveData<Resource<T>>.observeData(
         success: (T?) -> Unit,
         loading: (() -> Unit)? = null,
-        error: (() -> Unit)? = null
+        error: ((Throwable?) -> Unit)? = null
     ) {
-        this.observe(this@CoreFragment) { data ->
-            when (data.status) {
-                Status.SUCCESS -> success.invoke(data.data)
+        this.observe(this@CoreFragment) { resource ->
+            when (resource.status) {
+                Status.SUCCESS -> success.invoke(resource.data)
                 Status.LOADING -> loading?.invoke()
-                Status.ERROR -> error?.invoke()
-                else -> Throwable("${data.data} fetch error")
+                Status.ERROR -> error?.invoke(resource.error)
+                else -> Throwable("${resource.data} fetch error")
             }
         }
     }

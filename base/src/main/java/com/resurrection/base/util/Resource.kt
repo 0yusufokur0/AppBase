@@ -7,7 +7,7 @@ enum class Status {
     INVALID
 }
 
-sealed class Resource<out T>(val status: Status, val data: T?, val message: Throwable?) {
+sealed class Resource<out T>(val status: Status, val data: T?, val error: Throwable?) {
     class Loading<T> : Resource<T>(Status.LOADING, null, null)
     class Success<T>(data: T?) : Resource<T>(Status.SUCCESS, data, null)
     class Error<T>(exception: Throwable?) : Resource<T>(Status.ERROR, null, exception)
