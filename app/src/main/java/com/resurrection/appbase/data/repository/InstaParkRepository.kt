@@ -6,6 +6,7 @@ import com.resurrection.appbase.data.model.photos.PhotoModel
 import com.resurrection.appbase.data.model.photos.PhotoModelItem
 import com.resurrection.appbase.data.remote.InstaParkApiService
 import com.resurrection.base.component.NetworkManager
+import com.resurrection.base.component.OkHttpClientManager
 import com.resurrection.base.network.getData
 import com.resurrection.base.util.Resource
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +24,8 @@ import kotlin.collections.ArrayList
 
 class InstaParkRepository @Inject constructor(
     val instaParkApiService: InstaParkApiService,
-    val networkManager: NetworkManager) {
+    val okHttpClientManager: OkHttpClientManager
+    ) {
 
 
     val medicineListType: Type = object : TypeToken<ArrayList<PhotoModelItem>>() {}.type
@@ -31,7 +33,7 @@ class InstaParkRepository @Inject constructor(
     suspend fun getUsers() = getData { instaParkApiService.getUsers() }
     suspend fun getUser(id: String) = getData { instaParkApiService.getUser(id) }
     suspend fun getPosts() = getData { instaParkApiService.getPosts() }
-    suspend fun getPhotos() = networkManager.newRequest(
+    suspend fun getPhotos() = okHttpClientManager.newRequest(
             path = "/photos",
             responseType = PhotoModel::class.java,
         )

@@ -24,6 +24,8 @@ abstract class BaseApplication : MultiDexApplication(){
     lateinit var biometricManager: BiometricManager
     @Inject
     lateinit var typeConverter: TypeConverter
+    @Inject
+    lateinit var okHttpClientManager: OkHttpClientManager
 
     abstract fun init()
 

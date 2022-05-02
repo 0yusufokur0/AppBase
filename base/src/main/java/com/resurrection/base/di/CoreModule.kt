@@ -40,7 +40,7 @@ object CoreModule {
 
     @Singleton
     @Provides
-    fun provideNetworkManger(@ApplicationContext context: Context,typeConverter: TypeConverter) = NetworkManager(context,typeConverter)
+    fun provideNetworkManger(@ApplicationContext context: Context) = NetworkManager(context)
 
     @Singleton
     @Provides
@@ -57,5 +57,9 @@ object CoreModule {
     @Singleton
     @Provides
     fun provideDataStoreManager(@ApplicationContext context: Context) = DataStoreManager(context)
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClientManager(typeConverter: TypeConverter) = OkHttpClientManager(typeConverter)
 
 }

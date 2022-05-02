@@ -18,6 +18,6 @@ class App : BaseApplication() {
                 .newBuilder()
                 .addInterceptor(LoggerInterceptor(loggerManager))
                 .build()
-        networkManager.init(okHttpClient,BuildConfig.API_URL)
+        okHttpClientManager.init(okHttpClient,BuildConfig.API_URL)
     }
 }

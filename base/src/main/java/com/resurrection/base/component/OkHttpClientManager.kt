@@ -13,7 +13,6 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
 class OkHttpClientManager @Inject constructor(
-    @ApplicationContext val context: Context,
     val typeConverter: TypeConverter
 ) {
     companion object {
