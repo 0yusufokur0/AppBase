@@ -22,14 +22,13 @@ class OkHttpClientManager @Inject constructor(
         const val DELETE = "DELETE"
     }
 
-    private var _okHttpClient = OkHttpClient().newBuilder().build()
-    val okHttpClient = _okHttpClient
-    private var baseUrl = ""
+    private lateinit var okHttpClient: OkHttpClient
+    private lateinit var baseUrl: String
 
 
-    fun init(okHttpClient: OkHttpClient = _okHttpClient,baseUrl: String) {
+    fun init(okHttpClient: OkHttpClient,baseUrl: String) {
         this.baseUrl = baseUrl
-        this._okHttpClient = okHttpClient
+        this.okHttpClient = okHttpClient
     }
 
     fun <T> newRequest(
