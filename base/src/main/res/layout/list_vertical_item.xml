@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="data" type="com.resurrection.base.model.Item"/>
+        <variable name="data" type="com.resurrection.base.models.Item"/>
 
     </data>
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <com.resurrection.base.widget.AppTextView
+        <com.resurrection.base.widgets.AppTextView
                 android:text="@{data.value}"
                 android:id="@+id/appTextView"
                 android:layout_width="match_parent"

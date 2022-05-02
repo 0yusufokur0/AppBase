@@ -5,8 +5,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.resurrection.base.component.*
-import com.resurrection.base.component.SecurityManager
+import com.resurrection.base.components.appstate.AppState
+import com.resurrection.base.components.security.SecurityManager
+import com.resurrection.base.components.data.DataHolderManager
+import com.resurrection.base.components.data.SharedPreferencesManager
+import com.resurrection.base.components.data.TypeConverter
+import com.resurrection.base.components.logger.LoggerManager
+import com.resurrection.base.components.network.NetworkManager
+import com.resurrection.base.components.security.BiometricManager
+import com.resurrection.base.components.widget.AppLoadingIndicator
 import javax.inject.Inject
 
 open class CoreAdapter<T>(

@@ -1,13 +1,19 @@
 package com.resurrection.base.core.fragment
 
 import android.os.Bundle
-import android.view.View
-import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import com.resurrection.base.component.*
-import com.resurrection.base.util.Resource
-import com.resurrection.base.util.Status
+import com.resurrection.base.components.appstate.AppState
+import com.resurrection.base.components.data.DataHolderManager
+import com.resurrection.base.components.data.DataStoreManager
+import com.resurrection.base.components.data.SharedPreferencesManager
+import com.resurrection.base.components.data.TypeConverter
+import com.resurrection.base.components.logger.LoggerManager
+import com.resurrection.base.components.network.NetworkManager
+import com.resurrection.base.components.security.SecurityManager
+import com.resurrection.base.components.widget.AppLoadingIndicator
+import com.resurrection.base.utils.Resource
+import com.resurrection.base.utils.Status
 import javax.inject.Inject
 
 abstract class CoreFragment : Fragment() {

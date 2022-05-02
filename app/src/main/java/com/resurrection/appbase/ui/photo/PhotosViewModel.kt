@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.resurrection.appbase.data.model.photos.PhotoModel
 import com.resurrection.appbase.data.repository.InstaParkRepository
 import com.resurrection.base.core.viewmodel.BaseViewModel
-import com.resurrection.base.util.Resource
+import com.resurrection.base.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

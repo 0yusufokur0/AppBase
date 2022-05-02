@@ -2,7 +2,18 @@ package com.resurrection.base.di
 
 import android.content.Context
 import android.os.Bundle
-import com.resurrection.base.component.*
+import com.resurrection.base.components.appstate.AppState
+import com.resurrection.base.components.data.DataHolderManager
+import com.resurrection.base.components.data.DataStoreManager
+import com.resurrection.base.components.data.SharedPreferencesManager
+import com.resurrection.base.components.data.TypeConverter
+import com.resurrection.base.components.logger.LoggerManager
+import com.resurrection.base.components.network.NetworkManager
+import com.resurrection.base.components.network.OkHttpClientManager
+import com.resurrection.base.components.security.BiometricManager
+import com.resurrection.base.components.security.CryptographyManager
+import com.resurrection.base.components.security.SecurityManager
+import com.resurrection.base.components.widget.AppLoadingIndicator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

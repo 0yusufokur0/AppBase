@@ -3,10 +3,10 @@ package com.resurrection.appbase.ui.photo
 import android.os.Bundle
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentPhotosBinding
-import com.resurrection.base.component.DataStoreManager
+import com.resurrection.base.components.data.DataStoreManager
 import com.resurrection.base.core.fragment.BaseFragment
-import com.resurrection.base.general.toast
-import com.resurrection.base.widget.init
+import com.resurrection.base.extensions.toast
+import com.resurrection.base.extensions.init
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

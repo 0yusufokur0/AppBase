@@ -2,9 +2,7 @@ package com.resurrection.appbase.di
 
 import com.resurrection.appbase.data.remote.InstaParkApiService
 import com.resurrection.appbase.data.repository.InstaParkRepository
-import com.resurrection.base.component.NetworkManager
-import com.resurrection.base.component.OkHttpClientManager
-import dagger.Binds
+import com.resurrection.base.components.network.OkHttpClientManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

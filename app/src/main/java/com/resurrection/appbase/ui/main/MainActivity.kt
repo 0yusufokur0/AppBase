@@ -8,7 +8,7 @@ import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.ActivityMainBinding
 import com.resurrection.appbase.ui.photo.PhotosFragment
 import com.resurrection.base.core.activity.BaseActivity
-import com.resurrection.base.general.toast
+import com.resurrection.base.extensions.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
