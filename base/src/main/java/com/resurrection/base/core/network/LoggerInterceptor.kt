@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets
 
 
 open class LoggerInterceptor(private val loggerManager: LoggerManager) : Interceptor {
+
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder().build()
         val tempResponse = chain.proceed(request)
@@ -23,7 +24,6 @@ open class LoggerInterceptor(private val loggerManager: LoggerManager) : Interce
         logRequestAndResponse(request, resultResponse)
 
         return resultResponse
-
     }
 
     private fun logRequestAndResponse(request: Request, response: Response) {
@@ -35,10 +35,9 @@ open class LoggerInterceptor(private val loggerManager: LoggerManager) : Interce
         val requestBody = request.body?.toString() ?: ""
 
         val responseHeaders = response.headers.toString()
-        val responseBody = response.peekBody(Long.MAX_VALUE).string()
         val responseCode = response.code
         val responseMessage = response.message
-        val mresponseBody = response.body?.source()?.buffer?.clone()?.readString(StandardCharsets.UTF_8)
+        val responseBody = response.body?.source()?.buffer?.clone()?.readString(StandardCharsets.UTF_8)
 
         val requestLogString =
                     "\n" +
@@ -46,14 +45,16 @@ open class LoggerInterceptor(private val loggerManager: LoggerManager) : Interce
                     "\t Method: $requestMethod \n" +
                     "\t Headers: $requestHeaders \n" +
                     "\t Body: $requestBody \n"
+
         val responseLogString =
                     "\n" +
                     "\t Headers: $responseHeaders \n" +
-                    "\t Body: $mresponseBody \n" +
                     "\t Message: $responseMessage \n"+
-                    "\t Code: $responseCode \n"
+                    "\t Code: $responseCode \n" +
+                    "\t Body: $responseBody \n"
+
         val resultLogString =
-                " .\n"+
+                "New Request Started... \n"+
                 "┌────── Request ────────────────────────────────────────────────────────────────────────" +
                 "\n" +
                 requestTime +
@@ -65,7 +66,6 @@ open class LoggerInterceptor(private val loggerManager: LoggerManager) : Interce
                 "└───────────────────────────────────────────────────────────────────────────────────────"
 
         loggerManager.d(resultLogString)
-
     }
 
 }
