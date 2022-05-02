@@ -16,7 +16,7 @@ class App : BaseApplication() {
         val okHttpClient =
             OkHttpClient()
                 .newBuilder()
-                //.addInterceptor(LoggerInterceptor(loggerManager))
+                .addInterceptor(LoggerInterceptor(loggerManager))
                 .build()
         okHttpClientManager.init(okHttpClient,BuildConfig.API_URL)
     }
