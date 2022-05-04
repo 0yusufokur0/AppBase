@@ -18,77 +18,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(
     R.layout.activity_main,
     MainActivityViewModel::class.java) {
 
-
-
-
     @RequiresApi(Build.VERSION_CODES.N)
     override fun init(savedInstanceState: Bundle?) {
 
-        dataStoreManager.putInt(
-            key = "intKey",
-            value = 133,
-            success = {
-
-            }, error = {
-
-            }
-        )
-
         val fragment = PassengerFragment()
         val transaction = supportFragmentManager.beginTransaction()
-
         transaction.replace(binding.frameLayout.id, fragment)
         transaction.addToBackStack(null)
-
         transaction.commit()
-
-
-        biometricManager.setup(
-            "my title",
-            "my sub title",
-            "my desc",
-            biometricIsAvailable = {
-
-            },biometricIsUnAvailable = {
-
-            },success = {
-                toast("succes")
-            },error = {
-                toast("errorr")
-        })
-
-        biometricManager.authenticate()
-
-
-        val dialog = AlertDialog.Builder(this)
-            .setTitle("network connection")
-            .setPositiveButton(android.R.string.ok, null)
-            .setNegativeButton("try again", null)
-            .setCancelable(false)
-            .create()
-
-        dialog.setOnShowListener {
-
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                finish()
-            }
-
-            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener {
-                if (networkManager.isNetworkAvailable) dialog.dismiss()
-            }
-
-        }
-        networkManager.setNetworkStateListener(
-            available = {
-                dialog.dismiss()
-            },
-            unAvailable = {
-                dialog.show()
-            }
-        )
-
-
-
     }
 
 }
