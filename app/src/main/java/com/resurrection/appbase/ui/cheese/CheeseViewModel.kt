@@ -26,14 +26,9 @@ class CheeseViewModel @Inject constructor(var cheeseDao: CheeseDao)
     }
 
     val allCheeses: Flow<PagingData<CheeseListItem>> = Pager(
-        config = PagingConfig(
-            pageSize = 60,
-            enablePlaceholders = true,
-            maxSize = 200
-        )
-    ) {
-        cheeseDao.allCheesesByName()
-    }.flow
+        config = PagingConfig( pageSize = 60, enablePlaceholders = true, maxSize = 200),
+        pagingSourceFactory = { cheeseDao.allCheesesByName() }
+    ).flow
         .map { pagingData ->
             pagingData
                 // Map cheeses to common UI model.
