@@ -5,6 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentPassengerBinding
+import com.resurrection.appbase.ui.adapter.LoadStateAdapter
 import com.resurrection.base.core.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -19,8 +20,8 @@ class PassengerFragment :BaseFragment<FragmentPassengerBinding,PassengerViewMode
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = passengersAdapter.withLoadStateHeaderAndFooter(
-                header = PassengersLoadStateAdapter { passengersAdapter.retry() },
-                footer = PassengersLoadStateAdapter { passengersAdapter.retry() }
+                header = LoadStateAdapter { passengersAdapter.retry() },
+                footer = LoadStateAdapter { passengersAdapter.retry() }
             )
             setHasFixedSize(true)
         }

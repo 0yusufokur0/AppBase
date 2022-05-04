@@ -21,7 +21,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(
     @RequiresApi(Build.VERSION_CODES.N)
     override fun init(savedInstanceState: Bundle?) {
 
-        val fragment = CheeseFragment()
+        val fragment = PassengerFragment()
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(binding.frameLayout.id, fragment)
         transaction.addToBackStack(null)

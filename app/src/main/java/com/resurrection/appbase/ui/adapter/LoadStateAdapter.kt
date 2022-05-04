@@ -1,4 +1,4 @@
-package com.resurrection.appbase.ui.passenger
+package com.resurrection.appbase.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +7,24 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.resurrection.appbase.databinding.ItemLoadingStateBinding
+import com.resurrection.appbase.ui.adapter.LoadStateAdapter.LoadStateViewHolder
 import com.resurrection.appbase.visible
 
-class PassengersLoadStateAdapter(
+class LoadStateAdapter(
     private val retry: () -> Unit
-) : LoadStateAdapter<PassengersLoadStateAdapter.PassengerLoadStateViewHolder>() {
+) : LoadStateAdapter<LoadStateViewHolder>() {
 
-    inner class PassengerLoadStateViewHolder(
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        loadState: LoadState
+    ) = LoadStateViewHolder(
+        ItemLoadingStateBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+        retry
+    )
+
+    override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState)  = holder.bind(loadState)
+    
+    class LoadStateViewHolder(
         private val binding: ItemLoadingStateBinding,
         private val retry: () -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -32,16 +43,4 @@ class PassengersLoadStateAdapter(
             binding.progressbar.visibility = View.VISIBLE
         }
     }
-
-    override fun onBindViewHolder(holder: PassengerLoadStateViewHolder, loadState: LoadState) {
-        holder.bind(loadState)
-    }
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        loadState: LoadState
-    ) = PassengerLoadStateViewHolder(
-        ItemLoadingStateBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-        retry
-    )
 }
