@@ -22,4 +22,7 @@ interface CheeseDao {
 
     @Delete
     fun delete(cheese: Cheese)
+
+    @Query("DELETE FROM Cheese")
+    fun deleteAllCheese()
 }

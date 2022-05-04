@@ -8,8 +8,11 @@ import com.resurrection.appbase.data.model.cheese.Cheese
 import com.resurrection.appbase.data.model.cheese.CheeseListItem
 import com.resurrection.base.core.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
@@ -19,7 +22,8 @@ class CheeseViewModel @Inject constructor(var cheeseDao: CheeseDao)
     :BaseViewModel() {
 
     init {
-        ioThread {
+        CoroutineScope(Dispatchers.IO).launch {
+            cheeseDao.deleteAllCheese()
             cheeseDao.insert(
                 CHEESE_DATA.map { Cheese(id = 0, name = it) })
         }
@@ -55,20 +59,11 @@ class CheeseViewModel @Inject constructor(var cheeseDao: CheeseDao)
         .cachedIn(viewModelScope)
 
 
-    fun insert(text: CharSequence) = ioThread {
+    fun insert(text: CharSequence) = CoroutineScope(Dispatchers.IO).launch {
         cheeseDao.insert(Cheese(id = 0, name = text.toString()))
     }
 
-    fun remove(cheese: Cheese) = ioThread {
+    fun remove(cheese: Cheese) = CoroutineScope(Dispatchers.IO).launch {
         cheeseDao.delete(cheese)
     }
-}
-
-private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
-
-/**
- * Utility method to run blocks on a dedicated background thread, used for io/database work.
- */
-fun ioThread(f : () -> Unit) {
-    IO_EXECUTOR.execute(f)
 }
