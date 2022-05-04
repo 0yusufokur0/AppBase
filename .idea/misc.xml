@@ -16,6 +16,8 @@
         <entry key="app/src/main/res/drawable/rounded_rectangle_bg.xml" value="0.2564814814814815" />
         <entry key="app/src/main/res/drawable/rounded_text_bg.xml" value="0.17604166666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19882246376811594" />
+        <entry key="app/src/main/res/layout/cheese_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_cheese.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_photos.xml" value="0.1" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.1638888888888889" />
         <entry key="app/src/main/res/layout/list_horizontal_item.xml" value="0.15572916666666667" />
