@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentCheeseBinding
-import com.resurrection.appbase.ui.adapter.LoadStateAdapter
 import com.resurrection.base.core.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -20,10 +19,21 @@ class CheeseFragment : BaseFragment<FragmentCheeseBinding,CheeseViewModel>(
 ) {
     override fun init(savedInstanceState: Bundle?) {
         val adapter = CheeseAdapter()
+
+/*        val loadStateAdapter = BaseLoadStateAdapter<ItemLoadingStateBinding>(R.layout.item_loading_state)
+        loadStateAdapter.bindLoadState = { binding, loadState ->
+            if (loadState is LoadState.Error) binding.textViewError.text = loadState.error.localizedMessage
+            binding.progressbar.visible(loadState is LoadState.Loading)
+            binding.buttonRetry.visible(loadState is LoadState.Error)
+            binding.textViewError.visible(loadState is LoadState.Error)
+            binding.buttonRetry.setOnClickListener { adapter.retry() }
+            binding.progressbar.visibility = View.VISIBLE
+        }
+
         binding.cheeseList.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = LoadStateAdapter { adapter.retry() },
-            footer = LoadStateAdapter { adapter.retry() }
-        )
+            header = loadStateAdapter,
+            footer = loadStateAdapter
+        )*/
         lifecycleScope.launch {
             viewModel.allCheeses.collectLatest { adapter.submitData(it) }
         }

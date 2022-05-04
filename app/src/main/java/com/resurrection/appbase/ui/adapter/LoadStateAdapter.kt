@@ -1,46 +1,29 @@
 package com.resurrection.appbase.ui.adapter
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.paging.LoadState
-import androidx.paging.LoadStateAdapter
-import androidx.recyclerview.widget.RecyclerView
+import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.ItemLoadingStateBinding
-import com.resurrection.appbase.ui.adapter.LoadStateAdapter.LoadStateViewHolder
 import com.resurrection.appbase.visible
+import com.resurrection.base.core.adapter.BaseLoadStateAdapter
 
 class LoadStateAdapter(
     private val retry: () -> Unit
-) : LoadStateAdapter<LoadStateViewHolder>() {
+) : BaseLoadStateAdapter<ItemLoadingStateBinding>(R.layout.item_loading_state){
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        loadState: LoadState
-    ) = LoadStateViewHolder(
-        ItemLoadingStateBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-        retry
-    )
-
-    override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState)  = holder.bind(loadState)
-    
-    class LoadStateViewHolder(
-        private val binding: ItemLoadingStateBinding,
-        private val retry: () -> Unit
-    ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(loadState: LoadState) {
-            if (loadState is LoadState.Error) {
-                binding.textViewError.text = loadState.error.localizedMessage
-            }
-
-            binding.progressbar.visible(loadState is LoadState.Loading)
-            binding.buttonRetry.visible(loadState is LoadState.Error)
-            binding.textViewError.visible(loadState is LoadState.Error)
-            binding.buttonRetry.setOnClickListener {
-                retry()
-            }
-
-            binding.progressbar.visibility = View.VISIBLE
+    override fun bindLoadState(binding: ItemLoadingStateBinding, loadState: LoadState) {
+        if (loadState is LoadState.Error) {
+            binding.textViewError.text = loadState.error.localizedMessage
         }
+
+        binding.progressbar.visible(loadState is LoadState.Loading)
+        binding.buttonRetry.visible(loadState is LoadState.Error)
+        binding.textViewError.visible(loadState is LoadState.Error)
+        binding.buttonRetry.setOnClickListener {
+            retry()
+        }
+
+        binding.progressbar.visibility = View.VISIBLE
     }
+
 }
