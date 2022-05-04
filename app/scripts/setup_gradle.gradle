@@ -58,6 +58,12 @@ dependencies {
     // Base
     implementation project(':base')
 
+    //Paging 3 - https://developer.android.com/topic/libraries/architecture/paging
+    implementation("androidx.paging:paging-runtime:3.1.1")
+
+    implementation("androidx.room:room-runtime:2.4.2")
+    annotationProcessor("androidx.room:room-compiler:2.4.2")
+
     // Okhttp
     implementation('com.squareup.okhttp3:okhttp:4.9.1')
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
