@@ -7,6 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.ActivityMainBinding
 import com.resurrection.appbase.ui.cheese.CheeseFragment
+import com.resurrection.appbase.ui.passenger.PassengerFragment
 import com.resurrection.appbase.ui.photo.PhotosFragment
 import com.resurrection.base.core.activity.BaseActivity
 import com.resurrection.base.extensions.toast
@@ -33,7 +34,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(
             }
         )
 
-        val fragment = CheeseFragment()
+        val fragment = PassengerFragment()
         val transaction = supportFragmentManager.beginTransaction()
 
         transaction.replace(binding.frameLayout.id, fragment)
