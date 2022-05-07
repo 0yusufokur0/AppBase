@@ -49,6 +49,9 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
     }
 
     private fun initPhotosObserver(){
+
+
+
         viewModel.photos.observeData(success = {
             it?.let {
                 toast(it)

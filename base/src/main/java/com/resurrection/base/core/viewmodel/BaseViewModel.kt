@@ -14,6 +14,7 @@ import com.resurrection.base.components.security.BiometricManager
 import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.widget.AppLoadingIndicator
 import com.resurrection.base.utils.Resource
+import com.resurrection.base.utils.callPrivateFunc
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -74,5 +75,11 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     fun <T> MutableLiveData<T>.toLiveData():LiveData<T> = this
+
+    fun <T> liveData(): LiveData<T> = androidx.lifecycle.liveData { }
+
+    protected fun <T> LiveData<T>.postValue(data:T){
+        this.callPrivateFunc("postValue",data)
+    }
 
 }
