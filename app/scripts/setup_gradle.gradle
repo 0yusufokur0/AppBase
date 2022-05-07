@@ -58,6 +58,9 @@ dependencies {
     // Base
     implementation project(':base')
 
+    // kotlin reflect
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.10'
+
     //Paging 3 - https://developer.android.com/topic/libraries/architecture/paging
     implementation("androidx.paging:paging-runtime:3.1.1")
 
