@@ -7,6 +7,9 @@ import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import kotlin.reflect.full.declaredMemberFunctions
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.jvm.isAccessible
 
 fun Any.isValid(): Boolean {
     var isValid = true
@@ -27,7 +30,7 @@ fun Any.isValid(): Boolean {
     return isValid
 }
 
-fun <T : Any> T.getPrivateProperty(variableName: String): Any? {
+fun <T : Any> T.getPrivatePropertyOfJava(variableName: String): Any? {
 
     return javaClass.getDeclaredField(variableName).let { field ->
         field.isAccessible = true
@@ -41,3 +44,17 @@ fun <T : Any> T.setAndReturnPrivateProperty(variableName: String, data: Any): An
         return@let field.get(this)
     }
 }
+
+inline fun <reified T> T.callPrivateFunc(name: String, vararg args: Any?): Any? =
+    T::class
+        .declaredMemberFunctions
+        .firstOrNull { it.name == name }
+        ?.apply { isAccessible = true }
+        ?.call(this, *args)
+
+inline fun <reified T : Any, R> T.getPrivatePropertyOfKotlin(name: String): R? =
+    T::class
+        .memberProperties
+        .firstOrNull { it.name == name }
+        ?.apply { isAccessible = true }
+        ?.get(this) as? R
