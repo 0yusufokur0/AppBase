@@ -7,14 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LiveData
 import com.resurrection.base.components.appstate.AppState
-import com.resurrection.base.components.data.DataHolderManager
 import com.resurrection.base.components.data.DataStoreManager
-import com.resurrection.base.components.data.SharedPreferencesManager
+import com.resurrection.base.components.sharedpreferences.SharedPreferencesManagerImpl
 import com.resurrection.base.components.data.TypeConverter
+import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.logger.LoggerManager
 import com.resurrection.base.components.network.NetworkManager
 import com.resurrection.base.components.security.BiometricManager
 import com.resurrection.base.components.security.SecurityManager
+import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
 import com.resurrection.base.components.widget.AppLoadingIndicator
 import com.resurrection.base.utils.Resource
 import com.resurrection.base.utils.Status
