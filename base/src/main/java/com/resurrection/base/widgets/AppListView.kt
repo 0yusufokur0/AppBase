@@ -25,7 +25,7 @@ class AppListView @JvmOverloads constructor(
         layoutManager = if(setVertical) LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         else LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         mAdapter = ItemAdapter(setVertical)
-        mAdapter?.onItemClick ={
+        mAdapter?.setOnItemClickListener {
             listener(it.value)
         }
         adapter = mAdapter

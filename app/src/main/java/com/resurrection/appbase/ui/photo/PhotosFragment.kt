@@ -43,15 +43,12 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
     }
 
     private fun initPhotoAdapterOnItemClick(){
-        photoAdapter.onItemClick = {
-            toast(it.title)
+        photoAdapter.setOnItemClickListener {
+
         }
     }
 
     private fun initPhotosObserver(){
-
-
-
         viewModel.photos.observeData(success = {
             it?.let {
                 toast(it)

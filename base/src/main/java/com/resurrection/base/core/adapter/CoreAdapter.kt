@@ -6,24 +6,33 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class CoreAdapter<Model,VDB:ViewDataBinding>(
+abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
     private val layoutResource: Int,
     private val itemId: Int?,
     private var currentList: ArrayList<Model>? = null,
-) : RecyclerView.Adapter<BaseHolder<Model,VDB>>() {
+) : RecyclerView.Adapter<BaseHolder<Model, VDB>>() {
 
+    private var itemClick: ((Model) -> Unit)? = null
+    private var itemLongClick: ((Model) -> Unit)? = null
+    private lateinit var binding: VDB
 
-    open var onItemClick: ((Model) -> Unit)? = null
-    open lateinit var binding: VDB
+    fun setOnItemClickListener(itemClick: (Model) -> Unit) {
+        this.itemClick = itemClick
+    }
+
+    fun setOnItemLongClickListener(itemLongClick: (Model) -> Unit) {
+        this.itemLongClick = itemLongClick
+    }
 
     abstract fun bindItem(binding: VDB, item: Model)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<Model,VDB> {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutResource, parent, false)
-        return BaseHolder(binding, itemId, onItemClick,this::bindItem)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<Model, VDB> {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        binding = DataBindingUtil.inflate(layoutInflater, layoutResource, parent, false)
+        return BaseHolder(binding, itemId, itemClick, itemLongClick, this::bindItem)
     }
 
-    override fun onBindViewHolder(holder: BaseHolder<Model,VDB>, position: Int) {
+    override fun onBindViewHolder(holder: BaseHolder<Model, VDB>, position: Int) {
         currentList?.let { holder.bind(currentList!![position]) }
     }
 

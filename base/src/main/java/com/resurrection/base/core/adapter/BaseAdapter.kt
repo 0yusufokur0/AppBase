@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBindingKtx
 import androidx.recyclerview.widget.DiffUtil
 import java.util.*
 
-abstract class BaseAdapter<Model,VDB: ViewDataBinding>(
+abstract class BaseAdapter<Model:Any,VDB: ViewDataBinding>(
     private var layoutResource: Int,
     private var itemId: Int? = null,
     private var currentList: ArrayList<Model>? = arrayListOf(),
