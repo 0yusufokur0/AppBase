@@ -8,9 +8,9 @@ import java.lang.Double.longBitsToDouble
 import javax.inject.Inject
 
 
-class SharedPreferencesManagerImpl @Inject constructor(
-    private val typeConverter: TypeConverter,
-    context: Context
+class SharedPreferencesManagerImpl(
+    context: Context,
+    private val typeConverter: TypeConverter
 ) : SharedPreferencesManager {
 
     override val manager: SharedPreferences =
