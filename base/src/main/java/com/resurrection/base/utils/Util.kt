@@ -57,4 +57,4 @@ inline fun <reified T : Any, R> T.getPrivatePropertyOfKotlin(name: String): R? =
         .memberProperties
         .firstOrNull { it.name == name }
         ?.apply { isAccessible = true }
-        ?.get(this) as? R
+        ?.get(this) as R?
