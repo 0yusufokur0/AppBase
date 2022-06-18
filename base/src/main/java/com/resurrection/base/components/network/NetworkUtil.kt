@@ -1,4 +1,4 @@
-package com.resurrection.base.network
+package com.resurrection.base.components.network
 
 import com.resurrection.base.utils.Resource
 import kotlinx.coroutines.flow.flow

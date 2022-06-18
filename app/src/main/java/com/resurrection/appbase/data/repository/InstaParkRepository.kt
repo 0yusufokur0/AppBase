@@ -3,7 +3,7 @@ package com.resurrection.appbase.data.repository
 import com.resurrection.appbase.data.model.photos.PhotoModel
 import com.resurrection.appbase.data.remote.InstaParkApiService
 import com.resurrection.base.components.network.OkHttpClientManager
-import com.resurrection.base.network.getData
+import com.resurrection.base.components.network.getData
 import javax.inject.Inject
 
 

@@ -78,7 +78,7 @@ class SharedPreferencesManagerImpl(
     }
 
     override fun getDouble(key: String, defValue: Double): Double =
-        getLong(key, doubleToRawLongBits(defValue)).let { longBitsToDouble(it) }
+        longBitsToDouble(getLong(key, doubleToRawLongBits(defValue)))
 
     override fun <Model> putObject(key: String, value: Model) {
         editor.putString(key, typeConverter.toJson(value))

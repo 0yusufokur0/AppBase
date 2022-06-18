@@ -12,7 +12,9 @@
             android:id="@+id/image_view_airlines_logo"
             android:layout_width="280dp"
             android:layout_height="52dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/image_view_airlines_logo_content_description"
+            />
 
         <TextView
             android:id="@+id/text_view_headquarters"

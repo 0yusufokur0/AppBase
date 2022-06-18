@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import java.util.*
 
 abstract class BaseAdapter<Model : Any, VDB : ViewDataBinding>(
-    private var layoutResource: Int,
-    private var itemId: Int? = null,
+    layoutResource: Int,
+    itemId: Int? = null,
     private var currentList: ArrayList<Model>? = arrayListOf(),
 ) : CoreAdapter<Model, VDB>(layoutResource, itemId, currentList) {
 

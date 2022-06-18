@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class PassengerViewModel @Inject constructor(val passengersApiService: PassengersApiService) :
+class PassengerViewModel @Inject constructor(private val passengersApiService: PassengersApiService) :
     BaseViewModel() {
 
     val passengers = Pager(config = PagingConfig(pageSize = 10, prefetchDistance = 2),

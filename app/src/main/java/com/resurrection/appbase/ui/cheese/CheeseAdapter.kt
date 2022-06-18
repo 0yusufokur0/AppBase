@@ -71,7 +71,7 @@ class CheeseAdapter :
 
         fun bindTo(item: CheeseListItem?) {
             if (item is CheeseListItem.Separator) {
-                nameView.text = "${item.name} Cheeses"
+                nameView.text = item.name
                 nameView.setTypeface(null, Typeface.BOLD)
             } else {
                 nameView.text = item?.name

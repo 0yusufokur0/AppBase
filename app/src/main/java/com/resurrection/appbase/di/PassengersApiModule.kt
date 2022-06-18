@@ -15,7 +15,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class PassengersApiModule {
 
-    private val BASE_URL = "https://api.instantwebtools.net/v1/"
+    companion object {
+        private const val BASE_URL = "https://api.instantwebtools.net/v1/"
+    }
+
 
     @Provides
     @Singleton

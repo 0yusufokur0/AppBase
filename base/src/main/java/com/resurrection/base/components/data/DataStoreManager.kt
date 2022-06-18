@@ -6,12 +6,11 @@ import com.resurrection.base.extensions.dataStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class DataStoreManager(context: Context) {
-    val manager = context.dataStore
+    private val manager = context.dataStore
 
     fun putInt(
         key: String,

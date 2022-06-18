@@ -10,11 +10,11 @@ import com.resurrection.base.utils.createFolder
 import java.text.SimpleDateFormat
 import java.util.*
 
-class LoggerManager(private val context: Context) {
+class LoggerManager(context: Context) {
 
     private var saveState = false
     private val _logList = mutableListOf<String>()
-    private val LOG_TAG = "AppLogger"
+    private val tag = "AppLogger"
     private val appName = getApplicationName(context)
     private var activityName = ""
     private var fragmentName = ""
@@ -38,32 +38,32 @@ class LoggerManager(private val context: Context) {
     // region log
     fun d(message: String) {
         if (saveState) _logList.add(message)
-        Log.d(LOG_TAG, message)
+        Log.d(tag, message)
     }
 
     fun e(message: String) {
         if (saveState) _logList.add(message)
-        Log.e(LOG_TAG, message)
+        Log.e(tag, message)
     }
 
     fun i(message: String) {
         if (saveState) _logList.add(message)
-        Log.i(LOG_TAG, message)
+        Log.i(tag, message)
     }
 
     fun v(message: String) {
         if (saveState) _logList.add(message)
-        Log.v(LOG_TAG, message)
+        Log.v(tag, message)
     }
 
     fun w(message: String) {
         if (saveState) _logList.add(message)
-        Log.w(LOG_TAG, message)
+        Log.w(tag, message)
     }
 
     fun wtf(message: String) {
         if (saveState) _logList.add(message)
-        Log.wtf(LOG_TAG, message)
+        Log.wtf(tag, message)
     }
 
     fun clearLogList() = _logList.clear()

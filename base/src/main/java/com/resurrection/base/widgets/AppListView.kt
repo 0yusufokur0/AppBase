@@ -16,7 +16,7 @@ class AppListView @JvmOverloads constructor(
     defStyleAttr: Int = R.attr.recyclerViewStyle
 ) : RecyclerView(context, attrs, defStyleAttr) {
 
-    var mAdapter: ItemAdapter? = null
+    private var mAdapter: ItemAdapter? = null
 
     fun init(setVertical: Boolean = true, list: ArrayList<String>, listener: (String) -> Unit) {
         val layoutRes = R.layout.list_vertical_item
@@ -38,7 +38,7 @@ class AppListView @JvmOverloads constructor(
         mAdapter?.addAll(itemList)
     }
 
-    class ItemAdapter(val setVertical: Boolean = true) : BaseAdapter<Item, ListVerticalItemBinding>(
+    class ItemAdapter(private val setVertical: Boolean = true) : BaseAdapter<Item, ListVerticalItemBinding>(
         layoutResource = R.layout.list_vertical_item,
         itemId = BR.data,
         currentList = arrayListOf(),

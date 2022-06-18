@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class CheeseViewModel @Inject constructor(var cheeseDao: CheeseDao) : BaseViewModel() {
+class CheeseViewModel @Inject constructor(private var cheeseDao: CheeseDao) : BaseViewModel() {
 
     init {
         CoroutineScope(Dispatchers.IO).launch {

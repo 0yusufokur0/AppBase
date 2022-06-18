@@ -1,5 +1,6 @@
 package com.resurrection.appbase.ui.passenger
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -36,10 +37,11 @@ class PassengersAdapter :
     inner class PassengersViewHolder(private val binding: ItemPassengerBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bindPassenger(item: Passenger) = with(binding) {
-            imageViewAirlinesLogo.loadImageWithRoundedCorner(item.airline.get(0).logo)
-            textViewHeadquarters.text = item.airline.get(0).head_quaters
-            textViewNameWithTrips.text = "${item.name}, ${item.trips} Trips"
+            imageViewAirlinesLogo.loadImageWithRoundedCorner(item.airline[0].logo)
+            textViewHeadquarters.text = item.airline[0].head_quaters
+            textViewNameWithTrips.text =item.name + item.trips
         }
     }
 

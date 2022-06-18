@@ -125,7 +125,7 @@ interface SharedPreferencesManager {
      * Insert a long value into main shared preferences with the given key.
      * If key is exists in the main shared preferences, it value will be replaced.
      * @param key a String key
-     * @param value a Long
+     * @param defValue a Long
      * */
     fun putLong(key: String, defValue: Long)
 

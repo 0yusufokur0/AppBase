@@ -2,4 +2,9 @@
     <string name="app_name">AppBase</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_view_airlines_logo_content_description">This is the airlines logo</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="add_cheese">add_cheese</string>
+    <string name="add">add</string>
+    <string name="tap_to_retry">Tap to Retry</string>
 </resources>
