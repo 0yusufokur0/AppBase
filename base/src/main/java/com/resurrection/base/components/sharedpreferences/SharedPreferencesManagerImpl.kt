@@ -86,8 +86,8 @@ class SharedPreferencesManagerImpl(
         editor.apply()
     }
 
-    override fun <Model> getObject(key: String): Model? =
-        manager.getString(key, null)?.let { typeConverter.fromJson(it) }
+    override fun <Model> getObject(key: String,clazz: Class<Model>): Model? =
+        manager.getString(key, null)?.let { typeConverter.fromJson(it,clazz) }
 
 
 }

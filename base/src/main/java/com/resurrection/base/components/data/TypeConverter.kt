@@ -7,17 +7,8 @@ class TypeConverter {
 
     private val gson = Gson()
 
-    fun <T> toJson(obj: T): String {
-        return gson.toJson(obj)
-    }
+    fun <T> toJson(obj: T): String = gson.toJson(obj)
 
-    fun <T> fromJson(json: String): T {
-        return gson.fromJson(json,getType())
-    }
-
-    fun <T> getType(): Class<T> {
-        val asd = (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
-        return asd
-    }
+    fun <T> fromJson(json: String, clazz: Class<T>): T = gson.fromJson(json, clazz)
 
 }

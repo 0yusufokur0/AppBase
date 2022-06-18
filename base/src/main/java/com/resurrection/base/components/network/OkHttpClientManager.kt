@@ -38,7 +38,7 @@ class OkHttpClientManager @Inject constructor(
         headers: Map<String, String>? = null,
         path: String,
         responseType: Class<T>,
-        map:(responseBody: String) -> T =  { typeConverter.fromJson(it) }
+        map:(responseBody: String) -> T =  { typeConverter.fromJson(it,responseType) }
     ) = flow {
         val requestBuilder = Request.Builder()
             .url(baseUrl + path)
