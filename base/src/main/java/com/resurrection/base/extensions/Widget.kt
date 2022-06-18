@@ -1,5 +1,6 @@
 package com.resurrection.base.extensions
 
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ fun RecyclerView.setVerticalLinearLayoutManager(reverseLayout:Boolean = false) =
 fun RecyclerView.setHorizontalLinearLayoutManager(reverseLayout:Boolean = false) =
     LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, reverseLayout).also { this.layoutManager = it }
 
-fun <T> RecyclerView.init(adapter: BaseAdapter<T>,layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)){
+fun <Model,VDB:ViewDataBinding> RecyclerView.init(adapter: BaseAdapter<Model,VDB>,layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)){
     this.layoutManager = layoutManager
     this.adapter = adapter
 }

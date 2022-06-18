@@ -30,6 +30,8 @@
         <entry key="app/src/main/res/layout/post_item.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/layout/progress_bar_layout.xml" value="0.12447916666666667" />
         <entry key="base/src/main/res/drawable/rounded_view_bg.xml" value="0.1" />
+        <entry key="base/src/main/res/layout/list_horizontal_item.xml" value="0.2953125" />
+        <entry key="base/src/main/res/layout/list_vertical_item.xml" value="0.19583333333333333" />
         <entry key="base/src/main/res/layout/progress_bar_layout.xml" value="0.35833333333333334" />
       </map>
     </option>
