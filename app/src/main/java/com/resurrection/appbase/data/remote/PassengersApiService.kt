@@ -12,9 +12,5 @@ interface PassengersApiService {
         @Query("size") size: Int = 10
     ): PassengersResponse
 
-    companion object {
-
-
-    }
 }
 

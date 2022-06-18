@@ -19,7 +19,7 @@ android {
     }
 
 
-    def variantConfig = new VariantConfig("dev", "https://jsonplaceholder.typicode.com", false, true, ".");
+    def variantConfig = new VariantConfig("dev", "https://jsonplaceholder.typicode.com", false, true, ".")
     flavorDimensions 'productFlavors'
 
     productFlavors {
@@ -116,11 +116,11 @@ dependencies {
 
 
 class VariantConfig {
-    private String variantName;
-    private String apiUrl;
-    private boolean loggerEnabled;
-    private boolean checkRootEnabled;
-    private String googleApiKey;
+    private String variantName
+    private String apiUrl
+    private boolean loggerEnabled
+    private boolean checkRootEnabled
+    private String googleApiKey
 
     VariantConfig(String variantName, String apiUrl, boolean loggerEnabled, boolean checkRootEnabled, String googleApiKey) {
         this.variantName = variantName

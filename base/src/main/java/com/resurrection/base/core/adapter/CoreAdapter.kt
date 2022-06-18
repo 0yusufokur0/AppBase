@@ -34,7 +34,7 @@ abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
 
     override fun onBindViewHolder(holder: BaseHolder<Model, VDB>, position: Int) {
         currentList?.let { holder.bind(currentList!![position]) }
-        holder.itemView.isLongClickable = true;
+        holder.itemView.isLongClickable = true
     }
 
     override fun getItemCount() = currentList?.let { currentList!!.size } ?: run { 0 }
