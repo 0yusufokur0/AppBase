@@ -1,6 +1,5 @@
 package com.resurrection.appbase.di
 
-import com.resurrection.appbase.BuildConfig
 import com.resurrection.appbase.data.remote.PassengersApiService
 import dagger.Module
 import dagger.Provides

@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import com.resurrection.base.components.data.TypeConverter
 import java.lang.Double.doubleToRawLongBits
 import java.lang.Double.longBitsToDouble
-import javax.inject.Inject
 
 
 class SharedPreferencesManagerImpl(

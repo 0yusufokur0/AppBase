@@ -1,7 +1,6 @@
 package com.resurrection.base.components.sharedpreferences
 
 import android.content.SharedPreferences
-import android.os.Bundle
 
 
 /**

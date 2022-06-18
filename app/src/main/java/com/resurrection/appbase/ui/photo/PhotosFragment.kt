@@ -5,8 +5,8 @@ import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentPhotosBinding
 import com.resurrection.base.components.data.DataStoreManager
 import com.resurrection.base.core.fragment.BaseFragment
-import com.resurrection.base.extensions.toast
 import com.resurrection.base.extensions.init
+import com.resurrection.base.extensions.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

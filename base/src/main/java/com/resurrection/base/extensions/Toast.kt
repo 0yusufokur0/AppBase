@@ -5,7 +5,6 @@ import android.content.Context
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import java.lang.Exception
 
 fun AppCompatActivity.toast(message: String?) = toast(this, message, Toast.LENGTH_SHORT)
 fun Fragment.toast(message: String?) = toast(requireContext(), message, Toast.LENGTH_SHORT)

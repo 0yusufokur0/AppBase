@@ -1,12 +1,12 @@
 package com.resurrection.appbase.data.remote
 
-import com.resurrection.appbase.data.model.photos.PhotoModel
 import com.resurrection.appbase.data.model.photos.PhotoModelItem
 import com.resurrection.appbase.data.model.posts.PostModel
 import com.resurrection.appbase.data.model.users.UsersModel
 import com.resurrection.appbase.data.model.users.UsersModelItem
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface InstaParkApiService{
     @GET("users")

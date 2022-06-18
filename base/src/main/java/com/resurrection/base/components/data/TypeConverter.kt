@@ -1,7 +1,6 @@
 package com.resurrection.base.components.data
 
 import com.google.gson.Gson
-import java.lang.reflect.ParameterizedType
 
 class TypeConverter {
 

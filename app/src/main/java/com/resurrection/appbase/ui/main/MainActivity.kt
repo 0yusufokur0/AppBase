@@ -3,14 +3,10 @@ package com.resurrection.appbase.ui.main
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.ActivityMainBinding
-import com.resurrection.appbase.ui.cheese.CheeseFragment
-import com.resurrection.appbase.ui.passenger.PassengerFragment
 import com.resurrection.appbase.ui.photo.PhotosFragment
 import com.resurrection.base.core.activity.BaseActivity
-import com.resurrection.base.extensions.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -2,7 +2,6 @@ package com.resurrection.base.core.application
 
 import androidx.multidex.MultiDexApplication
 import com.resurrection.base.components.appstate.AppState
-import com.resurrection.base.components.sharedpreferences.SharedPreferencesManagerImpl
 import com.resurrection.base.components.data.TypeConverter
 import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.logger.LoggerManager

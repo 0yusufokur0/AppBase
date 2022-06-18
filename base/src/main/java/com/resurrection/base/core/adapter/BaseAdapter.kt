@@ -3,7 +3,6 @@ package com.resurrection.base.core.adapter
 import android.annotation.SuppressLint
 import android.widget.Filter
 import androidx.databinding.ViewDataBinding
-import androidx.databinding.ViewDataBindingKtx
 import androidx.recyclerview.widget.DiffUtil
 import java.util.*
 

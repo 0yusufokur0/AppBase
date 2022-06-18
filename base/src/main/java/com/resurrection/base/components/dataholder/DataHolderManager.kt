@@ -3,7 +3,6 @@ package com.resurrection.base.components.dataholder
 import android.os.Bundle
 import android.os.Parcelable
 import java.io.Serializable
-import java.util.ArrayList;
 
 /**
  *

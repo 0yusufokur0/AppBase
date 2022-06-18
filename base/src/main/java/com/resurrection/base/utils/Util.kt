@@ -1,12 +1,6 @@
 package com.resurrection.base.utils
 
 import android.util.Log
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
-import android.view.animation.AnimationUtils
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import kotlin.reflect.full.declaredMemberFunctions
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible

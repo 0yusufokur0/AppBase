@@ -1,7 +1,7 @@
 package com.resurrection.appbase
 
-import com.resurrection.base.core.application.BaseApplication
 import com.resurrection.base.components.logger.LoggerInterceptor
+import com.resurrection.base.core.application.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 
