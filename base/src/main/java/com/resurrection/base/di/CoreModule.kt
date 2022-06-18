@@ -1,18 +1,19 @@
 package com.resurrection.base.di
 
 import android.content.Context
-import android.os.Bundle
 import com.resurrection.base.components.appstate.AppState
-import com.resurrection.base.components.data.DataHolderManager
 import com.resurrection.base.components.data.DataStoreManager
-import com.resurrection.base.components.data.SharedPreferencesManager
 import com.resurrection.base.components.data.TypeConverter
+import com.resurrection.base.components.dataholder.DataHolderManager
+import com.resurrection.base.components.dataholder.DataHolderManagerImpl
 import com.resurrection.base.components.logger.LoggerManager
 import com.resurrection.base.components.network.NetworkManager
 import com.resurrection.base.components.network.OkHttpClientManager
 import com.resurrection.base.components.security.BiometricManager
 import com.resurrection.base.components.security.CryptographyManager
 import com.resurrection.base.components.security.SecurityManager
+import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
+import com.resurrection.base.components.sharedpreferences.SharedPreferencesManagerImpl
 import com.resurrection.base.components.widget.AppLoadingIndicator
 import dagger.Module
 import dagger.Provides
@@ -27,15 +28,23 @@ object CoreModule {
 
     @Provides
     @Singleton
-    fun provideAppState() = AppState(isAppForeground = true, isAppLightMode = true,isNetworkAvailable = false,isRooted = false)
+    fun provideAppState() = AppState(
+        isAppForeground = true,
+        isAppLightMode = true,
+        isNetworkAvailable = false,
+        isRooted = false
+    )
 
     @Provides
     @Singleton
-    fun provideDataHolder() = DataHolderManager(Bundle())
+    fun provideDataHolder(): DataHolderManager = DataHolderManagerImpl()
 
     @Singleton
     @Provides
-    fun provideSharedPreferencesManager(@ApplicationContext context: Context) = SharedPreferencesManager(context)
+    fun provideSharedPreferencesManager(
+        @ApplicationContext context: Context,
+        typeConverter: TypeConverter
+    ):SharedPreferencesManager = SharedPreferencesManagerImpl(context, typeConverter)
 
     @Singleton
     @Provides
@@ -71,6 +80,7 @@ object CoreModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClientManager(typeConverter: TypeConverter) = OkHttpClientManager(typeConverter)
+    fun provideOkHttpClientManager(typeConverter: TypeConverter) =
+        OkHttpClientManager(typeConverter)
 
 }
