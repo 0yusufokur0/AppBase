@@ -23,13 +23,9 @@ class PhotosViewModel @Inject constructor(private val instaParkRepository: Insta
 
     val photos = liveData<Resource<PhotoModel>>()
 
-
-     fun getPhotos() = viewModelScope.launch {
-            instaParkRepository.getPhotos()
-                .onStart { photos.postValue(Resource.Loading()) }
-                .catch { photos.postValue(Resource.Error(it)) }
-                .collect { photos.postValue(it) }
-
-    }
+     fun getPhotos() = fetchLiveData(
+         liveData = photos,
+         request = { instaParkRepository.getPhotos() }
+     )
 
 }

@@ -47,14 +47,14 @@ abstract class BaseViewModel : ViewModel() {
 
 
     fun <T> fetchLiveData(
-        condition: Boolean = true,
-        liveData: MutableLiveData<Resource<T>>,
+        liveData: LiveData<Resource<T>>,
         request: suspend () -> Flow<Resource<T>>,
+        condition: ()->Boolean = { true },
         success: (Resource<T>) -> Unit = { liveData.postValue(it) },
         loading: () -> Unit = { liveData.postValue(Resource.Loading()) },
         error: (Throwable) -> Unit = { liveData.postValue(Resource.Error(it)) }
     ) = viewModelScope.launch {
-        if (condition) {
+        if (condition()) {
             request()
                 .onStart { loading() }
                 .catch { error(it) }
