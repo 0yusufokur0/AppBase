@@ -15,7 +15,24 @@ class CryptographyManager {
         private const val AES_MODE = "AES/CBC/PKCS7Padding"
         private const val CHARSET = "UTF-8"
         private const val HASH_ALGORITHM = "SHA-256"
-        private val ivBytes = byteArrayOf(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+        private val ivBytes = byteArrayOf(
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00
+        )
     }
 
     private fun generateKey(password: String): SecretKeySpec {

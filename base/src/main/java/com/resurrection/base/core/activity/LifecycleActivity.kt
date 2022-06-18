@@ -3,7 +3,7 @@ package com.resurrection.base.core.activity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 
-abstract class LifecycleActivity: CoreActivity() {
+abstract class LifecycleActivity : CoreActivity() {
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         when (event) {

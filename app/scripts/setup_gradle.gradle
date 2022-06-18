@@ -1,4 +1,3 @@
-
 android {
 
     buildFeatures {
@@ -15,7 +14,7 @@ android {
     }
 
 
-    defaultConfig{
+    defaultConfig {
         multiDexEnabled true
     }
 
@@ -23,20 +22,20 @@ android {
     def variantConfig = new VariantConfig("dev", "https://jsonplaceholder.typicode.com", false, true, ".");
     flavorDimensions 'productFlavors'
 
-    productFlavors{
-        dev{
+    productFlavors {
+        dev {
             variantConfig.setVariantName("dev")
             variantConfig.setCheckRootEnabled(true)
             variantConfig.setLoggerEnabled(true)
             variantConfig.setGoogleApiKey("asdasd")
         }
-        preProd{
+        preProd {
             variantConfig.setVariantName("preProd")
             variantConfig.setCheckRootEnabled(true)
             variantConfig.setLoggerEnabled(true)
             variantConfig.setGoogleApiKey("asd")
         }
-        prod{
+        prod {
             variantConfig.setVariantName("prod")
             variantConfig.setCheckRootEnabled(true)
             variantConfig.setLoggerEnabled(true)
@@ -45,11 +44,11 @@ android {
     }
 
     applicationVariants.all { variant ->
-        variant.buildConfigField("String", "VARIANT_NAME", '"'+variantConfig.getVariantName()+'"' )
-        variant.buildConfigField("String", "API_URL", '"'+String.valueOf(variantConfig.getApiUrl())+'"' )
-        variant.buildConfigField("Boolean", "CHECK_ROOT_ENABLED", String.valueOf(variantConfig.getCheckRootEnabled().toString()) )
+        variant.buildConfigField("String", "VARIANT_NAME", '"' + variantConfig.getVariantName() + '"')
+        variant.buildConfigField("String", "API_URL", '"' + String.valueOf(variantConfig.getApiUrl()) + '"')
+        variant.buildConfigField("Boolean", "CHECK_ROOT_ENABLED", String.valueOf(variantConfig.getCheckRootEnabled().toString()))
         variant.buildConfigField("Boolean", "LOGGER_ENABLED", String.valueOf(variantConfig.getLoggerEnabled()))
-        variant.buildConfigField("String", "GOOGLE_API_KEY",'"'+ String.valueOf(variantConfig.getGoogleApiKey())+'"' )
+        variant.buildConfigField("String", "GOOGLE_API_KEY", '"' + String.valueOf(variantConfig.getGoogleApiKey()) + '"')
     }
 
 }
@@ -80,7 +79,7 @@ dependencies {
     implementation "io.coil-kt:coil:1.4.0"
 
     // Constraint Layout
-    implementation"com.android.support.constraint:constraint-layout:2.0.4"
+    implementation "com.android.support.constraint:constraint-layout:2.0.4"
 
     // Multidex
     implementation "androidx.multidex:multidex:2.0.1"
@@ -116,7 +115,7 @@ dependencies {
 }
 
 
-class VariantConfig{
+class VariantConfig {
     private String variantName;
     private String apiUrl;
     private boolean loggerEnabled;

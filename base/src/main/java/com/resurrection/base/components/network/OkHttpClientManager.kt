@@ -25,7 +25,7 @@ class OkHttpClientManager @Inject constructor(
     private lateinit var baseUrl: String
 
 
-    fun init(okHttpClient: OkHttpClient,baseUrl: String) {
+    fun init(okHttpClient: OkHttpClient, baseUrl: String) {
         this.baseUrl = baseUrl
         this.okHttpClient = okHttpClient
     }
@@ -38,7 +38,7 @@ class OkHttpClientManager @Inject constructor(
         headers: Map<String, String>? = null,
         path: String,
         responseType: Class<T>,
-        map:(responseBody: String) -> T =  { typeConverter.fromJson(it,responseType) }
+        map: (responseBody: String) -> T = { typeConverter.fromJson(it, responseType) }
     ) = flow {
         val requestBuilder = Request.Builder()
             .url(baseUrl + path)

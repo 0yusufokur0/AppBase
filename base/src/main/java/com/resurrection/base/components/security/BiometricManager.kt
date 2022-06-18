@@ -103,7 +103,7 @@ class BiometricManager {
 
         val authIntKey =
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) biometricManager.canAuthenticate()
-            else  biometricManager.canAuthenticate(BiometricManager.Authenticators.DEVICE_CREDENTIAL or BiometricManager.Authenticators.BIOMETRIC_STRONG)
+            else biometricManager.canAuthenticate(BiometricManager.Authenticators.DEVICE_CREDENTIAL or BiometricManager.Authenticators.BIOMETRIC_STRONG)
 
         return when (authIntKey) {
             BiometricManager.BIOMETRIC_SUCCESS -> true

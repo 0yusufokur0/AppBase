@@ -49,22 +49,22 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
 
     }
 
-    private fun initPhotoRecyclerView(){
+    private fun initPhotoRecyclerView() {
         binding.photoRecyclerView.init(photoAdapter)
     }
 
-    private fun initPhotoAdapterOnItemClick(){
+    private fun initPhotoAdapterOnItemClick() {
         photoAdapter.setOnItemClickListener {
             toast("item clicked")
         }
     }
 
-    private fun initPhotoAdapterOnItemLongClick(){
+    private fun initPhotoAdapterOnItemLongClick() {
 
     }
 
 
-    private fun initPhotosObserver(){
+    private fun initPhotosObserver() {
         viewModel.photos.observeData(success = {
             it?.let {
                 toast(it)
@@ -76,7 +76,8 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
         }
         )
     }
-    private fun getPhotos(){
+
+    private fun getPhotos() {
         viewModel.getPhotos()
     }
 }

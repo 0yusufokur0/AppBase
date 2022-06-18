@@ -17,8 +17,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class CheeseViewModel @Inject constructor(var cheeseDao: CheeseDao)
-    :BaseViewModel() {
+class CheeseViewModel @Inject constructor(var cheeseDao: CheeseDao) : BaseViewModel() {
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
@@ -29,7 +28,7 @@ class CheeseViewModel @Inject constructor(var cheeseDao: CheeseDao)
     }
 
     val allCheeses: Flow<PagingData<CheeseListItem>> = Pager(
-        config = PagingConfig( pageSize = 60, enablePlaceholders = true, maxSize = 200),
+        config = PagingConfig(pageSize = 60, enablePlaceholders = true, maxSize = 200),
         pagingSourceFactory = { cheeseDao.allCheesesByName() }
     ).flow
         .map { pagingData ->
@@ -46,7 +45,7 @@ class CheeseViewModel @Inject constructor(var cheeseDao: CheeseDao)
                     } else if (before == null) {
                         // Header
                         CheeseListItem.Separator(after.name.first())
-                    } else if (!before.name.first().equals(after.name.first(), ignoreCase = true)){
+                    } else if (!before.name.first().equals(after.name.first(), ignoreCase = true)) {
                         // Between two items that start with different letters.
                         CheeseListItem.Separator(after.name.first())
                     } else {

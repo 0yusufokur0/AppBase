@@ -36,33 +36,34 @@ open class LoggerInterceptor(private val loggerManager: LoggerManager) : Interce
         val responseHeaders = response.headers.toString()
         val responseCode = response.code
         val responseMessage = response.message
-        val responseBody = response.body?.source()?.buffer?.clone()?.readString(StandardCharsets.UTF_8)
+        val responseBody =
+            response.body?.source()?.buffer?.clone()?.readString(StandardCharsets.UTF_8)
 
         val requestLogString =
-                    "\n" +
+            "\n" +
                     "\t URL: $requestUrl \n" +
                     "\t Method: $requestMethod \n" +
                     "\t Headers: $requestHeaders \n" +
                     "\t Body: $requestBody \n"
 
         val responseLogString =
-                    "\n" +
+            "\n" +
                     "\t Headers: $responseHeaders \n" +
-                    "\t Message: $responseMessage \n"+
+                    "\t Message: $responseMessage \n" +
                     "\t Code: $responseCode \n" +
                     "\t Body: $responseBody \n"
 
         val resultLogString =
-                "New Request Started... \n"+
-                "┌────── Request ────────────────────────────────────────────────────────────────────────" +
-                "\n" +
-                requestTime +
-                requestLogString +
-                "└───────────────────────────────────────────────────────────────────────────────────────" +
-                "\n" +
-                "┌────── Response ───────────────────────────────────────────────────────────────────────" +
-                responseLogString +
-                "└───────────────────────────────────────────────────────────────────────────────────────"
+            "New Request Started... \n" +
+                    "┌────── Request ────────────────────────────────────────────────────────────────────────" +
+                    "\n" +
+                    requestTime +
+                    requestLogString +
+                    "└───────────────────────────────────────────────────────────────────────────────────────" +
+                    "\n" +
+                    "┌────── Response ───────────────────────────────────────────────────────────────────────" +
+                    responseLogString +
+                    "└───────────────────────────────────────────────────────────────────────────────────────"
 
         loggerManager.d(resultLogString)
     }

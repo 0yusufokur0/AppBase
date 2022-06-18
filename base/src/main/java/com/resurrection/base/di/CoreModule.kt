@@ -44,7 +44,7 @@ object CoreModule {
     fun provideSharedPreferencesManager(
         @ApplicationContext context: Context,
         typeConverter: TypeConverter
-    ):SharedPreferencesManager = SharedPreferencesManagerImpl(context, typeConverter)
+    ): SharedPreferencesManager = SharedPreferencesManagerImpl(context, typeConverter)
 
     @Singleton
     @Provides

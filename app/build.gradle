@@ -5,7 +5,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 apply plugin: 'kotlin-android'
-apply from:"scripts/setup_gradle.gradle"
+apply from: "scripts/setup_gradle.gradle"
 
 android {
     compileSdk 32

@@ -18,11 +18,11 @@ object CheeseDaoModule {
     @Provides
     @Singleton
     fun provideCheeseDatabase(@ApplicationContext context: Context): CheeseDatabase =
-        Room.databaseBuilder(context, CheeseDatabase::class.java,"database_name").build()
+        Room.databaseBuilder(context, CheeseDatabase::class.java, "database_name").build()
 
     @Provides
     @Singleton
-    fun provideCheeseDao(cheeseDatabase: CheeseDatabase):CheeseDao = cheeseDatabase.cheeseDao()
+    fun provideCheeseDao(cheeseDatabase: CheeseDatabase): CheeseDao = cheeseDatabase.cheeseDao()
 
 
 }

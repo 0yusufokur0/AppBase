@@ -30,7 +30,7 @@ fun ImageView.loadImageWithRoundedCorner(image: Any?) {
 
 @SuppressLint("ClickableViewAccessibility")
 @BindingAdapter("setClickAnimation")
-fun View.setClickAnimation(enable:Boolean = false) {
+fun View.setClickAnimation(enable: Boolean = false) {
     if (enable) {
         setOnTouchListener { v, event ->
             background.alpha = 200

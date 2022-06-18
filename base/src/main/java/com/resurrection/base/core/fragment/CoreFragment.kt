@@ -20,20 +20,28 @@ abstract class CoreFragment : Fragment() {
 
     @Inject
     lateinit var appState: AppState
+
     @Inject
     lateinit var dataHolder: DataHolderManager
+
     @Inject
     lateinit var sharedPreferences: SharedPreferencesManager
+
     @Inject
     lateinit var loggerManager: LoggerManager
+
     @Inject
     lateinit var loadingIndicator: AppLoadingIndicator
+
     @Inject
     lateinit var networkManager: NetworkManager
+
     @Inject
     lateinit var securityManager: SecurityManager
+
     @Inject
     lateinit var typeConverter: TypeConverter
+
     @Inject
     lateinit var dataStoreManager: DataStoreManager
 

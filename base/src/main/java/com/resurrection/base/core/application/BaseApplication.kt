@@ -13,26 +13,35 @@ import com.resurrection.base.components.sharedpreferences.SharedPreferencesManag
 import com.resurrection.base.components.widget.AppLoadingIndicator
 import javax.inject.Inject
 
-abstract class BaseApplication : MultiDexApplication(){
+abstract class BaseApplication : MultiDexApplication() {
 
     @Inject
     lateinit var appState: AppState
+
     @Inject
     lateinit var dataHolder: DataHolderManager
+
     @Inject
     lateinit var sharedPreferences: SharedPreferencesManager
+
     @Inject
     lateinit var loggerManager: LoggerManager
+
     @Inject
     lateinit var loadingIndicator: AppLoadingIndicator
+
     @Inject
     lateinit var networkManager: NetworkManager
+
     @Inject
     lateinit var securityManager: SecurityManager
+
     @Inject
     lateinit var biometricManager: BiometricManager
+
     @Inject
     lateinit var typeConverter: TypeConverter
+
     @Inject
     lateinit var okHttpClientManager: OkHttpClientManager
 

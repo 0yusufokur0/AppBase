@@ -49,7 +49,7 @@ abstract class BaseViewModel : ViewModel() {
     fun <T> fetchLiveData(
         liveData: LiveData<Resource<T>>,
         request: suspend () -> Flow<Resource<T>>,
-        condition: ()->Boolean = { true },
+        condition: () -> Boolean = { true },
         success: (Resource<T>) -> Unit = { liveData.postValue(it) },
         loading: () -> Unit = { liveData.postValue(Resource.Loading()) },
         error: (Throwable) -> Unit = { liveData.postValue(Resource.Error(it)) }

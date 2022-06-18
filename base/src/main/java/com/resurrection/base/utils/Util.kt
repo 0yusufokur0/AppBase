@@ -31,6 +31,7 @@ fun <T : Any> T.getPrivatePropertyOfJava(variableName: String): Any? {
         return@let field.get(this)
     }
 }
+
 fun <T : Any> T.setAndReturnPrivateProperty(variableName: String, data: Any): Any? {
     return javaClass.getDeclaredField(variableName).let { field ->
         field.isAccessible = true

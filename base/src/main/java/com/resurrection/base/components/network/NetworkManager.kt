@@ -13,8 +13,10 @@ class NetworkManager @Inject constructor(
     @ApplicationContext val context: Context,
 ) {
 
-    private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    private val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+    private val connectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    private val capabilities =
+        connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
     private var _isNetworkAvailable = checkNetworkAvailable()
     val isNetworkAvailable: Boolean = _isNetworkAvailable
 

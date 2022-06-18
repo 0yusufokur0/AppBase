@@ -11,12 +11,12 @@ class App : BaseApplication() {
         initOkHttpClient()
     }
 
-    private fun initOkHttpClient(){
+    private fun initOkHttpClient() {
         val okHttpClient =
             OkHttpClient()
                 .newBuilder()
                 .addInterceptor(LoggerInterceptor(loggerManager))
                 .build()
-        okHttpClientManager.init(okHttpClient,BuildConfig.API_URL)
+        okHttpClientManager.init(okHttpClient, BuildConfig.API_URL)
     }
 }

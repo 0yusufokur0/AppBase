@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PassengerFragment :BaseFragment<FragmentPassengerBinding,PassengerViewModel>(
-    R.layout.fragment_passenger,PassengerViewModel::class.java
+class PassengerFragment : BaseFragment<FragmentPassengerBinding, PassengerViewModel>(
+    R.layout.fragment_passenger, PassengerViewModel::class.java
 ) {
     private val passengersAdapter = PassengersAdapter()
     override fun init(savedInstanceState: Bundle?) {

@@ -8,7 +8,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface InstaParkApiService{
+interface InstaParkApiService {
     @GET("users")
     suspend fun getUsers(): Response<UsersModel>
 
@@ -19,6 +19,6 @@ interface InstaParkApiService{
     suspend fun getPhotos(): Response<ArrayList<PhotoModelItem>>
 
     @GET("users/{id}")
-    suspend fun getUser(@Path("id") id:String): Response<UsersModelItem>
+    suspend fun getUser(@Path("id") id: String): Response<UsersModelItem>
 
 }

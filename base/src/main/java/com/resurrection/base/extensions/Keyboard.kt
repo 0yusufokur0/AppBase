@@ -13,8 +13,9 @@ fun Fragment.hideKeyboard() = hideKeyboardMain(requireActivity(), requireActivit
 fun Context.hideKeyboard(view: View) = hideKeyboardMain(this, view)
 fun Service.hideKeyboard(view: View) = hideKeyboardMain(this, view)
 
-private fun hideKeyboardMain(context: Context,view: View) :InputMethodManager{
-    val inputMethodManager = context.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+private fun hideKeyboardMain(context: Context, view: View): InputMethodManager {
+    val inputMethodManager =
+        context.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     return inputMethodManager
 }

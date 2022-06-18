@@ -14,8 +14,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CheeseFragment : BaseFragment<FragmentCheeseBinding,CheeseViewModel>(
-    R.layout.fragment_cheese,CheeseViewModel::class.java
+class CheeseFragment : BaseFragment<FragmentCheeseBinding, CheeseViewModel>(
+    R.layout.fragment_cheese, CheeseViewModel::class.java
 ) {
     override fun init(savedInstanceState: Bundle?) {
         val adapter = CheeseAdapter()
@@ -57,8 +57,10 @@ class CheeseFragment : BaseFragment<FragmentCheeseBinding,CheeseViewModel>(
                 }
             }
 
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
-                                target: RecyclerView.ViewHolder): Boolean = false
+            override fun onMove(
+                recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean = false
 
             // When an item is swiped, remove the item via the view model. The list item will be
             // automatically removed in response, because the adapter is observing the live list.

@@ -22,8 +22,9 @@ class AppListView @JvmOverloads constructor(
         val layoutRes = R.layout.list_vertical_item
         val itemList = arrayListOf<Item>()
         list.forEach { itemList.add(Item(it)) }
-        layoutManager = if(setVertical) LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        else LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        layoutManager =
+            if (setVertical) LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            else LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         mAdapter = ItemAdapter(setVertical)
         mAdapter?.setOnItemClickListener {
             listener(it.value)
@@ -37,13 +38,13 @@ class AppListView @JvmOverloads constructor(
         mAdapter?.addAll(itemList)
     }
 
-    class ItemAdapter(val setVertical: Boolean = true): BaseAdapter<Item,ListVerticalItemBinding>(
+    class ItemAdapter(val setVertical: Boolean = true) : BaseAdapter<Item, ListVerticalItemBinding>(
         layoutResource = R.layout.list_vertical_item,
         itemId = BR.data,
         currentList = arrayListOf(),
     ) {
         override fun bindItem(binding: ListVerticalItemBinding, item: Item) {
-            if (setVertical){
+            if (setVertical) {
                 binding.appTextViewHorizontal.visibility = GONE
             }
         }

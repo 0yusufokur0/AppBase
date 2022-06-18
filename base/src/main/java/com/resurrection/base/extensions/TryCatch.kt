@@ -14,7 +14,10 @@ fun tryCatch(func: () -> Unit) {
 }
 
 @JvmName("tryCatch")
-fun <T> LifecycleOwner.tryCatch(defaultValue: T?= null,func: suspend CoroutineScope.() -> T?): T? {
+fun <T> LifecycleOwner.tryCatch(
+    defaultValue: T? = null,
+    func: suspend CoroutineScope.() -> T?
+): T? {
     try {
         var result: T? = null
         this.lifecycleScope.launch { result = func() }

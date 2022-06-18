@@ -27,7 +27,8 @@ import com.resurrection.appbase.R
 import com.resurrection.appbase.data.model.cheese.Cheese
 import com.resurrection.appbase.data.model.cheese.CheeseListItem
 
-class CheeseAdapter : PagingDataAdapter<CheeseListItem, CheeseAdapter.CheeseViewHolder>(diffCallback) {
+class CheeseAdapter :
+    PagingDataAdapter<CheeseListItem, CheeseAdapter.CheeseViewHolder>(diffCallback) {
     override fun onBindViewHolder(holder: CheeseViewHolder, position: Int) {
         holder.bindTo(getItem(position))
     }
@@ -39,7 +40,10 @@ class CheeseAdapter : PagingDataAdapter<CheeseListItem, CheeseAdapter.CheeseView
     companion object {
 
         val diffCallback = object : DiffUtil.ItemCallback<CheeseListItem>() {
-            override fun areItemsTheSame(oldItem: CheeseListItem, newItem: CheeseListItem): Boolean {
+            override fun areItemsTheSame(
+                oldItem: CheeseListItem,
+                newItem: CheeseListItem
+            ): Boolean {
                 return if (oldItem is CheeseListItem.Item && newItem is CheeseListItem.Item) {
                     oldItem.cheese.id == newItem.cheese.id
                 } else if (oldItem is CheeseListItem.Separator && newItem is CheeseListItem.Separator) {
@@ -49,7 +53,10 @@ class CheeseAdapter : PagingDataAdapter<CheeseListItem, CheeseAdapter.CheeseView
                 }
             }
 
-            override fun areContentsTheSame(oldItem: CheeseListItem, newItem: CheeseListItem): Boolean {
+            override fun areContentsTheSame(
+                oldItem: CheeseListItem,
+                newItem: CheeseListItem
+            ): Boolean {
                 return oldItem == newItem
             }
         }

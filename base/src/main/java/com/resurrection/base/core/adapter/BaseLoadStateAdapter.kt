@@ -9,15 +9,23 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.resurrection.base.core.adapter.BaseLoadStateAdapter.BaseLoadStateViewHolder
 
-abstract class BaseLoadStateAdapter <T : ViewDataBinding>(private val layoutResource: Int) :
+abstract class BaseLoadStateAdapter<T : ViewDataBinding>(private val layoutResource: Int) :
     LoadStateAdapter<BaseLoadStateViewHolder<T>>() {
 
     abstract fun bindLoadState(binding: T, loadState: LoadState)
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): BaseLoadStateViewHolder<T> =
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        loadState: LoadState
+    ): BaseLoadStateViewHolder<T> =
         BaseLoadStateViewHolder(
-            DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutResource, parent, false),
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                layoutResource,
+                parent,
+                false
+            ),
             this::bindLoadState
         )
 

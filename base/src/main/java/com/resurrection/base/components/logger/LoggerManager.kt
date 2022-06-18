@@ -19,14 +19,21 @@ class LoggerManager(private val context: Context) {
     private var activityName = ""
     private var fragmentName = ""
     private var rootPath = "" + Environment.getExternalStorageDirectory().absolutePath
-    private val logPath = Environment.getExternalStorageDirectory().absolutePath + "/" + appName + "/Logs"
+    private val logPath =
+        Environment.getExternalStorageDirectory().absolutePath + "/" + appName + "/Logs"
     val logList: List<String> = _logList
 
-    fun init(saveState: Boolean) { this.saveState = saveState }
+    fun init(saveState: Boolean) {
+        this.saveState = saveState
+    }
 
-    fun initActivity(activityName: String) { this.activityName = activityName }
+    fun initActivity(activityName: String) {
+        this.activityName = activityName
+    }
 
-    fun initFragment(fragmentName:String) { this.fragmentName = fragmentName }
+    fun initFragment(fragmentName: String) {
+        this.fragmentName = fragmentName
+    }
 
     // region log
     fun d(message: String) {
@@ -109,6 +116,8 @@ class LoggerManager(private val context: Context) {
     private fun getApplicationName(context: Context): String {
         val applicationInfo: ApplicationInfo = context.applicationInfo
         val stringId: Int = applicationInfo.labelRes
-        return if (stringId == 0) applicationInfo.nonLocalizedLabel.toString() else context.getString(stringId)
+        return if (stringId == 0) applicationInfo.nonLocalizedLabel.toString() else context.getString(
+            stringId
+        )
     }
 }

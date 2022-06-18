@@ -9,7 +9,7 @@ import com.resurrection.base.core.adapter.BaseLoadStateAdapter
 
 class LoadStateAdapter(
     private val retry: () -> Unit
-) : BaseLoadStateAdapter<ItemLoadingStateBinding>(R.layout.item_loading_state){
+) : BaseLoadStateAdapter<ItemLoadingStateBinding>(R.layout.item_loading_state) {
 
     override fun bindLoadState(binding: ItemLoadingStateBinding, loadState: LoadState) {
         if (loadState is LoadState.Error) {

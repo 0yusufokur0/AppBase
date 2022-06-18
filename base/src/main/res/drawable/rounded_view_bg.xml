@@ -4,16 +4,15 @@
     <item>
         <shape>
             <corners
-                    android:bottomLeftRadius="@dimen/rounded_text"
-                    android:bottomRightRadius="@dimen/rounded_text"
-                    android:topLeftRadius="@dimen/rounded_text"
-                    android:topRightRadius="@dimen/rounded_text" />
+                android:bottomLeftRadius="@dimen/rounded_text"
+                android:bottomRightRadius="@dimen/rounded_text"
+                android:topLeftRadius="@dimen/rounded_text"
+                android:topRightRadius="@dimen/rounded_text" />
             <gradient
-                    android:angle="90"
-                    android:startColor="@color/primary_color"
-                    android:centerColor="@color/primary_color"
-                    android:endColor="@color/primary_color"
-            />
+                android:angle="90"
+                android:centerColor="@color/primary_color"
+                android:endColor="@color/primary_color"
+                android:startColor="@color/primary_color" />
         </shape>
     </item>
 

@@ -4,13 +4,13 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 
 
-fun <ResponseModel, ListItemModel:Any> pagingDataSource(
-    request: suspend (nextPageNumber:Int) -> ResponseModel,
+fun <ResponseModel, ListItemModel : Any> pagingDataSource(
+    request: suspend (nextPageNumber: Int) -> ResponseModel,
     data: ((ResponseModel) -> List<ListItemModel>),
     totalPages: ((ResponseModel) -> Int)
 ): PagingSource<Int, ListItemModel> {
 
-    val pagingSourceObject = object : PagingSource<Int, ListItemModel>(){
+    val pagingSourceObject = object : PagingSource<Int, ListItemModel>() {
 
         override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ListItemModel> {
             return try {
@@ -35,5 +35,5 @@ fun <ResponseModel, ListItemModel:Any> pagingDataSource(
 
     }
 
-    return  pagingSourceObject
+    return pagingSourceObject
 }

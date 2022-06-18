@@ -164,6 +164,6 @@ interface SharedPreferencesManager {
      * @param key a String key
      * @return a Serializable or default value
      * */
-    fun <Model> getObject(key: String,clazz: Class<Model>): Model?
+    fun <Model> getObject(key: String, clazz: Class<Model>): Model?
 
 }

@@ -6,8 +6,11 @@ import retrofit2.Response
 
 
 @JvmName("getData1")
-fun <T> getData(request: suspend () -> Response<T>) =  flow { emit(getResourceByNetworkRequest { request() }) }
-fun <T> getData(request: suspend () -> T) = flow { emit(getResourceByDatabaseRequest { request() }) }
+fun <T> getData(request: suspend () -> Response<T>) =
+    flow { emit(getResourceByNetworkRequest { request() }) }
+
+fun <T> getData(request: suspend () -> T) =
+    flow { emit(getResourceByDatabaseRequest { request() }) }
 
 suspend fun <T> getResourceByNetworkRequest(request: suspend () -> Response<T>): Resource<T> {
     try {

@@ -12,7 +12,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(
     R.layout.activity_main,
-    MainActivityViewModel::class.java) {
+    MainActivityViewModel::class.java
+) {
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun init(savedInstanceState: Bundle?) {

@@ -13,7 +13,7 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
 ) : LifecycleActivity() {
 
     private val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
-    val  binding: VDB by lazy { DataBindingUtil.setContentView(this@BaseActivity, layoutRes) }
+    val binding: VDB by lazy { DataBindingUtil.setContentView(this@BaseActivity, layoutRes) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

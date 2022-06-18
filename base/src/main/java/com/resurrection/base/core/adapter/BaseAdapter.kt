@@ -6,11 +6,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import java.util.*
 
-abstract class BaseAdapter<Model:Any,VDB: ViewDataBinding>(
+abstract class BaseAdapter<Model : Any, VDB : ViewDataBinding>(
     private var layoutResource: Int,
     private var itemId: Int? = null,
     private var currentList: ArrayList<Model>? = arrayListOf(),
-) : CoreAdapter<Model,VDB>(layoutResource, itemId, currentList) {
+) : CoreAdapter<Model, VDB>(layoutResource, itemId, currentList) {
 
     @SuppressLint("NotifyDataSetChanged")
     fun addAll(list: List<Model>) = currentList?.let {
@@ -19,7 +19,7 @@ abstract class BaseAdapter<Model:Any,VDB: ViewDataBinding>(
         currentList!!.clear()
         currentList!!.addAll(list)
         diffResult.dispatchUpdatesTo(this)
-    }?: run {
+    } ?: run {
         currentList?.addAll(list)
         notifyDataSetChanged()
     }
@@ -27,7 +27,7 @@ abstract class BaseAdapter<Model:Any,VDB: ViewDataBinding>(
     fun add(item: Model) = currentList?.let {
         currentList!!.add(item)
         notifyItemInserted(currentList!!.size - 1)
-    }?: run {
+    } ?: run {
         currentList?.add(item)
         notifyItemInserted(0)
     }
@@ -54,41 +54,48 @@ abstract class BaseAdapter<Model:Any,VDB: ViewDataBinding>(
 
     fun getItems() = currentList?.let { currentList!!.toList() }
 
-    fun getItems(predicate: (Model) -> Boolean) = currentList?.let { currentList!!.filter(predicate) }
+    fun getItems(predicate: (Model) -> Boolean) =
+        currentList?.let { currentList!!.filter(predicate) }
 
-    fun <R> filterBy(constraint: CharSequence, selector: ((Model) -> R?)? = null) = currentList?.let {
-        val mFilter = object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val filteredList = ArrayList<Model>()
-                if (constraint == null || constraint.isEmpty()) filteredList.addAll(currentList!!)
-                else {
-                    val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim()
-                    selector?.let {
-                        for (item in currentList!!)
-                            if (it.invoke(item).toString().lowercase(Locale.getDefault()).contains(filterPattern))
-                                filteredList.add(item)
-                    } ?: run {
-                        for (item in currentList!!)
-                            if (item.toString().lowercase(Locale.getDefault()).contains(filterPattern))
-                                filteredList.add(item)
+    fun <R> filterBy(constraint: CharSequence, selector: ((Model) -> R?)? = null) =
+        currentList?.let {
+            val mFilter = object : Filter() {
+                override fun performFiltering(constraint: CharSequence?): FilterResults {
+                    val filteredList = ArrayList<Model>()
+                    if (constraint == null || constraint.isEmpty()) filteredList.addAll(currentList!!)
+                    else {
+                        val filterPattern =
+                            constraint.toString().lowercase(Locale.getDefault()).trim()
+                        selector?.let {
+                            for (item in currentList!!)
+                                if (it.invoke(item).toString().lowercase(Locale.getDefault())
+                                        .contains(filterPattern)
+                                )
+                                    filteredList.add(item)
+                        } ?: run {
+                            for (item in currentList!!)
+                                if (item.toString().lowercase(Locale.getDefault())
+                                        .contains(filterPattern)
+                                )
+                                    filteredList.add(item)
+                        }
+                    }
+                    val results = FilterResults()
+                    results.values = filteredList
+                    return results
+                }
+
+                @SuppressLint("NotifyDataSetChanged")
+                override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                    currentList ?: run {
+                        currentList!!.clear()
+                        currentList!!.addAll(results?.values as ArrayList<Model>)
+                        notifyDataSetChanged()
                     }
                 }
-                val results = FilterResults()
-                results.values = filteredList
-                return results
             }
-
-            @SuppressLint("NotifyDataSetChanged")
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                currentList?: run {
-                currentList!!.clear()
-                currentList!!.addAll(results?.values as ArrayList<Model>)
-                notifyDataSetChanged()
-                }
-            }
+            mFilter.filter(constraint)
         }
-        mFilter.filter(constraint)
-    }
 
     fun <R : Comparable<R>> sort(selector: (Model) -> R?) {
         val mutable = currentList?.toMutableList()

@@ -11,11 +11,14 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object  RepositoryModule {
+object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMovieRepository(instaParkApiService: InstaParkApiService,okHttpClientManager: OkHttpClientManager) =
-        InstaParkRepository(instaParkApiService,okHttpClientManager)
+    fun provideMovieRepository(
+        instaParkApiService: InstaParkApiService,
+        okHttpClientManager: OkHttpClientManager
+    ) =
+        InstaParkRepository(instaParkApiService, okHttpClientManager)
 
 }

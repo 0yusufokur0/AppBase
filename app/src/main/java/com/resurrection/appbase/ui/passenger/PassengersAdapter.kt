@@ -11,14 +11,20 @@ import com.resurrection.appbase.data.model.passenger.Passenger
 import com.resurrection.appbase.databinding.ItemPassengerBinding
 import com.resurrection.base.utils.loadImageWithRoundedCorner
 
-class PassengersAdapter: PagingDataAdapter<Passenger, PassengersAdapter.PassengersViewHolder>(PassengersComparator) {
+class PassengersAdapter :
+    PagingDataAdapter<Passenger, PassengersAdapter.PassengersViewHolder>(PassengersComparator) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): PassengersViewHolder {
         return PassengersViewHolder(
-            DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_passenger, parent, false)
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.item_passenger,
+                parent,
+                false
+            )
         )
     }
 
