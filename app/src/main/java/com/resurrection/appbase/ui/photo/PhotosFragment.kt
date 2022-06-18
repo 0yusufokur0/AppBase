@@ -21,6 +21,17 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
         initPhotosObserver()
         getPhotos()
 
+        binding.button.setOnLongClickListener {
+            toast("Button long click")
+            true
+        }
+
+        photoAdapter.setOnItemLongClickListener {
+            toast("item long clicked")
+            true
+        }
+
+
         val dataStore = DataStoreManager(requireContext())
 
         dataStore.getInt(
@@ -44,9 +55,14 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
 
     private fun initPhotoAdapterOnItemClick(){
         photoAdapter.setOnItemClickListener {
-
+            toast("item clicked")
         }
     }
+
+    private fun initPhotoAdapterOnItemLongClick(){
+
+    }
+
 
     private fun initPhotosObserver(){
         viewModel.photos.observeData(success = {

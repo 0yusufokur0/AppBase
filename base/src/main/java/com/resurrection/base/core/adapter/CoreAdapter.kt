@@ -13,14 +13,14 @@ abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
 ) : RecyclerView.Adapter<BaseHolder<Model, VDB>>() {
 
     private var itemClick: ((Model) -> Unit)? = null
-    private var itemLongClick: ((Model) -> Unit)? = null
+    private var itemLongClick: ((Model) -> Boolean)? = null
     private lateinit var binding: VDB
 
     fun setOnItemClickListener(itemClick: (Model) -> Unit) {
         this.itemClick = itemClick
     }
 
-    fun setOnItemLongClickListener(itemLongClick: (Model) -> Unit) {
+    fun setOnItemLongClickListener(itemLongClick: (Model) -> Boolean) {
         this.itemLongClick = itemLongClick
     }
 
@@ -34,6 +34,7 @@ abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
 
     override fun onBindViewHolder(holder: BaseHolder<Model, VDB>, position: Int) {
         currentList?.let { holder.bind(currentList!![position]) }
+        holder.itemView.isLongClickable = true;
     }
 
     override fun getItemCount() = currentList?.let { currentList!!.size } ?: run { 0 }
