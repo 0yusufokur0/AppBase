@@ -1,11 +1,7 @@
 package com.resurrection.base.core.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.resurrection.base.components.appstate.AppState
-import com.resurrection.base.components.sharedpreferences.SharedPreferencesManagerImpl
 import com.resurrection.base.components.data.TypeConverter
 import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.logger.LoggerManager
@@ -24,20 +20,28 @@ abstract class BaseViewModel : ViewModel() {
 
     @Inject
     lateinit var appState: AppState
+
     @Inject
     lateinit var dataHolder: DataHolderManager
+
     @Inject
     lateinit var sharedPreferences: SharedPreferencesManager
+
     @Inject
     lateinit var loggerManager: LoggerManager
+
     @Inject
     lateinit var loadingIndicator: AppLoadingIndicator
+
     @Inject
     lateinit var networkManager: NetworkManager
+
     @Inject
     lateinit var securityManager: SecurityManager
+
     @Inject
     lateinit var biometricManager: BiometricManager
+
     @Inject
     lateinit var typeConverter: TypeConverter
 
@@ -54,7 +58,7 @@ abstract class BaseViewModel : ViewModel() {
             request()
                 .onStart { loading() }
                 .catch { error(it) }
-                .collect { success(it)}
+                .collect { success(it) }
         } else {
             liveData.postValue(Resource.InValid(Throwable("request parameters is invalid")))
         }
@@ -75,12 +79,12 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    fun <T> MutableLiveData<T>.toLiveData():LiveData<T> = this
+    fun <T> MutableLiveData<T>.toLiveData(): LiveData<T> = this
 
-    fun <T> liveData(): LiveData<T> = androidx.lifecycle.liveData { }
+    fun <T> liveData(): LiveData<T> = liveData { }
 
-    protected fun <T> LiveData<T>.postValue(data:T){
-        this.callPrivateFunc("postValue",data)
+    protected fun <T> LiveData<T>.postValue(data: T) {
+        this.callPrivateFunc("postValue", data)
     }
 
 }
