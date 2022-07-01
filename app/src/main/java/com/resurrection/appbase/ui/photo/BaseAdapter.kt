@@ -3,27 +3,24 @@ package com.resurrection.appbase.ui.photo
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.resurrection.appbase.R
-import com.resurrection.appbase.data.model.photos.PhotoModelItem
-import com.resurrection.appbase.databinding.PhotoItemBinding
 
-// Model
-// ViewDataBinding
-// layoutResource
-// bind fun
+class BaseAdapter<Model,VDB:ViewDataBinding>(val layoutResource:Int): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
+    private val currentList = arrayListOf<Model>()
+    private lateinit var binding: VDB
 
-class PhotoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
+    private var bindViewFunction :(VDB,Model) -> Unit = { viewDataBinding,model->  }
 
-    private val currentList = arrayListOf<PhotoModelItem>()
-    private lateinit var binding:PhotoItemBinding
+    fun setViewBindFun(bind:(VDB,Model) -> Unit){
+        bindViewFunction = bind
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         binding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.photo_item,
+            layoutResource,
             parent,
             false
         )
@@ -33,17 +30,15 @@ class PhotoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val currentItem = currentList.get(position)
-        binding.photoTextView.text = currentItem.title
-        binding.photoImageView.load(currentItem.thumbnailUrl)
+        bindViewFunction.invoke(binding,currentItem)
     }
 
     override fun getItemCount(): Int = currentList.size
 
-    fun setList(list:ArrayList<PhotoModelItem>){
+    fun setList(list:ArrayList<Model>){
         currentList.clear()
         currentList.addAll(list)
         notifyDataSetChanged()
     }
-
 
 }

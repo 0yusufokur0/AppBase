@@ -9,18 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
     private val layoutResource: Int,
     private val itemId: Int?,
-    private var currentList: ArrayList<Model>? = null,
+    private var currentList: ArrayList<Model> = arrayListOf(),
 ) : RecyclerView.Adapter<BaseHolder<Model, VDB>>() {
 
     private var itemClick: ((Model) -> Unit)? = null
     private var itemLongClick: ((Model) -> Boolean)? = null
     private lateinit var binding: VDB
 
-    fun setOnItemClickListener(itemClick: (Model) -> Unit) {
+    open fun setOnItemClickListener(itemClick: (Model) -> Unit) {
         this.itemClick = itemClick
     }
 
-    fun setOnItemLongClickListener(itemLongClick: (Model) -> Boolean) {
+    open fun setOnItemLongClickListener(itemLongClick: (Model) -> Boolean) {
         this.itemLongClick = itemLongClick
     }
 
@@ -33,9 +33,9 @@ abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
     }
 
     override fun onBindViewHolder(holder: BaseHolder<Model, VDB>, position: Int) {
-        currentList?.let { holder.bind(currentList!![position]) }
+        holder.bind(currentList[position])
         holder.itemView.isLongClickable = true
     }
 
-    override fun getItemCount() = currentList?.let { currentList!!.size } ?: run { 0 }
+    override fun getItemCount() = currentList.size
 }
