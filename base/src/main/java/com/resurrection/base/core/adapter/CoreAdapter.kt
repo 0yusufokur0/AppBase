@@ -29,7 +29,7 @@ abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<Model, VDB> {
         val layoutInflater = LayoutInflater.from(parent.context)
         binding = DataBindingUtil.inflate(layoutInflater, layoutResource, parent, false)
-        return BaseHolder(binding, itemId, itemClick, itemLongClick, this::bindItem)
+        return BaseHolder(binding, itemId, this::bindItem, itemClick, itemLongClick)
     }
 
     override fun onBindViewHolder(holder: BaseHolder<Model, VDB>, position: Int) {
