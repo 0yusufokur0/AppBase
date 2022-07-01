@@ -2,13 +2,16 @@ package com.resurrection.base.di
 
 import android.content.Context
 import com.resurrection.base.components.appstate.AppState
-import com.resurrection.base.components.data.DataStoreManager
-import com.resurrection.base.components.data.TypeConverter
+import com.resurrection.base.components.datastore.DataStoreManagerImpl
+import com.resurrection.base.components.typeconverter.TypeConverter
 import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.dataholder.DataHolderManagerImpl
+import com.resurrection.base.components.datastore.DataStoreManager
 import com.resurrection.base.components.logger.LoggerManager
 import com.resurrection.base.components.network.NetworkManager
 import com.resurrection.base.components.network.OkHttpClientManager
+import com.resurrection.base.components.permission.PermissionManager
+import com.resurrection.base.components.permission.PermissionManagerImpl
 import com.resurrection.base.components.security.BiometricManager
 import com.resurrection.base.components.security.CryptographyManager
 import com.resurrection.base.components.security.SecurityManager
@@ -76,11 +79,15 @@ object CoreModule {
 
     @Singleton
     @Provides
-    fun provideDataStoreManager(@ApplicationContext context: Context) = DataStoreManager(context)
+    fun provideDataStoreManager(@ApplicationContext context: Context):DataStoreManager = DataStoreManagerImpl(context)
 
     @Singleton
     @Provides
     fun provideOkHttpClientManager(typeConverter: TypeConverter) =
         OkHttpClientManager(typeConverter)
+
+    @Singleton
+    @Provides
+    fun providePermissionManager(dataStoreManager: DataStoreManager): PermissionManager = PermissionManagerImpl(dataStoreManager)
 
 }
