@@ -1,6 +1,6 @@
 package com.resurrection.base.components.network
 
-import com.resurrection.base.components.data.TypeConverter
+import com.resurrection.base.components.typeconverter.TypeConverter
 import com.resurrection.base.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow

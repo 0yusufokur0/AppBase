@@ -1,4 +1,4 @@
-package com.resurrection.base.components.data
+package com.resurrection.base.components.typeconverter
 
 import com.google.gson.Gson
 

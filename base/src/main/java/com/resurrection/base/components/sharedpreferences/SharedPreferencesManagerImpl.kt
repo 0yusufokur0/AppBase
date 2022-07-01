@@ -2,7 +2,7 @@ package com.resurrection.base.components.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.resurrection.base.components.data.TypeConverter
+import com.resurrection.base.components.typeconverter.TypeConverter
 import java.lang.Double.doubleToRawLongBits
 import java.lang.Double.longBitsToDouble
 
