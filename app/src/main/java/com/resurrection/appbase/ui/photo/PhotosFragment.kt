@@ -4,7 +4,9 @@ import android.os.Bundle
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentPhotosBinding
 import com.resurrection.base.core.fragment.BaseFragment
+import com.resurrection.base.extensions.toast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 
 
 @AndroidEntryPoint
@@ -14,26 +16,5 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
     override fun init(savedInstanceState: Bundle?) {
 
 
-
     }
-    // read external storage permission
-
-
-
-
-}
-
-class ASD:XXX{
-    override val asd: String
-        get() {
-            super.asd = "asd"
-            return  ""
-        }
-    var asd
-        get() {
-            return "sşdflıg"
-        }
-}
-
-interface XXX {
 }
