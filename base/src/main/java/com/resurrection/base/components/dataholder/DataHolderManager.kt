@@ -84,9 +84,9 @@ interface DataHolderManager {
     /**
      * Get int value with the given key from main bundle.
      * @param key a String key
-     * @return a Int or null
+     * @return a Int
      * */
-    fun getInt(key: String, defValue: Int? = null): Int?
+    fun getInt(key: String, defValue: Int): Int
 
     /**
      * Insert a string value into main bundle with the given key.
@@ -99,9 +99,9 @@ interface DataHolderManager {
     /**
      * Get string value with the given key from main bundle.
      * @param key a String key
-     * @return a String or null
+     * @return a String
      * */
-    fun getString(key: String, defValue: String? = null): String?
+    fun getString(key: String, defValue: String): String
 
     /**
      * Insert a boolean value into main bundle with the given key.
@@ -114,9 +114,9 @@ interface DataHolderManager {
     /**
      * get boolean value with the given key from main bundle.
      * @param key a String key
-     * @return a Boolean or null
+     * @return a Boolean
      * */
-    fun getBoolean(key: String, defValue: Boolean): Boolean?
+    fun getBoolean(key: String, defValue: Boolean): Boolean
 
     /**
      * Insert a float value into main bundle with the given key.
@@ -129,9 +129,9 @@ interface DataHolderManager {
     /**
      * get float value with the given key from main bundle.
      * @param key a String key
-     * @return a Float or null
+     * @return a Float
      * */
-    fun getFloat(key: String, defValue: Float? = null): Float?
+    fun getFloat(key: String, defValue: Float): Float
 
     /**
      * Insert a long value into main bundle with the given key.
@@ -144,9 +144,9 @@ interface DataHolderManager {
     /**
      * get long value with the given key from main bundle.
      * @param key a String key
-     * @return a Long or null
+     * @return a Long
      * */
-    fun getLong(key: String, defValue: Long? = null): Long?
+    fun getLong(key: String, defValue: Long): Long
 
     /**
      * Insert a double value into main bundle with the given key.
@@ -159,9 +159,9 @@ interface DataHolderManager {
     /**
      * get double value with the given key from main bundle.
      * @param key a String key
-     * @return a Double or null
+     * @return a Double
      * */
-    fun getDouble(key: String, defValue: Double? = null): Double?
+    fun getDouble(key: String, defValue: Double): Double
 
     /**
      * Insert a serializable value into main bundle with the given key.

@@ -26,37 +26,37 @@ class DataHolderManagerImpl @Inject constructor() : DataHolderManager {
     override fun putInt(key: String, value: Int) =
         manager.putInt(key, value)
 
-    override fun getInt(key: String, defValue: Int?): Int? =
+    override fun getInt(key: String, defValue: Int): Int =
         handleGet(key, defValue, manager::getInt)
 
     override fun putString(key: String, value: String) =
         manager.putString(key, value)
 
-    override fun getString(key: String, defValue: String?): String? =
+    override fun getString(key: String, defValue: String): String =
         handleGet(key, defValue, manager::getString)
 
     override fun putBoolean(key: String, value: Boolean) =
         manager.putBoolean(key, value)
 
-    override fun getBoolean(key: String, defValue: Boolean): Boolean? =
+    override fun getBoolean(key: String, defValue: Boolean): Boolean =
         handleGet(key, defValue, manager::getBoolean)
 
     override fun putFloat(key: String, value: Float) =
         manager.putFloat(key, value)
 
-    override fun getFloat(key: String, defValue: Float?): Float? =
+    override fun getFloat(key: String, defValue: Float): Float =
         handleGet(key, defValue, manager::getFloat)
 
     override fun putLong(key: String, value: Long) =
         manager.putLong(key, value)
 
-    override fun getLong(key: String, defValue: Long?): Long? =
+    override fun getLong(key: String, defValue: Long): Long =
         handleGet(key, defValue, manager::getLong)
 
     override fun putDouble(key: String, value: Double) =
         manager.putDouble(key, value)
 
-    override fun getDouble(key: String, defValue: Double?): Double? =
+    override fun getDouble(key: String, defValue: Double): Double =
         handleGet(key, defValue, manager::getDouble)
 
     override fun <R : Serializable> putSerializable(key: String, value: R) =
@@ -95,6 +95,16 @@ class DataHolderManagerImpl @Inject constructor() : DataHolderManager {
         handleGet(key, null, manager::getCharSequenceArrayList)
 
 
-    private fun <T> handleGet(key: String, defValue: T? = null, getValue: (String) -> T?): T? =
-        if (contains(key)) getValue(key) else defValue
+    private fun <T> handleGet(key: String, defValue: T, getValue: (String) -> T?): T {
+
+        if (contains(key)) {
+            getValue(key)?.let {
+                return it
+            }?:run {
+                return defValue
+            }
+        } else {
+            return defValue
+        }
+    }
 }
