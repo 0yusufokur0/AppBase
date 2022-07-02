@@ -31,12 +31,12 @@ object CoreModule {
 
     @Provides
     @Singleton
-    fun provideAppState() = AppState(
-        isAppForeground = true,
-        isAppLightMode = true,
-        isNetworkAvailable = false,
-        isRooted = false
-    )
+    fun provideAppState(
+        @ApplicationContext context: Context,
+        dataHolderManager: DataHolderManager,
+        networkManager: NetworkManager,
+        securityManager: SecurityManager
+    ) = AppState(context, dataHolderManager, networkManager, securityManager)
 
     @Provides
     @Singleton
