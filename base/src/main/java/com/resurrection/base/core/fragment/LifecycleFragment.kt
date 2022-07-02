@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-abstract class LifecycleFragment : CoreFragment() {
+open class LifecycleFragment : CoreFragment() {
 
     open fun onStateChanged(event: FragmentLifecycleEvent) {
         when (event) {
@@ -13,25 +13,22 @@ abstract class LifecycleFragment : CoreFragment() {
                 loggerManager.fragmentOnCreate()
             }
             FragmentLifecycleEvent.ON_CREATE_VIEW -> {
+                loggerManager.fragmentOnCreateView()
             }
             FragmentLifecycleEvent.ON_VIEW_CREATED -> {
                 loggerManager.initFragment(this.javaClass.simpleName)
-                appState.isNetworkAvailable = networkManager.checkNetworkAvailable()
             }
             FragmentLifecycleEvent.ON_START -> {
                 loggerManager.fragmentOnStart()
             }
             FragmentLifecycleEvent.ON_RESUME -> {
                 loggerManager.fragmentOnResume()
-
             }
             FragmentLifecycleEvent.ON_PAUSE -> {
                 loggerManager.fragmentOnPause()
-
             }
             FragmentLifecycleEvent.ON_STOP -> {
                 loggerManager.fragmentOnStop()
-
             }
             FragmentLifecycleEvent.ON_DESTROY_VIEW -> {
                 loggerManager.fragmentOnDestroyView()

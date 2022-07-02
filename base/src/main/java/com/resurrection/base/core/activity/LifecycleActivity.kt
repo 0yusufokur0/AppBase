@@ -1,21 +1,25 @@
 package com.resurrection.base.core.activity
 
+import android.os.Bundle
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
+import com.resurrection.base.utils.BaseConstants
 
-abstract class LifecycleActivity : CoreActivity() {
+open class LifecycleActivity : CoreActivity(),LifecycleEventObserver {
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         when (event) {
             Lifecycle.Event.ON_CREATE -> {
-                appState.isRooted = securityManager.isRooted()
+                dataHolder.putBoolean(BaseConstants.IS_FOREGROUND, true)
                 loadingIndicator.init(this)
                 loggerManager.activityOnCreate()
                 loggerManager.initActivity(localClassName)
                 biometricManager.init(this)
             }
             Lifecycle.Event.ON_START -> {
-                appState.isAppForeground = true
+                dataHolder.putBoolean(BaseConstants.IS_FOREGROUND, true)
                 loggerManager.activityOnStart()
             }
             Lifecycle.Event.ON_RESUME -> {
@@ -25,7 +29,7 @@ abstract class LifecycleActivity : CoreActivity() {
                 loggerManager.activityOnPause()
             }
             Lifecycle.Event.ON_STOP -> {
-                appState.isAppForeground = false
+                dataHolder.putBoolean(BaseConstants.IS_FOREGROUND, false)
                 loggerManager.activityOnStop()
             }
             Lifecycle.Event.ON_DESTROY -> {
@@ -35,5 +39,9 @@ abstract class LifecycleActivity : CoreActivity() {
                 loggerManager.activityOnRestart()
             }
         }
+    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
     }
 }
