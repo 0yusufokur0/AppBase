@@ -10,7 +10,7 @@ abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
     private val layoutResource: Int,
     private val itemId: Int?,
     private var currentList: ArrayList<Model> = arrayListOf(),
-) : RecyclerView.Adapter<BaseHolder<Model, VDB>>() {
+) : RecyclerView.Adapter<BaseViewHolder<Model, VDB>>() {
 
     private var itemClick: ((Model) -> Unit)? = null
     private var itemLongClick: ((Model) -> Boolean)? = null
@@ -26,13 +26,13 @@ abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
 
     abstract fun bindItem(binding: VDB, item: Model)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<Model, VDB> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Model, VDB> {
         val layoutInflater = LayoutInflater.from(parent.context)
         binding = DataBindingUtil.inflate(layoutInflater, layoutResource, parent, false)
-        return BaseHolder(binding, itemId, this::bindItem, itemClick, itemLongClick)
+        return BaseViewHolder(binding, itemId, this::bindItem, itemClick, itemLongClick)
     }
 
-    override fun onBindViewHolder(holder: BaseHolder<Model, VDB>, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder<Model, VDB>, position: Int) {
         holder.bind(currentList[position])
         holder.itemView.isLongClickable = true
     }
