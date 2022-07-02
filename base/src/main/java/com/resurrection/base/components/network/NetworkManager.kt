@@ -17,8 +17,6 @@ class NetworkManager @Inject constructor(
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     private val capabilities =
         connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-    private var _isNetworkAvailable = checkNetworkAvailable()
-    val isNetworkAvailable: Boolean = _isNetworkAvailable
 
     fun checkNetworkAvailable(): Boolean =
         try {
@@ -27,7 +25,7 @@ class NetworkManager @Inject constructor(
                     capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
                     capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
                     capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                    else -> true
+                    else -> false
                 }
             } else false
         } catch (e: Exception) {
@@ -43,25 +41,21 @@ class NetworkManager @Inject constructor(
             ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
-                _isNetworkAvailable = true
                 available()
             }
 
             override fun onLost(network: Network) {
                 super.onLost(network)
-                _isNetworkAvailable = false
                 unAvailable()
             }
 
             override fun onLosing(network: Network, maxMsToLive: Int) {
                 super.onLosing(network, maxMsToLive)
-                _isNetworkAvailable = false
                 unAvailable()
             }
 
             override fun onUnavailable() {
                 super.onUnavailable()
-                _isNetworkAvailable = false
                 unAvailable()
             }
 
