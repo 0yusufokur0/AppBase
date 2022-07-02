@@ -19,6 +19,8 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
     val binding get() = _binding!!
     protected val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
 
+    abstract fun init(savedInstanceState: Bundle?)
+
     @CallSuper
     override fun onCreateView(
         inflater: LayoutInflater,

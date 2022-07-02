@@ -16,11 +16,12 @@ import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
 import com.resurrection.base.components.typeconverter.TypeConverter
 import com.resurrection.base.components.widget.AppLoadingIndicator
+import com.resurrection.base.utils.BaseConstants
 import com.resurrection.base.utils.Resource
 import com.resurrection.base.utils.Status
 import javax.inject.Inject
 
-abstract class CoreActivity : AppCompatActivity(), LifecycleEventObserver {
+open class CoreActivity : AppCompatActivity() {
     @Inject
     lateinit var appState: AppState
 
@@ -50,8 +51,6 @@ abstract class CoreActivity : AppCompatActivity(), LifecycleEventObserver {
 
     @Inject
     lateinit var dataStoreManager: DataStoreManager
-
-    abstract fun init(savedInstanceState: Bundle?)
 
     @SuppressLint("ObsoleteSdkInt")
     fun requestPermission(permissions: Array<String>, requestCode: Int) {

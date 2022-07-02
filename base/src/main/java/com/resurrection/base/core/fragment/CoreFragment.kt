@@ -16,7 +16,7 @@ import com.resurrection.base.utils.Resource
 import com.resurrection.base.utils.Status
 import javax.inject.Inject
 
-abstract class CoreFragment : Fragment() {
+open class CoreFragment : Fragment() {
 
     @Inject
     lateinit var appState: AppState
@@ -44,8 +44,6 @@ abstract class CoreFragment : Fragment() {
 
     @Inject
     lateinit var dataStoreManager: DataStoreManager
-
-    abstract fun init(savedInstanceState: Bundle?)
 
     fun <T> LiveData<Resource<T>>.observeData(
         success: (T?) -> Unit,
