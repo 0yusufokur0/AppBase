@@ -11,6 +11,7 @@ import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.datastore.DataStoreManager
 import com.resurrection.base.components.logger.LoggerManager
 import com.resurrection.base.components.network.NetworkManager
+import com.resurrection.base.components.permission.PermissionManager
 import com.resurrection.base.components.security.BiometricManager
 import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
@@ -51,6 +52,9 @@ open class CoreActivity : AppCompatActivity() {
 
     @Inject
     lateinit var dataStoreManager: DataStoreManager
+
+    @Inject
+    lateinit var permissionManager: PermissionManager
 
 
     fun <T> LiveData<Resource<T>>.observeData(
