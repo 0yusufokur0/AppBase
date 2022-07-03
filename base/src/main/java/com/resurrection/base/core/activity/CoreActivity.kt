@@ -52,12 +52,6 @@ open class CoreActivity : AppCompatActivity() {
     @Inject
     lateinit var dataStoreManager: DataStoreManager
 
-    @SuppressLint("ObsoleteSdkInt")
-    fun requestPermission(permissions: Array<String>, requestCode: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(permissions, requestCode)
-        }
-    }
 
     fun <T> LiveData<Resource<T>>.observeData(
         success: (T?) -> Unit,
