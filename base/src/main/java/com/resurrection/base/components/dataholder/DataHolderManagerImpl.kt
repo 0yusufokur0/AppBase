@@ -5,7 +5,7 @@ import android.os.Parcelable
 import java.io.Serializable
 import javax.inject.Inject
 
-class DataHolderManagerImpl @Inject constructor() : DataHolderManager {
+class DataHolderManagerImpl: DataHolderManager {
 
     override val manager = Bundle()
 

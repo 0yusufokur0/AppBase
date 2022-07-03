@@ -9,8 +9,8 @@ import androidx.annotation.RequiresApi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class NetworkManager @Inject constructor(
-    @ApplicationContext val context: Context,
+class NetworkManager(
+     val context: Context,
 ) {
 
     private val connectivityManager =

@@ -11,7 +11,7 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
-class OkHttpClientManager @Inject constructor(
+class OkHttpClientManager(
     val typeConverter: TypeConverter
 ) {
     companion object {

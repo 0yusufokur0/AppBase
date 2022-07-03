@@ -9,7 +9,7 @@ import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.utils.BaseConstants
 import javax.inject.Inject
 
-class AppState @Inject constructor(
+class AppState(
     private val context: Context,
     private val dataHolderManager: DataHolderManager,
     private val networkManager: NetworkManager,
