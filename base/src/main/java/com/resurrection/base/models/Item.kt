@@ -1,3 +1,4 @@
 package com.resurrection.base.models
 
-data class Item(var value: String)
+@JvmInline
+value class Item(val value: String)
