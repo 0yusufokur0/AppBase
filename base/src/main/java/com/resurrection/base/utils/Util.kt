@@ -53,3 +53,12 @@ inline fun <reified T : Any, R> T.getPrivatePropertyOfKotlin(name: String): R? =
         .firstOrNull { it.name == name }
         ?.apply { isAccessible = true }
         ?.get(this) as R?
+
+
+inline fun <reified T> T.callPrivateFunctionWithIndex(index: Int, vararg args: Any?): Any? {
+    return T::class
+        .declaredMemberFunctions
+        .toList()[index]
+        .apply { isAccessible = true }
+        .call(this, *args)
+}
