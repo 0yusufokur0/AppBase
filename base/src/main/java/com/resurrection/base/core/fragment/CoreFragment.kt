@@ -1,6 +1,5 @@
 package com.resurrection.base.core.fragment
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import com.resurrection.base.components.appstate.AppState
@@ -9,7 +8,6 @@ import com.resurrection.base.components.typeconverter.TypeConverter
 import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.logger.LoggerManager
 import com.resurrection.base.components.network.NetworkManager
-import com.resurrection.base.components.permission.PermissionManager
 import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
 import com.resurrection.base.components.widget.AppLoadingIndicator
@@ -45,9 +43,6 @@ open class CoreFragment : Fragment() {
 
     @Inject
     lateinit var dataStoreManager: DataStoreManager
-
-    @Inject
-    lateinit var permissionManager: PermissionManager
 
     fun <T> LiveData<Resource<T>>.observeData(
         success: (T?) -> Unit,

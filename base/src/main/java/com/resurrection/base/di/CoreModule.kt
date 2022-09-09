@@ -10,8 +10,6 @@ import com.resurrection.base.components.datastore.DataStoreManager
 import com.resurrection.base.components.logger.LoggerManager
 import com.resurrection.base.components.network.NetworkManager
 import com.resurrection.base.components.network.OkHttpClientManager
-import com.resurrection.base.components.permission.PermissionManager
-import com.resurrection.base.components.permission.PermissionManagerImpl
 import com.resurrection.base.components.security.BiometricManager
 import com.resurrection.base.components.security.CryptographyManager
 import com.resurrection.base.components.security.SecurityManager
@@ -85,9 +83,5 @@ object CoreModule {
     @Provides
     fun provideOkHttpClientManager(typeConverter: TypeConverter) =
         OkHttpClientManager(typeConverter)
-
-    @Singleton
-    @Provides
-    fun providePermissionManager(dataStoreManager: DataStoreManager): PermissionManager = PermissionManagerImpl(dataStoreManager)
 
 }
