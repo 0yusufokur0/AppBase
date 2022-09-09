@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="photoItem"
+            type="com.resurrection.appbase.data.model.photos.PhotoModelItem" />
+    </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -21,18 +27,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/photoImageView"
+                <com.resurrection.base.widgets.AppImageView
+                    loadImageWithRoundedCorner="@{photoItem.url}"
                     android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    tools:background="@mipmap/ic_launcher" />
+                    android:layout_height="200dp" />
 
                 <TextView
-                    android:id="@+id/photoTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    tools:text="sdfşgsdişfg" />
+                    android:text="@{photoItem.title}" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="asd" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
