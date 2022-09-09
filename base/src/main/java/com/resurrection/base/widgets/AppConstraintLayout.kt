@@ -7,8 +7,4 @@ import com.resurrection.base.R
 
 class AppConstraintLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr) {
-    init {
-        setBackgroundResource(R.drawable.rounded_view_bg)
-    }
-}
+) : ConstraintLayout(context, attrs, defStyleAttr)
