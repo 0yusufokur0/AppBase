@@ -24,6 +24,29 @@ fun Any.isValid(): Boolean {
     return isValid
 }
 
+fun checkAreNotNull(vararg any:Any?): Boolean {
+    any.forEach {
+        it?: run {
+            return false
+        }
+    }
+    return true
+}
+
+fun Any?.isNotNull():Boolean{
+    this?.let {
+        return true
+    }?: run {
+        return false
+    }
+}fun Any?.isNull():Boolean{
+    this?.let {
+        return false
+    }?: run {
+        return true
+    }
+}
+
 fun <T : Any> T.getPrivatePropertyOfJava(variableName: String): Any? {
 
     return javaClass.getDeclaredField(variableName).let { field ->
