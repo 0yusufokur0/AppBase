@@ -3,4 +3,11 @@
     package="com.resurrection.base">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application>
+        <activity
+            android:name=".components.logger.LoggerMonitorActivity"
+            android:exported="false" />
+    </application>
+
 </manifest>
