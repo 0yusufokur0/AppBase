@@ -27,22 +27,19 @@ open class CoreFragment : Fragment() {
     lateinit var sharedPreferences: SharedPreferencesManager
 
     @Inject
+    lateinit var dataStoreManager: DataStoreManager
+
+    @Inject
     lateinit var loggerManager: LoggerManager
 
     @Inject
     lateinit var loadingIndicator: AppLoadingIndicator
 
     @Inject
-    lateinit var networkManager: NetworkManager
-
-    @Inject
     lateinit var securityManager: SecurityManager
 
     @Inject
     lateinit var typeConverter: TypeConverter
-
-    @Inject
-    lateinit var dataStoreManager: DataStoreManager
 
     fun <T> LiveData<Resource<T>>.observeData(
         success: (T?) -> Unit,

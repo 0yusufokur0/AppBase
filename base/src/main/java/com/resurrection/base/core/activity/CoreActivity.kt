@@ -17,6 +17,7 @@ import com.resurrection.base.utils.Status
 import javax.inject.Inject
 
 open class CoreActivity : AppCompatActivity() {
+
     @Inject
     lateinit var appState: AppState
 
@@ -27,13 +28,13 @@ open class CoreActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferencesManager
 
     @Inject
+    lateinit var dataStoreManager: DataStoreManager
+
+    @Inject
     lateinit var loggerManager: LoggerManager
 
     @Inject
     lateinit var loadingIndicator: AppLoadingIndicator
-
-    @Inject
-    lateinit var networkManager: NetworkManager
 
     @Inject
     lateinit var securityManager: SecurityManager
@@ -43,9 +44,6 @@ open class CoreActivity : AppCompatActivity() {
 
     @Inject
     lateinit var typeConverter: TypeConverter
-
-    @Inject
-    lateinit var dataStoreManager: DataStoreManager
 
     fun <T> LiveData<Resource<T>>.observeData(
         success: (T?) -> Unit,
