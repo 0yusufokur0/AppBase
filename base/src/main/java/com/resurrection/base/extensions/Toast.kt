@@ -1,60 +1,43 @@
 package com.resurrection.base.extensions
 
-import android.app.Service
 import android.content.Context
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
-fun AppCompatActivity.toast(message: String?) = toast(this, message, Toast.LENGTH_SHORT)
-fun Fragment.toast(message: String?) = toast(requireContext(), message, Toast.LENGTH_SHORT)
-fun Context.toast(message: String?) = toast(this, message, Toast.LENGTH_SHORT)
-fun Service.toast(message: String?) = toast(this, message, Toast.LENGTH_SHORT)
-fun AppCompatActivity.toastLong(message: String?) = toast(this, message, Toast.LENGTH_LONG)
-fun Fragment.toastLong(message: String?) = toast(requireContext(), message, Toast.LENGTH_LONG)
-fun Context.toastLong(message: String?) = toast(this, message, Toast.LENGTH_LONG)
-fun Service.toastLong(message: String?) = toast(this, message, Toast.LENGTH_LONG)
+fun Context.toast(message: String?) = toast(this, message)
+fun Context.toast(message: Int?) = toast(this, message)
+fun Context.toast(message: Any?) = toast(this, message)
 
-fun AppCompatActivity.toast(message: Int?) = toast(this, message, Toast.LENGTH_SHORT)
-fun Fragment.toast(message: Int?) = toast(requireContext(), message, Toast.LENGTH_SHORT)
-fun Context.toast(message: Int?) = toast(this, message, Toast.LENGTH_SHORT)
-fun Service.toast(message: Int?) = toast(this, message, Toast.LENGTH_SHORT)
-fun AppCompatActivity.toastLong(message: Int?) = toast(this, message, Toast.LENGTH_LONG)
-fun Fragment.toastLong(message: Int?) = toast(requireContext(), message, Toast.LENGTH_LONG)
-fun Context.toastLong(message: Int?) = toast(this, message, Toast.LENGTH_LONG)
-fun Service.toastLong(message: Int?) = toast(this, message, Toast.LENGTH_LONG)
+fun Context.toastLong(message: String?) = toastLong(this, message)
+fun Context.toastLong(message: Int?) = toastLong(this, message)
+fun Context.toastLong(message: Any?) = toastLong(this, message)
 
-fun AppCompatActivity.toast(message: Any?) = toast(this, message, Toast.LENGTH_SHORT)
-fun Fragment.toast(message: Any?) = toast(requireContext(), message, Toast.LENGTH_SHORT)
-fun Context.toast(message: Any?) = toast(this, message, Toast.LENGTH_SHORT)
-fun Service.toast(message: Any?) = toast(this, message, Toast.LENGTH_SHORT)
-fun AppCompatActivity.toastLong(message: Any?) = toast(this, message, Toast.LENGTH_LONG)
-fun Fragment.toastLong(message: Any?) = toast(requireContext(), message, Toast.LENGTH_LONG)
-fun Context.toastLong(message: Any?) = toast(this, message, Toast.LENGTH_LONG)
-fun Service.toastLong(message: Any?) = toast(this, message, Toast.LENGTH_LONG)
+fun Fragment.toast(message: String?) = toast(requireContext(), message)
+fun Fragment.toast(message: Int?) = toast(requireContext(), message)
+fun Fragment.toast(message: Any?) = toast(requireContext(), message)
 
-private fun toast(context: Context, message: String?, duration: Int): Toast {
-    val toast = Toast.makeText(context, message, duration)
-    toast.show()
-    return toast
+fun Fragment.toastLong(message: Int?) = toastLong(requireContext(), message)
+fun Fragment.toastLong(message: String?) = toastLong(requireContext(), message)
+fun Fragment.toastLong(message: Any?) = toastLong(requireContext(), message)
+
+
+@JvmName("toastLong1")
+private fun toastLong(context: Context, message: String?) = toast(context, message, Toast.LENGTH_LONG)
+
+@JvmName("toastLongInt")
+private fun toastLong(context: Context, messageId: Int?) = toast(context, messageId, Toast.LENGTH_LONG)
+
+@JvmName("toastLongAny")
+private fun toastLong(context: Context, message: Any?) = toast(context, message, Toast.LENGTH_LONG)
+
+private fun toast(context: Context, message: String?, duration: Int = Toast.LENGTH_SHORT) = message?.let {
+    Toast.makeText(context, message, duration).show()
 }
 
-private fun toast(context: Context, message: Int?, duration: Int): Toast {
-    return try {
-        message ?: return Toast.makeText(context, "", duration)
-        val msg = context.getString(message)
-        val toast = Toast.makeText(context, msg, duration)
-        toast.show()
-        toast
-    } catch (e: Exception) {
-        val toast = Toast.makeText(context, message.toString(), duration)
-        toast.show()
-        toast
-    }
+private fun toast(context: Context, messageId: Int?, duration: Int = Toast.LENGTH_SHORT) = messageId?.let {
+    Toast.makeText(context, messageId, duration).show()
 }
 
-private fun toast(context: Context, message: Any?, duration: Int): Toast {
-    val toast = Toast.makeText(context, message.toString(), duration)
-    toast.show()
-    return toast
+private fun toast(context: Context, message: Any?, duration: Int = Toast.LENGTH_SHORT) = message?.let {
+    Toast.makeText(context, message.toString(), duration).show()
 }
