@@ -85,7 +85,7 @@ inline fun <reified T> T.callPrivateFunctionWithIndex(index: Int, vararg args: A
         .declaredMemberFunctions
         .toList()[index]
         .apply { isAccessible = true }
-        .call(this,*args)
+        .call(*args)
 }
 
 inline fun <reified  T> T.getFunctionIndexByName(name:String): Int? {
