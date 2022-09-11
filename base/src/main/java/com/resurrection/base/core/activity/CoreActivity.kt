@@ -12,6 +12,7 @@ import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
 import com.resurrection.base.components.typeconverter.TypeConverter
 import com.resurrection.base.components.widget.AppLoadingIndicator
+import com.resurrection.base.extensions.observeData
 import com.resurrection.base.utils.Resource
 import com.resurrection.base.utils.Status
 import javax.inject.Inject
@@ -45,18 +46,9 @@ open class CoreActivity : AppCompatActivity() {
     @Inject
     lateinit var typeConverter: TypeConverter
 
-    fun <T> LiveData<Resource<T>>.observeData(
-        success: (T?) -> Unit,
-        loading: (() -> Unit)? = null,
-        error: (() -> Unit)? = null
-    ) {
-        this.observe(this@CoreActivity) { data ->
-            when (data.status) {
-                Status.SUCCESS -> success.invoke(data.data)
-                Status.LOADING -> loading?.invoke()
-                Status.ERROR -> error?.invoke()
-                else -> Throwable("${data.data} fetch error")
-            }
-        }
-    }
+    inline fun <T> LiveData<Resource<T>>.observeData(
+        crossinline success: (T?) -> Unit = { },
+        crossinline loading: () -> Unit = { },
+        crossinline error: (Throwable?) -> Unit = { }
+    ) = this.observeData(this@CoreActivity, success, loading, error)
 }

@@ -12,6 +12,7 @@ import com.resurrection.base.components.typeconverter.TypeConverter
 import com.resurrection.base.components.widget.AppLoadingIndicator
 import com.resurrection.base.utils.Resource
 import com.resurrection.base.utils.callPrivateFunc
+import com.resurrection.base.utils.callPrivateFunctionWithIndex
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
@@ -49,23 +50,19 @@ abstract class BaseViewModel : ViewModel() {
     lateinit var typeConverter: TypeConverter
 
 
-    fun <T> fetchLiveData(
-        liveData: LiveData<Resource<T>>,
-        request: suspend () -> Flow<Resource<T>>,
-        condition: () -> Boolean = { true },
-        success: (Resource<T>) -> Unit = { liveData.postValue(it) },
-        loading: () -> Unit = { liveData.postValue(Resource.Loading()) },
-        error: (Throwable) -> Unit = { liveData.postValue(Resource.Error(it)) }
+    inline fun <T> LiveData<Resource<T>>.fetchData(
+        crossinline condition: () -> Boolean = { true },
+        crossinline request: suspend () -> Flow<Resource<T>>,
+        crossinline success: (Resource<T>) -> Unit = { this.accessPostValue(it) },
+        crossinline loading: () -> Unit = { this.accessPostValue(Resource.Loading()) },
+        crossinline error: (Throwable) -> Unit = { this.accessPostValue(Resource.Error(it)) }
     ) = viewModelScope.launch {
         if (condition()) {
             request()
                 .onStart { loading() }
                 .catch { error(it) }
                 .collect { success(it) }
-        } else {
-            liveData.postValue(Resource.InValid(Throwable("request parameters is invalid")))
         }
-
     }
 
     fun <T> MutableStateFlow<Resource<T>>.setData(
@@ -77,8 +74,6 @@ abstract class BaseViewModel : ViewModel() {
                 .onStart { this@setData.value = Resource.Loading() }
                 .catch { this@setData.value = Resource.Error(it) }
                 .collect { this@setData.value = it }
-        } else {
-            this@setData.value = Resource.InValid(Throwable("request parameters is invalid"))
         }
     }
 
@@ -86,8 +81,9 @@ abstract class BaseViewModel : ViewModel() {
 
     fun <T> liveData(): LiveData<T> = liveData { }
 
-    protected fun <T> LiveData<T>.postValue(data: T) {
-        this.callPrivateFunc("postValue", data)
-    }
+    protected fun <T> LiveData<T>.postValue(data: T) = this.callPrivateFunctionWithIndex(11, data)
+
+    @PublishedApi
+    internal fun <T> LiveData<Resource<T>>.accessPostValue(data: Resource<T>) = postValue(data)
 
 }

@@ -5,8 +5,12 @@ import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentPhotosBinding
 import com.resurrection.base.core.fragment.BaseFragment
 import com.resurrection.base.extensions.toast
+import com.resurrection.base.utils.getFunctionIndexByName
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
+import kotlin.reflect.full.declaredMemberFunctions
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.jvm.isAccessible
 
 
 @AndroidEntryPoint
@@ -15,6 +19,17 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
 
     override fun init(savedInstanceState: Bundle?) {
 
+        viewModel.getPhotos()
+
+        viewModel.photos.observeData(
+            success = {
+                binding.textView.text = it.toString()
+            }
+        )
+
+/*
+        binding.textView.text = viewModel.photos.getFunctionIndexByName("postValue").toString()
+*/
 
     }
 }
