@@ -2,6 +2,8 @@ package com.resurrection.base.utils
 
 import android.util.Log
 import kotlin.reflect.full.declaredMemberFunctions
+import kotlin.reflect.full.functions
+import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
 
@@ -83,5 +85,15 @@ inline fun <reified T> T.callPrivateFunctionWithIndex(index: Int, vararg args: A
         .declaredMemberFunctions
         .toList()[index]
         .apply { isAccessible = true }
-        .call(this, *args)
+        .call(this,*args)
+}
+
+inline fun <reified  T> T.getFunctionIndexByName(name:String): Int? {
+    val functionList =  T::class.declaredMemberFunctions
+    functionList.forEachIndexed { index, kFunction ->
+        if (kFunction.name == name){
+            return index
+        }
+    }
+    return null
 }
