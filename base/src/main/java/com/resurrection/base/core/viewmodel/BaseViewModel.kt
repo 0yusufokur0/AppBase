@@ -81,7 +81,7 @@ abstract class BaseViewModel : ViewModel() {
 
     fun <T> liveData(): LiveData<T> = liveData { }
 
-    protected fun <T> LiveData<T>.postValue(data: T) = this.callPrivateFunctionWithIndex(11, data)
+    protected fun <T> LiveData<T>.postValue(data: T) = this.callPrivateFunctionWithIndex(11, this,data)
 
     @PublishedApi
     internal fun <T> LiveData<Resource<T>>.accessPostValue(data: Resource<T>) = postValue(data)
