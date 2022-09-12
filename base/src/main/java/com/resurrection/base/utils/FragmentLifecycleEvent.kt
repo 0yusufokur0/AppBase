@@ -1,4 +1,4 @@
-package com.resurrection.base.core.fragment
+package com.resurrection.base.utils
 
 enum class FragmentLifecycleEvent {
     ON_CREATE,
