@@ -4,9 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ContentView
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import com.resurrection.base.utils.FragmentLifecycleEvent
 
-open class LifecycleFragment : CoreFragment() {
+abstract class LifecycleFragment @ContentView constructor(@LayoutRes layoutRes : Int) : CoreFragment(layoutRes),
+    LifecycleObserver {
 
+    abstract override fun init(view: View, savedInstanceState: Bundle?)
+
+
+
+/*
     open fun onStateChanged(event: FragmentLifecycleEvent) {
         when (event) {
             FragmentLifecycleEvent.ON_CREATE -> {
@@ -38,11 +50,14 @@ open class LifecycleFragment : CoreFragment() {
             }
         }
     }
+*/
 
-    // region Lifecycle Event
+/*    // region Lifecycle Event
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onStateChanged(FragmentLifecycleEvent.ON_CREATE)
+
+        lifecycle.addObserver(this)
     }
 
     override fun onCreateView(
@@ -51,12 +66,13 @@ open class LifecycleFragment : CoreFragment() {
         savedInstanceState: Bundle?
     ): View? {
         onStateChanged(FragmentLifecycleEvent.ON_CREATE_VIEW)
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return callOnCreateViewSuper(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        callOnViewCreatedSuper(view, savedInstanceState)
         onStateChanged(FragmentLifecycleEvent.ON_VIEW_CREATED)
+        init(view, savedInstanceState)
     }
 
     override fun onStart() {
@@ -88,5 +104,5 @@ open class LifecycleFragment : CoreFragment() {
         super.onDestroy()
         onStateChanged(FragmentLifecycleEvent.ON_DESTROY)
     }
-    // endregion
+    // endregion*/
 }

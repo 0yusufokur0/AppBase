@@ -12,14 +12,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
-    @LayoutRes val resLayoutId: Int, private val viewModelClass: Class<VM>
-) : LifecycleFragment() {
+    @LayoutRes val layoutRes: Int, private val viewModelClass: Class<VM>
+) : LifecycleFragment(layoutRes) {
 
     private var _binding: VDB? = null
     val binding get() = _binding!!
     protected val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
 
-    abstract fun init(savedInstanceState: Bundle?)
+    abstract override fun init(view: View, savedInstanceState: Bundle?)
 
     @CallSuper
     override fun onCreateView(
@@ -27,16 +27,17 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = DataBindingUtil.inflate(inflater, resLayoutId, container, false)
+        _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         return _binding!!.root
     }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        init(savedInstanceState)
+        callOnViewCreatedSuper(view, savedInstanceState)
+        init(view, savedInstanceState)
     }
 
+    @CallSuper
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

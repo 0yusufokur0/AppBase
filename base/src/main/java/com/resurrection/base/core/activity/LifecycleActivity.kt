@@ -1,13 +1,24 @@
 package com.resurrection.base.core.activity
 
 import android.os.Bundle
+import android.util.Log
+import androidx.annotation.ContentView
+import androidx.annotation.LayoutRes
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.resurrection.base.utils.BaseConstants
 
-open class LifecycleActivity : CoreActivity(),LifecycleEventObserver {
+abstract class LifecycleActivity @ContentView constructor(@LayoutRes layoutRes : Int): CoreActivity(layoutRes),LifecycleEventObserver {
+
+    abstract override fun init(savedInstanceState: Bundle?)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        callOnCreateSuper(savedInstanceState)
+        lifecycle.addObserver(this)
+        init(savedInstanceState)
+    }
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         when (event) {
@@ -40,8 +51,5 @@ open class LifecycleActivity : CoreActivity(),LifecycleEventObserver {
             }
         }
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
-    }
 }
+

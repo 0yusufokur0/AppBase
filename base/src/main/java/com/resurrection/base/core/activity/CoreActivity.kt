@@ -1,12 +1,15 @@
 package com.resurrection.base.core.activity
 
+import android.os.Bundle
+import android.util.Log
+import androidx.annotation.ContentView
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import com.resurrection.base.components.appstate.AppState
 import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.datastore.DataStoreManager
 import com.resurrection.base.components.logger.LoggerManager
-import com.resurrection.base.components.network.NetworkManager
 import com.resurrection.base.components.security.BiometricManager
 import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
@@ -14,11 +17,11 @@ import com.resurrection.base.components.typeconverter.TypeConverter
 import com.resurrection.base.components.widget.AppLoadingIndicator
 import com.resurrection.base.extensions.observeData
 import com.resurrection.base.utils.Resource
-import com.resurrection.base.utils.Status
 import javax.inject.Inject
 
-open class CoreActivity : AppCompatActivity() {
+abstract class CoreActivity @ContentView constructor(@LayoutRes layoutRes: Int) : AppCompatActivity(layoutRes) {
 
+    // region components
     @Inject
     lateinit var appState: AppState
 
@@ -45,10 +48,26 @@ open class CoreActivity : AppCompatActivity() {
 
     @Inject
     lateinit var typeConverter: TypeConverter
+    // endregion
+
+    // region constructors
+
+    // endregion
+
+    abstract fun init(savedInstanceState: Bundle?)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        callOnCreateSuper(savedInstanceState)
+        init(savedInstanceState)
+    }
+
+    fun callOnCreateSuper(savedInstanceState: Bundle?){
+        super.onCreate(savedInstanceState)
+    }
 
     inline fun <T> LiveData<Resource<T>>.observeData(
         crossinline success: (T?) -> Unit = { },
         crossinline loading: () -> Unit = { },
         crossinline error: (Throwable?) -> Unit = { }
-    ) = this.observeData(this@CoreActivity, success, loading, error)
+    ) = observeData(this@CoreActivity, success, loading, error)
 }
