@@ -6,6 +6,9 @@
 
     <application>
         <activity
+            android:name=".components.crashtracker.CrashTrackerActivity"
+            android:exported="false" />
+        <activity
             android:name=".components.logger.LoggerMonitorActivity"
             android:exported="false" />
     </application>
