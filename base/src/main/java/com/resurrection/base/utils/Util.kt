@@ -7,7 +7,7 @@ import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
 
-fun Any.isValid(): Boolean {
+/*fun Any.isValid(): Boolean {
     var isValid = true
     val fields = this.javaClass.declaredFields
 
@@ -24,7 +24,7 @@ fun Any.isValid(): Boolean {
         }
     }
     return isValid
-}
+}*/
 
 fun checkAreNotNull(vararg any:Any?): Boolean {
     any.forEach {
@@ -72,7 +72,7 @@ inline fun <reified T> T.callPrivateFunc(name: String, vararg args: Any?): Any? 
         ?.apply { isAccessible = true }
         ?.call(this, *args)
 
-inline fun <reified T : Any, R> T.getPrivatePropertyOfKotlin(name: String): R? =
+inline fun <reified T : Any, R> T.getPrivateProperty(name: String): R? =
     T::class
         .memberProperties
         .firstOrNull { it.name == name }
@@ -88,10 +88,29 @@ inline fun <reified T> T.callPrivateFunctionWithIndex(index: Int, vararg args: A
         .call(*args)
 }
 
+inline fun <reified T:Any> T.getPrivatePropertyValueByIndex(index: Int): Any? {
+    return T::class
+        .memberProperties
+        .toList()[index]
+        .apply { isAccessible = true }
+        .get(this)
+}
+
 inline fun <reified  T> T.getFunctionIndexByName(name:String): Int? {
     val functionList =  T::class.declaredMemberFunctions
     functionList.forEachIndexed { index, kFunction ->
         if (kFunction.name == name){
+            return index
+        }
+    }
+    return null
+}
+
+inline fun <reified  T:Any> T.getPropertyIndexByName(name:String): Int? {
+
+    val propertyList =  T::class.memberProperties
+    propertyList.forEachIndexed { index, kProperty ->
+        if (kProperty.name == name){
             return index
         }
     }
