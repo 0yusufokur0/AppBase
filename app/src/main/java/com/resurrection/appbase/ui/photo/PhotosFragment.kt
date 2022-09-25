@@ -1,6 +1,7 @@
 package com.resurrection.appbase.ui.photo
 
 import android.os.Bundle
+import android.view.View
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentPhotosBinding
 import com.resurrection.base.core.fragment.BaseFragment
@@ -17,8 +18,7 @@ import kotlin.reflect.jvm.isAccessible
 class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
     (R.layout.fragment_photos, PhotosViewModel::class.java) {
 
-    override fun init(savedInstanceState: Bundle?) {
-
+    override fun init(view: View, savedInstanceState: Bundle?) {
         viewModel.getPhotos()
 
         viewModel.photos.observeData(

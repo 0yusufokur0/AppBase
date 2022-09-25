@@ -1,6 +1,7 @@
 package com.resurrection.appbase.ui.passenger
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resurrection.appbase.R
@@ -16,7 +17,7 @@ class PassengerFragment : BaseFragment<FragmentPassengerBinding, PassengerViewMo
     R.layout.fragment_passenger, PassengerViewModel::class.java
 ) {
     private val passengersAdapter = PassengersAdapter()
-    override fun init(savedInstanceState: Bundle?) {
+    override fun init(view: View, savedInstanceState: Bundle?) {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = passengersAdapter.withLoadStateHeaderAndFooter(

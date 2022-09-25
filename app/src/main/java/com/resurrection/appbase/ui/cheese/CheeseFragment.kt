@@ -2,6 +2,7 @@ package com.resurrection.appbase.ui.cheese
 
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 class CheeseFragment : BaseFragment<FragmentCheeseBinding, CheeseViewModel>(
     R.layout.fragment_cheese, CheeseViewModel::class.java
 ) {
-    override fun init(savedInstanceState: Bundle?) {
+    override fun init(view: View, savedInstanceState: Bundle?) {
         val adapter = CheeseAdapter()
 
 /*        val loadStateAdapter = BaseLoadStateAdapter<ItemLoadingStateBinding>(R.layout.item_loading_state)
