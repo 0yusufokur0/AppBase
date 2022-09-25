@@ -4,7 +4,6 @@ import android.view.View
 import androidx.paging.LoadState
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.ItemLoadingStateBinding
-import com.resurrection.appbase.visible
 import com.resurrection.base.core.adapter.BaseLoadStateAdapter
 
 class LoadStateAdapter(
@@ -24,6 +23,10 @@ class LoadStateAdapter(
         }
 
         binding.progressbar.visibility = View.VISIBLE
+    }
+
+    private fun View.visible(isVisible: Boolean) {
+        visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
 }
