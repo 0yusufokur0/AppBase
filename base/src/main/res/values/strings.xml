@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AppBase</string>
+    <string name="an_unexpected_error_has_occurred">An unexpected error has occurred</string>
+    <string name="send_log_or_try_again">You can let us know what the problem is so that we can do our best to solve it or you can try again</string>
+    <string name="send_log">Send Log</string>
+    <string name="try_again">Try Again</string>
+    <string name="report">Report</string>
+    <string name="what_have_you_encountered">What have you encountered?</string>
 </resources>
