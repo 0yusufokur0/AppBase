@@ -14,6 +14,7 @@ buildscript {
         // in the individual module build.gradle files
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.5'
         classpath 'org.codehaus.groovy:groovy-all:3.0.9'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2"
     }
 }
 
