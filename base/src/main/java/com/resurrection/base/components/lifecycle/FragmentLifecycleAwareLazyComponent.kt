@@ -28,6 +28,7 @@ class FragmentLifecycleAwareLazyComponent<T>(
         observer.onStateChanged(owner, event)
         if (event == FragmentLifecycleEvent.ON_DESTROY_VIEW) {
             lifecycleFragment.removeLifecycleObserver(this)
+            cached = null
         }
     }
 }

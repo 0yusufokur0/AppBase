@@ -28,6 +28,7 @@ class ActivityLifecycleAwareLazyComponent<T>(
         observer?.onStateChanged(source, event)
         if (event == Lifecycle.Event.ON_DESTROY) {
             lifecycleActivity.lifecycle.removeObserver(this)
+            cached = null
         }
     }
 }
