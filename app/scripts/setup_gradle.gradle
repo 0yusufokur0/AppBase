@@ -8,6 +8,10 @@ android {
         enabled true
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     lintOptions {
         abortOnError false
         checkReleaseBuilds false
