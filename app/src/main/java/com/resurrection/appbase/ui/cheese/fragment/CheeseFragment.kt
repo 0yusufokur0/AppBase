@@ -1,4 +1,4 @@
-package com.resurrection.appbase.ui.cheese
+package com.resurrection.appbase.ui.cheese.fragment
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentCheeseBinding
+import com.resurrection.appbase.ui.cheese.viewmodel.CheeseViewModel
+import com.resurrection.appbase.ui.cheese.adapter.CheeseAdapter
 import com.resurrection.base.core.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

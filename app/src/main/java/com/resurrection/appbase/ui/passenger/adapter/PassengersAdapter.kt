@@ -1,4 +1,4 @@
-package com.resurrection.appbase.ui.passenger
+package com.resurrection.appbase.ui.passenger.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

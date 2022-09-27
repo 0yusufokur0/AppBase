@@ -1,4 +1,4 @@
-package com.resurrection.appbase.ui.passenger
+package com.resurrection.appbase.ui.passenger.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager

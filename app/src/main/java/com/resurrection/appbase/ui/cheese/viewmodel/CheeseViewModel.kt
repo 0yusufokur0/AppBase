@@ -1,4 +1,4 @@
-package com.resurrection.appbase.ui.cheese
+package com.resurrection.appbase.ui.cheese.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*

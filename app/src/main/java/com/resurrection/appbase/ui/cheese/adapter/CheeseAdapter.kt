@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.resurrection.appbase.ui.cheese
+package com.resurrection.appbase.ui.cheese.adapter
 
 import android.graphics.Typeface
 import android.view.LayoutInflater

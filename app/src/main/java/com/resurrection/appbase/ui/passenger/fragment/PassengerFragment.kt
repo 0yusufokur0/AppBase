@@ -1,4 +1,4 @@
-package com.resurrection.appbase.ui.passenger
+package com.resurrection.appbase.ui.passenger.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentPassengerBinding
-import com.resurrection.appbase.ui.adapter.LoadStateAdapter
+import com.resurrection.appbase.ui.passenger.viewmodel.PassengerViewModel
+import com.resurrection.appbase.ui.passenger.adapter.LoadStateAdapter
+import com.resurrection.appbase.ui.passenger.adapter.PassengersAdapter
 import com.resurrection.base.core.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

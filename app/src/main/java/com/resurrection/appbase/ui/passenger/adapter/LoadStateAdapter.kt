@@ -1,4 +1,4 @@
-package com.resurrection.appbase.ui.adapter
+package com.resurrection.appbase.ui.passenger.adapter
 
 import android.view.View
 import androidx.paging.LoadState
