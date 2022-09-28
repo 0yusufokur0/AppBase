@@ -1,63 +1,51 @@
 package com.resurrection.base.core.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.annotation.ContentView
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.resurrection.base.utils.FragmentLifecycleEvent
+import com.resurrection.base.utils.fragment.FragmentLifecycleEvent
+import com.resurrection.base.utils.fragment.FragmentLifecycleEventObserver
 
-abstract class LifecycleFragment @ContentView constructor(@LayoutRes layoutRes : Int) : CoreFragment(layoutRes),
-    LifecycleObserver {
+abstract class LifecycleFragment @ContentView constructor(@LayoutRes layoutRes: Int) : CoreFragment(layoutRes), FragmentLifecycleEventObserver {
 
     abstract override fun init(view: View, savedInstanceState: Bundle?)
 
+    private val lifecycleObservers = mutableListOf<FragmentLifecycleEventObserver>()
 
-
-/*
-    open fun onStateChanged(event: FragmentLifecycleEvent) {
-        when (event) {
-            FragmentLifecycleEvent.ON_CREATE -> {
-                loggerManager.fragmentOnCreate()
-            }
-            FragmentLifecycleEvent.ON_CREATE_VIEW -> {
-                loggerManager.fragmentOnCreateView()
-            }
-            FragmentLifecycleEvent.ON_VIEW_CREATED -> {
-                loggerManager.initFragment(this.javaClass.simpleName)
-            }
-            FragmentLifecycleEvent.ON_START -> {
-                loggerManager.fragmentOnStart()
-            }
-            FragmentLifecycleEvent.ON_RESUME -> {
-                loggerManager.fragmentOnResume()
-            }
-            FragmentLifecycleEvent.ON_PAUSE -> {
-                loggerManager.fragmentOnPause()
-            }
-            FragmentLifecycleEvent.ON_STOP -> {
-                loggerManager.fragmentOnStop()
-            }
-            FragmentLifecycleEvent.ON_DESTROY_VIEW -> {
-                loggerManager.fragmentOnDestroyView()
-            }
-            FragmentLifecycleEvent.ON_DESTROY -> {
-                loggerManager.fragmentOnDestroy()
-            }
-        }
+    fun addLifecycleObserver(observer:FragmentLifecycleEventObserver){
+        lifecycleObservers.add(observer)
     }
-*/
+    fun removeLifecycleObserver(observer:FragmentLifecycleEventObserver){
+        lifecycleObservers.remove(observer)
+    }
 
-/*    // region Lifecycle Event
+    fun removeAllLifecycleObserver(){
+        lifecycleObservers.clear()
+    }
+
+    @CallSuper
+    override fun onStateChanged(owner: LifecycleOwner?, event: FragmentLifecycleEvent) {
+        lifecycleObservers.forEach {
+            it.onStateChanged(owner, event)
+        }
+
+    }
+
+    // region Lifecycle Event
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        onStateChanged(null,FragmentLifecycleEvent.ON_ATTACH)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        onStateChanged(FragmentLifecycleEvent.ON_CREATE)
-
-        lifecycle.addObserver(this)
+        onStateChanged(null,FragmentLifecycleEvent.ON_CREATE)
     }
 
     override fun onCreateView(
@@ -65,44 +53,59 @@ abstract class LifecycleFragment @ContentView constructor(@LayoutRes layoutRes :
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        onStateChanged(FragmentLifecycleEvent.ON_CREATE_VIEW)
+        onStateChanged(null,FragmentLifecycleEvent.ON_CREATE_VIEW)
         return callOnCreateViewSuper(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         callOnViewCreatedSuper(view, savedInstanceState)
-        onStateChanged(FragmentLifecycleEvent.ON_VIEW_CREATED)
+        onStateChanged(viewLifecycleOwner,FragmentLifecycleEvent.ON_VIEW_CREATED)
         init(view, savedInstanceState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        onStateChanged(viewLifecycleOwner,FragmentLifecycleEvent.ON_VIEW_STATE_RESTORED)
     }
 
     override fun onStart() {
         super.onStart()
-        onStateChanged(FragmentLifecycleEvent.ON_START)
+        onStateChanged(viewLifecycleOwner,FragmentLifecycleEvent.ON_START)
     }
 
     override fun onResume() {
         super.onResume()
-        onStateChanged(FragmentLifecycleEvent.ON_RESUME)
+        onStateChanged(viewLifecycleOwner,FragmentLifecycleEvent.ON_RESUME)
     }
 
     override fun onPause() {
         super.onPause()
-        onStateChanged(FragmentLifecycleEvent.ON_PAUSE)
+        onStateChanged(viewLifecycleOwner,FragmentLifecycleEvent.ON_PAUSE)
     }
 
     override fun onStop() {
         super.onStop()
-        onStateChanged(FragmentLifecycleEvent.ON_STOP)
+        onStateChanged(viewLifecycleOwner,FragmentLifecycleEvent.ON_STOP)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        onStateChanged(viewLifecycleOwner,FragmentLifecycleEvent.ON_SAVE_INSTANCE_STATE)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        onStateChanged(FragmentLifecycleEvent.ON_DESTROY_VIEW)
+        onStateChanged(null,FragmentLifecycleEvent.ON_DESTROY_VIEW)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        onStateChanged(FragmentLifecycleEvent.ON_DESTROY)
+        onStateChanged(null,FragmentLifecycleEvent.ON_DESTROY)
     }
-    // endregion*/
+
+    override fun onDetach() {
+        super.onDetach()
+        onStateChanged(null,FragmentLifecycleEvent.ON_DETACH)
+    }
+    // endregion
 }
