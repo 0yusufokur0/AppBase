@@ -1,19 +1,19 @@
-package com.resurrection.base.components.lifecycle
+package com.resurrection.base.components.lifecycle.activity
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.resurrection.base.core.activity.LifecycleActivity
 
-class ActivityLifecycleAwareLazyComponent<T>(
+open class ActivityLifecycleAwareComponent<T>(
     private val lifecycleActivity: LifecycleActivity,
     private val instanceCreator: () -> T,
     private val observer: LifecycleEventObserver? = null
-) : Lazy<T>, LifecycleEventObserver {
+) : LifecycleEventObserver {
 
-    private var cached: T? = null
+    protected var cached: T? = null
 
-    override val value: T
+    open val value: T
         get() {
             cached ?: run {
                 cached = instanceCreator.invoke()
@@ -21,8 +21,6 @@ class ActivityLifecycleAwareLazyComponent<T>(
             }
             return cached!!
         }
-
-    override fun isInitialized(): Boolean = cached != null
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         observer?.onStateChanged(source, event)
