@@ -8,7 +8,7 @@ import com.resurrection.base.utils.fragment.FragmentLifecycleEventObserver
 open class FragmentLifecycleAwareComponent<T>(
     private val lifecycleFragment: LifecycleFragment,
     private val instanceCreator: () -> T,
-    private val observer: FragmentLifecycleEventObserver
+    private val observer: FragmentLifecycleEventObserver? = null
 ) : FragmentLifecycleEventObserver {
 
     protected var cached: T? = null
@@ -23,7 +23,7 @@ open class FragmentLifecycleAwareComponent<T>(
         }
 
     override fun onStateChanged(owner: LifecycleOwner?, event: FragmentLifecycleEvent) {
-        observer.onStateChanged(owner, event)
+        observer?.onStateChanged(owner, event)
         if (event == FragmentLifecycleEvent.ON_DESTROY_VIEW) {
             lifecycleFragment.removeLifecycleObserver(this)
             cached = null
