@@ -21,7 +21,7 @@ import com.resurrection.base.utils.Resource
 import com.resurrection.base.utils.getPrivatePropertyValueByIndex
 import javax.inject.Inject
 
-abstract class CoreFragment @ContentView constructor(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
+abstract class CoreFragment @ContentView constructor(@LayoutRes val layoutRes: Int) : Fragment(layoutRes) {
 
     // region components
     @Inject

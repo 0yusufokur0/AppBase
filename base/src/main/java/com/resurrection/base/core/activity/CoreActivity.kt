@@ -19,7 +19,7 @@ import com.resurrection.base.extensions.observeData
 import com.resurrection.base.utils.Resource
 import javax.inject.Inject
 
-abstract class CoreActivity @ContentView constructor(@LayoutRes layoutRes: Int) : AppCompatActivity(layoutRes) {
+abstract class CoreActivity @ContentView constructor(@LayoutRes val layoutRes: Int) : AppCompatActivity(layoutRes) {
 
     // region components
     @Inject
