@@ -24,7 +24,7 @@ class FragmentLifecycleAwareLazyComponent<T>(
 
     override fun isInitialized(): Boolean = cached != null
 
-    override fun onStateChanged(owner: LifecycleOwner, event: FragmentLifecycleEvent) {
+    override fun onStateChanged(owner: LifecycleOwner?, event: FragmentLifecycleEvent) {
         observer.onStateChanged(owner, event)
         if (event == FragmentLifecycleEvent.ON_DESTROY_VIEW) {
             lifecycleFragment.removeLifecycleObserver(this)
