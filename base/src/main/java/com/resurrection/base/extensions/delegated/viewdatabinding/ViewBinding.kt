@@ -1,4 +1,4 @@
-package com.resurrection.base.extensions.delegated
+package com.resurrection.base.extensions.delegated.viewdatabinding
 
 import android.view.LayoutInflater
 import android.view.View
