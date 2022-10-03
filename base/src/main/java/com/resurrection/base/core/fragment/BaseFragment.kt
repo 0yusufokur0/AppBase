@@ -6,18 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import com.resurrection.base.core.viewmodel.BaseViewModel
+import com.resurrection.base.extensions.delegated.viewdatabinding.dataBinding
+import com.resurrection.base.extensions.delegated.viewmodel.viewModel
 
-abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
-    @LayoutRes val layoutRes: Int, private val viewModelClass: Class<VM>
+abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel>(
+    @LayoutRes layoutRes: Int, viewModelClass: Class<VM>
 ) : LifecycleFragment(layoutRes) {
 
-    private var _binding: VDB? = null
-    val binding get() = _binding!!
-    protected val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
+    protected val binding by dataBinding<VDB>()
+    protected val viewModel by viewModel(viewModelClass)
 
     abstract override fun init(view: View, savedInstanceState: Bundle?)
 
@@ -26,10 +25,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
-        return _binding!!.root
-    }
+    ): View? = binding.root
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,9 +33,4 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : ViewModel>(
         init(view, savedInstanceState)
     }
 
-    @CallSuper
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

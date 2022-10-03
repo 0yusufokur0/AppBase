@@ -1,20 +1,19 @@
 package com.resurrection.base.core.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import com.resurrection.base.core.viewmodel.BaseViewModel
+import com.resurrection.base.extensions.delegated.viewdatabinding.dataBinding
+import com.resurrection.base.extensions.delegated.viewmodel.viewModel
 
-abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(
-    @LayoutRes private val layoutRes: Int,
-    private val viewModelClass: Class<VM>
+abstract class BaseActivity<VDB : ViewDataBinding, VM : BaseViewModel>(
+    @LayoutRes layoutRes: Int,
+    viewModelClass: Class<VM>
 ) : LifecycleActivity(layoutRes) {
 
-    private val viewModel by lazy { ViewModelProvider(this)[viewModelClass] }
-    val binding: VDB by lazy { DataBindingUtil.setContentView(this@BaseActivity, layoutRes) }
+    protected val binding by dataBinding<VDB>()
+    protected val viewModel by viewModel(viewModelClass)
 
     abstract override fun init(savedInstanceState: Bundle?)
 
