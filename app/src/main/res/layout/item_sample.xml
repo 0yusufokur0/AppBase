@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="sampleItem"
+            type="com.resurrection.appbase.data.model.sample.SampleModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.resurrection.base.widgets.AppLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.resurrection.base.widgets.AppConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <com.resurrection.base.widgets.AppLinearLayout
+                    android:id="@+id/appLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/expandContentImageButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.resurrection.base.widgets.AppTextView
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="@{sampleItem.title}"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        tools:text="Title" />
+
+                    <com.resurrection.base.widgets.AppTextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@{sampleItem.description}"
+                        android:lines="2"
+                        tools:text="@tools:sample/lorem/random" />
+
+                </com.resurrection.base.widgets.AppLinearLayout>
+
+                <com.resurrection.base.widgets.AppConstraintLayout
+                    android:id="@+id/openSampleBottomLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/appLinearLayout">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/childItemRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        tools:listitem="@layout/sample_child_item"/>
+
+                </com.resurrection.base.widgets.AppConstraintLayout>
+
+            </com.resurrection.base.widgets.AppConstraintLayout>
+
+        </com.resurrection.base.widgets.AppLinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
