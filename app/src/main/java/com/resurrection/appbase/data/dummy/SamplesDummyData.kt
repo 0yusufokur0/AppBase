@@ -17,5 +17,12 @@ val samplesDummyData = arrayListOf<SampleModel>(
             name = "First Sample",
             navigationDirections = NavigationDirections(R.id.passengerFragment)
         ))
+    ),SampleModel(
+        title = "UI Components",
+        description = "Alert Dialog and Loading Indicator",
+        examples = listOf(SampleChildItemModel(
+            name = "First Sample",
+            navigationDirections = NavigationDirections(R.id.passengerFragment)
+        ))
     )
 )
