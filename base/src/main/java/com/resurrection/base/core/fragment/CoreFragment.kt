@@ -15,7 +15,8 @@ import com.resurrection.base.components.logger.LoggerManager
 import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
 import com.resurrection.base.components.typeconverter.TypeConverter
-import com.resurrection.base.components.widget.AppLoadingIndicator
+import com.resurrection.base.components.widget.alertdialog.AlertDialogManager
+import com.resurrection.base.components.widget.loadingindicator.LoadingIndicator
 import com.resurrection.base.extensions.observeData
 import com.resurrection.base.utils.Resource
 import com.resurrection.base.utils.getPrivatePropertyValueByIndex
@@ -40,7 +41,10 @@ abstract class CoreFragment @ContentView constructor(@LayoutRes val layoutRes: I
     lateinit var loggerManager: LoggerManager
 
     @Inject
-    lateinit var loadingIndicator: AppLoadingIndicator
+    lateinit var loadingIndicator: LoadingIndicator
+
+    @Inject
+    lateinit var alertDialogManager: AlertDialogManager
 
     @Inject
     lateinit var securityManager: SecurityManager
