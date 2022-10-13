@@ -9,9 +9,8 @@ import com.resurrection.base.components.security.BiometricManager
 import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
 import com.resurrection.base.components.typeconverter.TypeConverter
-import com.resurrection.base.components.widget.AppLoadingIndicator
+import com.resurrection.base.components.widget.loadingindicator.LoadingIndicator
 import com.resurrection.base.utils.Resource
-import com.resurrection.base.utils.callPrivateFunc
 import com.resurrection.base.utils.callPrivateFunctionWithIndex
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,7 +34,7 @@ abstract class BaseViewModel : ViewModel() {
     lateinit var loggerManager: LoggerManager
 
     @Inject
-    lateinit var loadingIndicator: AppLoadingIndicator
+    lateinit var loadingIndicator: LoadingIndicator
 
     @Inject
     lateinit var networkManager: NetworkManager
