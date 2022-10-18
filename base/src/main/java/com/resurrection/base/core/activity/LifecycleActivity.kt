@@ -24,7 +24,6 @@ abstract class LifecycleActivity @ContentView constructor(@LayoutRes layoutRes :
         when (event) {
             Lifecycle.Event.ON_CREATE -> {
                 dataHolder.putBoolean(BaseConstants.IS_FOREGROUND, true)
-                loadingIndicator.init(this)
                 loggerManager.activityOnCreate()
                 loggerManager.initActivity(localClassName)
                 biometricManager.init(this)
