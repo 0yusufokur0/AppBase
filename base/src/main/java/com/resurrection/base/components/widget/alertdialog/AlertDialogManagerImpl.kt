@@ -23,25 +23,15 @@ class AlertDialogManagerImpl(private val context: Context) : AlertDialogManager 
         alertDialog = MaterialAlertDialogBuilder(context).apply {
             setTitle(title)
             setMessage(message)
-            setPositiveButton(positiveButtonTitle) { dialog, which ->
-                positiveButtonClickListener?.let {
-                    it.invoke()
-                }?: run {
-                    alertDialog.dismiss()
-                }
+            setPositiveButton(positiveButtonTitle) { _, _ ->
+                positiveButtonClickListener?.invoke() ?: run(alertDialog::dismiss)
             }
-            setNegativeButton(negativeButtonTitle) { dialog, which ->
-                negativeButtonClickListener?.let {
-                    it.invoke()
-                }?: run {
-                    alertDialog.dismiss()
-                }            }
-            setNeutralButton(neutralButtonTitle) { dialog, which ->
-                neutralButtonClickListener?.let {
-                    it.invoke()
-                }?: run {
-                    alertDialog.dismiss()
-                }            }
+            setNegativeButton(negativeButtonTitle) { _, _ ->
+                negativeButtonClickListener?.invoke() ?: run(alertDialog::dismiss)
+            }
+            setNeutralButton(neutralButtonTitle) { _, _ ->
+                neutralButtonClickListener?.invoke() ?: run(alertDialog::dismiss)
+            }
             setCancelable(false)
         }.create()
 
@@ -50,6 +40,14 @@ class AlertDialogManagerImpl(private val context: Context) : AlertDialogManager 
             setCanceledOnTouchOutside(false)
             show()
         }
+        return alertDialog
+    }
+
+    override fun show(builder: (MaterialAlertDialogBuilder) -> Unit): AlertDialog {
+        val alertDialogBuilder = MaterialAlertDialogBuilder(context)
+        builder.invoke(alertDialogBuilder)
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
         return alertDialog
     }
 }
