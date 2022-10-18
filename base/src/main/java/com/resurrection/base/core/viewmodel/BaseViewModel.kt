@@ -34,9 +34,6 @@ abstract class BaseViewModel : ViewModel() {
     lateinit var loggerManager: LoggerManager
 
     @Inject
-    lateinit var loadingIndicator: LoadingIndicator
-
-    @Inject
     lateinit var networkManager: NetworkManager
 
     @Inject
