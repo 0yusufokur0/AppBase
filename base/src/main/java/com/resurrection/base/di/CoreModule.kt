@@ -25,7 +25,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object CoreModule {
+class CoreModule {
 
     @Provides
     @Singleton
@@ -54,10 +54,6 @@ object CoreModule {
     @Singleton
     @Provides
     fun provideLogger(@ApplicationContext context: Context) = LoggerManager(context)
-
-    @Singleton
-    @Provides
-    fun provideAppLoadingIndicator() = AppLoadingIndicator()
 
     @Singleton
     @Provides
