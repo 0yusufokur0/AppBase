@@ -28,7 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.resurrection.base.widgets.AppImageView
-                    loadImageWithRoundedCorner="@{photoItem.url}"
+                    android:id="@+id/photo"
                     android:layout_width="200dp"
                     android:layout_height="200dp" />
 
