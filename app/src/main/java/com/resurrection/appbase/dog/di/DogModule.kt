@@ -1,7 +1,6 @@
 package com.resurrection.appbase.dog.di
 
-import com.resurrection.appbase.data.remote.InstaParkApiService
-import com.resurrection.appbase.di.RemoteDataModule
+
 import com.resurrection.appbase.dog.data.remote.DogApiService
 import dagger.Module
 import dagger.Provides
