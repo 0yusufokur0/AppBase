@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.resurrection.appbase.R
 import com.resurrection.appbase.data.model.passenger.Passenger
 import com.resurrection.appbase.databinding.ItemPassengerBinding
-import com.resurrection.base.utils.loadImageWithRoundedCorner
 
 class PassengersAdapter :
     PagingDataAdapter<Passenger, PassengersAdapter.PassengersViewHolder>(PassengersComparator) {
@@ -39,7 +38,9 @@ class PassengersAdapter :
 
         @SuppressLint("SetTextI18n")
         fun bindPassenger(item: Passenger) = with(binding) {
+/*
             imageViewAirlinesLogo.loadImageWithRoundedCorner(item.airline[0].logo)
+*/
             textViewHeadquarters.text = item.airline[0].head_quaters
             textViewNameWithTrips.text =item.name + item.trips
         }

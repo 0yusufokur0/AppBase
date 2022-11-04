@@ -1,5 +1,6 @@
 package com.resurrection.appbase.di
 
+/*
 import com.resurrection.appbase.data.remote.InstaParkApiService
 import com.resurrection.appbase.data.repository.InstaParkRepository
 import com.resurrection.base.components.network.OkHttpClientManager
@@ -21,4 +22,4 @@ object RepositoryModule {
     ) =
         InstaParkRepository(instaParkApiService, okHttpClientManager)
 
-}
+}*/

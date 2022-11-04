@@ -19,7 +19,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding, PhotosViewModel>
     (R.layout.fragment_photos, PhotosViewModel::class.java) {
 
     override fun init(view: View, savedInstanceState: Bundle?) {
-        viewModel.getPhotos()
+/*        viewModel.getPhotos()*/
 
         viewModel.photos.observeData(
             success = {

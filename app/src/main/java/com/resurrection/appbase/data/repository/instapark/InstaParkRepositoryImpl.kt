@@ -7,6 +7,7 @@ import com.resurrection.base.components.network.getData
 import javax.inject.Inject
 
 
+/*
 class InstaParkRepositoryImpl @Inject constructor(
     private val instaParkApiService: InstaParkApiService,
     private val okHttpClientManager: OkHttpClientManager
@@ -23,4 +24,4 @@ class InstaParkRepositoryImpl @Inject constructor(
         responseType = PhotoModel::class.java,
     )
 
-}
+}*/

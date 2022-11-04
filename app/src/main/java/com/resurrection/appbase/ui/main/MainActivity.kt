@@ -18,11 +18,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(
     @RequiresApi(Build.VERSION_CODES.N)
     override fun init(savedInstanceState: Bundle?) {
 
-        val fragment = PhotosFragment()
+ /*       val fragment = PhotosFragment()
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(binding.frameLayout.id, fragment)
         transaction.addToBackStack(null)
-        transaction.commit()
+        transaction.commit()*/
     }
 
 }
