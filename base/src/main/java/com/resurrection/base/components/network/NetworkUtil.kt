@@ -1,13 +1,16 @@
 package com.resurrection.base.components.network
 
 import com.resurrection.base.utils.Resource
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 
 
-@JvmName("getData1")
-fun <T> getData(request: suspend () -> Response<T>) =
-    flow { emit(getResourceByNetworkRequest { request() }) }
+fun  <T> resourcefulFlowOf(request: suspend () -> Response<T>): Flow<Resource<T>> {
+    return flow { emit(getResourceByNetworkRequest { request() }) }
+}
+
+
 
 fun <T> getData(request: suspend () -> T) =
     flow { emit(getResourceByDatabaseRequest { request() }) }
