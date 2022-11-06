@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Lifecycle.Event.*
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import com.resurrection.base.components.lifecycle.util.addObserver
 import com.resurrection.base.utils.BaseConstants
 import java.io.Serializable
 import javax.inject.Inject
@@ -15,11 +16,14 @@ class DataHolderManagerImpl : DataHolderManager {
 
     override val manager = Bundle()
 
-    override val lifecycleEventObserver get() = LifecycleEventObserver { source, event ->
-        when (event) {
-            ON_START -> putBoolean(BaseConstants.IS_FOREGROUND, true)
-            ON_STOP -> putBoolean(BaseConstants.IS_FOREGROUND, false)
-            else -> Unit
+
+    override fun init(lifecycle: Lifecycle) {
+        lifecycle.addObserver { source, event ->
+            when (event) {
+                ON_START -> putBoolean(BaseConstants.IS_FOREGROUND, true)
+                ON_STOP -> putBoolean(BaseConstants.IS_FOREGROUND, false)
+                else -> Unit
+            }
         }
     }
 
