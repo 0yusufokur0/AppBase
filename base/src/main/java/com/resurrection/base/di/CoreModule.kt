@@ -8,6 +8,7 @@ import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.dataholder.DataHolderManagerImpl
 import com.resurrection.base.components.datastore.DataStoreManager
 import com.resurrection.base.components.logger.LoggerManager
+import com.resurrection.base.components.logger.LoggerManagerImpl
 import com.resurrection.base.components.network.NetworkManager
 import com.resurrection.base.components.network.OkHttpClientManager
 import com.resurrection.base.components.security.BiometricManager
@@ -53,7 +54,7 @@ class CoreModule {
 
     @Singleton
     @Provides
-    fun provideLogger(@ApplicationContext context: Context) = LoggerManager(context)
+    fun provideLogger(@ApplicationContext context: Context): LoggerManager = LoggerManagerImpl(context)
 
     @Singleton
     @Provides

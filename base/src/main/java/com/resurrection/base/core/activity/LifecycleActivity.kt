@@ -16,13 +16,12 @@ abstract class LifecycleActivity @ContentView constructor(@LayoutRes layoutRes :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifecycle.addObserver(this)
-        initLifecycleObservers()
+        initComponents()
         init(savedInstanceState)
     }
 
-    private fun initLifecycleObservers(){
-        lifecycle.addObserver(dataHolder.lifecycleEventObserver)
+    private fun initComponents(){
+        dataHolder.init(lifecycle)
     }
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
