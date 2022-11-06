@@ -6,39 +6,21 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 
 
-fun  <T> resourcefulFlowOf(request: suspend () -> Response<T>): Flow<Resource<T>> {
-    return flow { emit(getResourceByNetworkRequest { request() }) }
-}
-
-
-
-fun <T> getData(request: suspend () -> T) =
-    flow { emit(getResourceByDatabaseRequest { request() }) }
-
-suspend fun <T> getResourceByNetworkRequest(request: suspend () -> Response<T>): Resource<T> {
-    try {
-        val response = request()
-        if (response.isSuccessful) {
-            response.body()?.apply {
-                return Resource.Success(this)
-            }
-        }
+@JvmName("resourcefulFlowOfRetrofit")
+fun <T> resourcefulFlowOfRemote(request: suspend () -> Response<T>) = flow {
+    val response = try {
+        Resource.Success(request.invoke().body())
     } catch (e: Exception) {
-        e.printStackTrace()
-        return Resource.Error(e)
+        Resource.Error(e)
     }
-    return Resource.Loading()
+    emit(response)
 }
-
-suspend fun <T> getResourceByDatabaseRequest(request: suspend () -> T): Resource<T> {
-    try {
-        val result = request()
-        result?.let {
-            return Resource.Success(result)
-        }
+@JvmName("resourcefulFlowOfRoom")
+fun <T> resourcefulFlowOfLocal(request: suspend () -> T) = flow {
+    val response = try {
+        Resource.Success(request.invoke())
     } catch (e: Exception) {
-        e.printStackTrace()
-        return Resource.Error(e)
+        Resource.Error(e)
     }
-    return Resource.Loading()
+    emit(response)
 }
