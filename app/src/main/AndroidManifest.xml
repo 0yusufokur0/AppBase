@@ -16,7 +16,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
-        android:name="com.resurrection.appbase.App"
+        android:name=".App"
         android:allowBackup="true"
 
         android:icon="@mipmap/ic_launcher"
@@ -27,7 +27,7 @@
         android:theme="@style/Theme.AppBase"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.resurrection.appbase.ui.main.activity.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
