@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 class PassengerFragment : CoreFragment(R.layout.fragment_passenger) {
 
     val binding by dataBinding<FragmentPassengerBinding>()
-    val viewModel by viewModel(PassengerViewModel::class.java)
+    val viewModel by viewModel<PassengerViewModel>()
 
     private val passengersAdapter = PassengersAdapter()
     override fun init(view: View, savedInstanceState: Bundle?) {

@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SampleListFragment : CoreFragment(R.layout.fragment_sample_list) {
 
     val binding by dataBinding<FragmentSampleListBinding>()
-    val viewModel by viewModel(SampleListViewModel::class.java)
+    val viewModel by viewModel<SampleListViewModel>()
 
     private val sampleListAdapter = SamplesRecyclerViewAdapter()
 

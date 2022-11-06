@@ -13,7 +13,7 @@ import javax.inject.Inject
 class LoggerMonitorActivity : CoreActivity(R.layout.activity_logger_monitor){
 
     val binding by dataBinding<ActivityLoggerMonitorBinding>()
-    val viewModel by viewModel(LoggerMonitorViewModel::class.java)
+    val viewModel by viewModel<LoggerMonitorViewModel>()
 
     @Inject
     lateinit var analyticsLogger: AnalyticsLoggerManagerImpl

@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 class CheeseFragment : CoreFragment(R.layout.fragment_cheese,) {
 
     val binding by dataBinding<FragmentCheeseBinding>()
-    val viewModel by viewModel(CheeseViewModel::class.java)
+    val viewModel by viewModel<CheeseViewModel>()
 
     override fun init(view: View, savedInstanceState: Bundle?) {
         val adapter = CheeseAdapter()

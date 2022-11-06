@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : CoreActivity(R.layout.activity_main) {
     val binding by dataBinding<ActivityMainBinding>()
-    val viewModel by viewModel(MainActivityViewModel::class.java)
+    val viewModel by viewModel<MainActivityViewModel>()
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun init(savedInstanceState: Bundle?) {

@@ -7,22 +7,19 @@ import com.resurrection.base.core.activity.CoreActivity
 import com.resurrection.base.core.fragment.CoreFragment
 import com.resurrection.base.core.viewmodel.BaseViewModel
 
-inline fun <VM : BaseViewModel> CoreActivity.viewModel(
-    viewModelClass: Class<VM>,
+inline fun <reified VM : BaseViewModel> CoreActivity.viewModel(
     crossinline storeProducer: () -> ViewModelStore = { viewModelStore },
     crossinline factoryProducer: (() -> ViewModelProvider.Factory) = { defaultViewModelProviderFactory }
-) = activityComponent { ViewModelProvider(storeProducer(), factoryProducer())[viewModelClass] }
+) = activityComponent { ViewModelProvider(storeProducer(), factoryProducer())[VM::class.java] }
 
-inline fun <VM : BaseViewModel> CoreFragment.viewModel(
-    viewModelClass: Class<VM>,
+inline fun <reified VM : BaseViewModel> CoreFragment.viewModel(
     noinline ownerProducer: () -> ViewModelStoreOwner = { this },
     crossinline factoryProducer: (() -> ViewModelProvider.Factory) = {
         (this as? HasDefaultViewModelProviderFactory)?.defaultViewModelProviderFactory ?: defaultViewModelProviderFactory
     }
-) = fragmentComponent { ViewModelProvider(ownerProducer(), factoryProducer())[viewModelClass] }
+) = fragmentComponent { ViewModelProvider(ownerProducer(), factoryProducer())[VM::class.java] }
 
-inline fun <VM : BaseViewModel> CoreFragment.activityViewModel(
-    viewModelClass: Class<VM>,
+inline fun <reified VM : BaseViewModel> CoreFragment.activityViewModel(
     crossinline ownerProducer: () -> ViewModelStore = { requireActivity().viewModelStore },
     crossinline factoryProducer: (() -> ViewModelProvider.Factory) = { requireActivity().defaultViewModelProviderFactory }
-) = fragmentComponent { ViewModelProvider(ownerProducer(), factoryProducer())[viewModelClass] }
+) = fragmentComponent { ViewModelProvider(ownerProducer(), factoryProducer())[VM::class.java] }

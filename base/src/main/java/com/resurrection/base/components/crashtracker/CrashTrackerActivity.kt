@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CrashTrackerActivity : CoreActivity(R.layout.activity_crash_tracker) {
 
     val binding by dataBinding<ActivityCrashTrackerBinding>()
-    val viewmodel by viewModel(CrashTrackerViewModel::class.java)
+    val viewModel by viewModel<CrashTrackerViewModel>()
 
     override fun init(savedInstanceState: Bundle?) {
 

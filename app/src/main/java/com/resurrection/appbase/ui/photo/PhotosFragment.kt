@@ -19,7 +19,7 @@ import kotlin.reflect.jvm.isAccessible
 class PhotosFragment : CoreFragment(R.layout.fragment_photos) {
 
     val binding by dataBinding<FragmentPhotosBinding>()
-    val viewModel by viewModel(PhotosViewModel::class.java)
+    val viewModel by viewModel<PhotosViewModel>()
 
     override fun init(view: View, savedInstanceState: Bundle?) {
 /*        viewModel.getPhotos()*/

@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DogFragment:CoreFragment(R.layout.fragment_dog) {
 
     val binding by dataBinding<FragmentDogBinding>()
-    val viewModel by viewModel(DogViewModel::class.java)
+    val viewModel by viewModel<DogViewModel>()
 
 
     override fun init(view: View, savedInstanceState: Bundle?) {
