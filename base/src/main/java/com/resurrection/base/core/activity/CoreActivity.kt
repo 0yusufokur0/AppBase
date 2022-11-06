@@ -42,26 +42,19 @@ abstract class CoreActivity @ContentView constructor(@LayoutRes val layoutRes: I
 
     @Inject
     lateinit var alertDialogManager: AlertDialogManager
-
-    @Inject
-    lateinit var securityManager: SecurityManager
-
-    @Inject
-    lateinit var biometricManager: BiometricManager
-
-    @Inject
-    lateinit var typeConverter: TypeConverter
-    // endregion
-
-    // region constructors
-
     // endregion
 
     abstract fun init(savedInstanceState: Bundle?)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initComponents()
         init(savedInstanceState)
+    }
+
+    private fun initComponents(){
+        dataHolder.init(lifecycle)
+        loggerManager.initActivity(lifecycle,localClassName)
     }
 
     inline fun <T> LiveData<Resource<T>>.observeData(

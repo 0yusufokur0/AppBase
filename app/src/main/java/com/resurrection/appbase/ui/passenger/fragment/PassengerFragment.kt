@@ -9,15 +9,19 @@ import com.resurrection.appbase.databinding.FragmentPassengerBinding
 import com.resurrection.appbase.ui.passenger.viewmodel.PassengerViewModel
 import com.resurrection.appbase.ui.passenger.adapter.LoadStateAdapter
 import com.resurrection.appbase.ui.passenger.adapter.PassengersAdapter
-import com.resurrection.base.core.fragment.BaseFragment
+import com.resurrection.base.core.fragment.CoreFragment
+import com.resurrection.base.extensions.delegated.viewdatabinding.dataBinding
+import com.resurrection.base.extensions.delegated.viewmodel.viewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PassengerFragment : BaseFragment<FragmentPassengerBinding, PassengerViewModel>(
-    R.layout.fragment_passenger, PassengerViewModel::class.java
-) {
+class PassengerFragment : CoreFragment(R.layout.fragment_passenger) {
+
+    val binding by dataBinding<FragmentPassengerBinding>()
+    val viewModel by viewModel(PassengerViewModel::class.java)
+
     private val passengersAdapter = PassengersAdapter()
     override fun init(view: View, savedInstanceState: Bundle?) {
         binding.recyclerView.apply {

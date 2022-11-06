@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Lifecycle.Event.*
 import com.resurrection.base.components.lifecycle.util.addObserver
-import com.resurrection.base.core.fragment.LifecycleFragment
+import com.resurrection.base.core.fragment.CoreFragment
 import com.resurrection.base.utils.createFile
 import com.resurrection.base.utils.createFolder
 import com.resurrection.base.utils.fragment.FragmentLifecycleEvent
@@ -49,7 +49,7 @@ class LoggerManagerImpl(context: Context): LoggerManager{
         }
     }
 
-    override fun initFragment(lifecycleFragment: LifecycleFragment, fragmentName: String) {
+    override fun initFragment(lifecycleFragment: CoreFragment, fragmentName: String) {
         this.fragmentName = fragmentName
         lifecycleFragment.addObserver { owner, event ->
             when (event){

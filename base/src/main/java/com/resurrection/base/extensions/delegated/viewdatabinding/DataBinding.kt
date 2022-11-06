@@ -7,19 +7,19 @@ import androidx.databinding.DataBindingUtil.*
 import androidx.databinding.ViewDataBinding
 import com.resurrection.base.components.lifecycle.util.activityComponent
 import com.resurrection.base.components.lifecycle.util.fragmentComponent
-import com.resurrection.base.core.activity.LifecycleActivity
-import com.resurrection.base.core.fragment.LifecycleFragment
+import com.resurrection.base.core.activity.CoreActivity
+import com.resurrection.base.core.fragment.CoreFragment
 
-fun <VDB : ViewDataBinding> LifecycleActivity.dataBinding(@LayoutRes layoutRes: Int) =
+fun <VDB : ViewDataBinding> CoreActivity.dataBinding(@LayoutRes layoutRes: Int) =
     activityComponent<VDB> { setContentView(this, layoutRes) }
 
-fun <VDB : ViewDataBinding> LifecycleActivity.dataBinding() =
+fun <VDB : ViewDataBinding> CoreActivity.dataBinding() =
     activityComponent<VDB> { setContentView(this, layoutRes) }
 
-fun <VDB : ViewDataBinding> LifecycleFragment.dataBinding() =
+fun <VDB : ViewDataBinding> CoreFragment.dataBinding() =
     fragmentComponent<VDB> { inflate(layoutInflater, layoutRes, view?.parent as ViewGroup?, false) }
 
-fun <VDB : ViewDataBinding> LifecycleFragment.dataBinding(@LayoutRes layoutRes: Int) =
+fun <VDB : ViewDataBinding> CoreFragment.dataBinding(@LayoutRes layoutRes: Int) =
     fragmentComponent<VDB> { inflate(layoutInflater, layoutRes, view?.parent as ViewGroup?, false) }
 
 fun <VDB : ViewDataBinding> View.dataBinding() = lazy { bind<VDB>(this) }

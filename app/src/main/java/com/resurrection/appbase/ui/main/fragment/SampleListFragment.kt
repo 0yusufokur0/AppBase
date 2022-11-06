@@ -6,14 +6,18 @@ import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentSampleListBinding
 import com.resurrection.appbase.ui.main.adapter.SamplesRecyclerViewAdapter
 import com.resurrection.appbase.ui.main.viewmodel.SampleListViewModel
-import com.resurrection.base.core.fragment.BaseFragment
+import com.resurrection.base.core.fragment.CoreFragment
+import com.resurrection.base.extensions.delegated.viewdatabinding.dataBinding
+import com.resurrection.base.extensions.delegated.viewmodel.viewModel
 import com.resurrection.base.extensions.init
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SampleListFragment : BaseFragment<FragmentSampleListBinding,SampleListViewModel>(
-    R.layout.fragment_sample_list,SampleListViewModel::class.java
-) {
+class SampleListFragment : CoreFragment(R.layout.fragment_sample_list) {
+
+    val binding by dataBinding<FragmentSampleListBinding>()
+    val viewModel by viewModel(SampleListViewModel::class.java)
+
     private val sampleListAdapter = SamplesRecyclerViewAdapter()
 
     override fun init(view: View, savedInstanceState: Bundle?) {

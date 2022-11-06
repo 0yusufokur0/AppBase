@@ -1,12 +1,12 @@
 package com.resurrection.base.components.logger
 
 import androidx.lifecycle.Lifecycle
-import com.resurrection.base.core.fragment.LifecycleFragment
+import com.resurrection.base.core.fragment.CoreFragment
 
 interface LoggerManager {
     fun initApp(saveState: Boolean)
     fun initActivity(lifecycle: Lifecycle,activityName: String)
-    fun initFragment(lifecycleFragment: LifecycleFragment,fragmentName: String)
+    fun initFragment(lifecycleFragment: CoreFragment, fragmentName: String)
 
     fun d(message: String)
     fun e(message: String)

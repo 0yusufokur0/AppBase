@@ -11,15 +11,19 @@ import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.FragmentCheeseBinding
 import com.resurrection.appbase.ui.cheese.viewmodel.CheeseViewModel
 import com.resurrection.appbase.ui.cheese.adapter.CheeseAdapter
-import com.resurrection.base.core.fragment.BaseFragment
+import com.resurrection.base.core.fragment.CoreFragment
+import com.resurrection.base.extensions.delegated.viewdatabinding.dataBinding
+import com.resurrection.base.extensions.delegated.viewmodel.viewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CheeseFragment : BaseFragment<FragmentCheeseBinding, CheeseViewModel>(
-    R.layout.fragment_cheese, CheeseViewModel::class.java
-) {
+class CheeseFragment : CoreFragment(R.layout.fragment_cheese,) {
+
+    val binding by dataBinding<FragmentCheeseBinding>()
+    val viewModel by viewModel(CheeseViewModel::class.java)
+
     override fun init(view: View, savedInstanceState: Bundle?) {
         val adapter = CheeseAdapter()
 
