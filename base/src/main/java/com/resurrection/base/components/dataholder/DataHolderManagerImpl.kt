@@ -2,12 +2,26 @@ package com.resurrection.base.components.dataholder
 
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Lifecycle.Event.*
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import com.resurrection.base.utils.BaseConstants
 import java.io.Serializable
 import javax.inject.Inject
 
-class DataHolderManagerImpl: DataHolderManager {
+class DataHolderManagerImpl : DataHolderManager {
 
     override val manager = Bundle()
+
+    override val lifecycleEventObserver get() = LifecycleEventObserver { source, event ->
+        when (event) {
+            ON_START -> putBoolean(BaseConstants.IS_FOREGROUND, true)
+            ON_STOP -> putBoolean(BaseConstants.IS_FOREGROUND, false)
+            else -> Unit
+        }
+    }
 
     override fun remove(key: String) = manager.remove(key)
     override fun contains(key: String) = manager.containsKey(key)

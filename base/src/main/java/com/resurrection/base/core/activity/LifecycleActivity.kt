@@ -15,15 +15,19 @@ abstract class LifecycleActivity @ContentView constructor(@LayoutRes layoutRes :
     abstract override fun init(savedInstanceState: Bundle?)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        callOnCreateSuper(savedInstanceState)
+        super.onCreate(savedInstanceState)
         lifecycle.addObserver(this)
+        initLifecycleObservers()
         init(savedInstanceState)
+    }
+
+    private fun initLifecycleObservers(){
+        lifecycle.addObserver(dataHolder.lifecycleEventObserver)
     }
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         when (event) {
             Lifecycle.Event.ON_CREATE -> {
-                dataHolder.putBoolean(BaseConstants.IS_FOREGROUND, true)
                 loggerManager.activityOnCreate()
                 loggerManager.initActivity(localClassName)
                 biometricManager.init(this)

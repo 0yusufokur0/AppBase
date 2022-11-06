@@ -2,6 +2,8 @@ package com.resurrection.base.components.dataholder
 
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleObserver
 import java.io.Serializable
 
 /**
@@ -15,6 +17,8 @@ import java.io.Serializable
 
 
 interface DataHolderManager {
+
+    abstract val lifecycleEventObserver: LifecycleEventObserver
 
     val manager: Bundle
 

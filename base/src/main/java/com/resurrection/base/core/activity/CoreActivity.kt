@@ -60,12 +60,8 @@ abstract class CoreActivity @ContentView constructor(@LayoutRes val layoutRes: I
     abstract fun init(savedInstanceState: Bundle?)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        callOnCreateSuper(savedInstanceState)
-        init(savedInstanceState)
-    }
-
-    fun callOnCreateSuper(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
+        init(savedInstanceState)
     }
 
     inline fun <T> LiveData<Resource<T>>.observeData(

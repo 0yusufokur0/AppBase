@@ -18,7 +18,7 @@ abstract class BaseActivity<VDB:ViewDataBinding, VM : BaseViewModel>(
     abstract override fun init(savedInstanceState: Bundle?)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        callOnCreateSuper(savedInstanceState)
+        super.onCreate(savedInstanceState)
         setContentView(binding.root)
         init(savedInstanceState)
     }
