@@ -67,40 +67,40 @@ class LoggerManagerImpl(context: Context): LoggerManager{
     }
 
     // region log
-    fun d(message: String) {
+    override fun d(message: String) {
         if (saveState) _logList.add(message)
         Log.d(tag, message)
     }
 
-    fun e(message: String) {
+    override fun e(message: String) {
         if (saveState) _logList.add(message)
         Log.e(tag, message)
     }
 
-    fun i(message: String) {
+    override fun i(message: String) {
         if (saveState) _logList.add(message)
         Log.i(tag, message)
     }
 
-    fun v(message: String) {
+    override fun v(message: String) {
         if (saveState) _logList.add(message)
         Log.v(tag, message)
     }
 
-    fun w(message: String) {
+    override fun w(message: String) {
         if (saveState) _logList.add(message)
         Log.w(tag, message)
     }
 
-    fun wtf(message: String) {
+    override fun wtf(message: String) {
         if (saveState) _logList.add(message)
         Log.wtf(tag, message)
     }
 
-    fun clearLogList() = _logList.clear()
+    override fun clearLogList() = _logList.clear()
     // endregion
 
-    fun record() {
+    override fun record() {
         saveState = true
         activityOnCreate()
         _logList.clear()
