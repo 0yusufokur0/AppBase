@@ -1,4 +1,4 @@
-package com.resurrection.base.di
+package com.resurrection.appbase.di
 
 import android.content.Context
 import com.resurrection.base.components.appstate.AppState
