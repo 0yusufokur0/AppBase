@@ -28,19 +28,18 @@ class SampleListFragment : CoreFragment(R.layout.fragment_sample_list) {
 
     private fun initViews() = binding.samplesRecyclerView.init(sampleListAdapter)
 
-    private fun iniObservers(){
+    private fun iniObservers() {
         viewModel.samplesLiveData.observeData(
             success = {
                 loadingIndicator.hide()
                 it?.let { samples ->
                     sampleListAdapter.addAll(samples)
                 }
-
             }, loading = {
-                loadingIndicator.show()
-            }, error = {
-                loadingIndicator.hide()
-            }
+            loadingIndicator.show()
+        }, error = {
+            loadingIndicator.hide()
+        }
         )
     }
 

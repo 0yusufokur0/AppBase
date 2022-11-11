@@ -3,8 +3,6 @@ package com.resurrection.base.components.dataholder
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleObserver
 import java.io.Serializable
 
 /**
@@ -16,12 +14,11 @@ import java.io.Serializable
  * @see <a href="https://developer.android.com/reference/android/os/Bundle.html"> Bundle </a>
  * */
 
-
 interface DataHolderManager {
 
     val manager: Bundle
 
-    fun init(lifecycle:Lifecycle)
+    fun init(lifecycle: Lifecycle)
 
     /**
      * Removes any entry with the given key from this bundle.
@@ -213,7 +210,6 @@ interface DataHolderManager {
      * */
     fun <T : Parcelable> getParcelableArrayList(key: String): ArrayList<T>?
 
-
     /**
      * Insert a int array value into main bundle with the given key.
      * If key is exists in the main bundle, it value will be replaced.
@@ -258,25 +254,4 @@ interface DataHolderManager {
      * @return a ArrayList<CharSequence> or null
      * */
     fun getCharSequenceArrayList(key: String): ArrayList<CharSequence>?
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -16,7 +16,6 @@ import com.resurrection.base.components.security.CryptographyManager
 import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManagerImpl
-import com.resurrection.base.components.widget.AppLoadingIndicator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -74,11 +73,10 @@ class CoreModule {
 
     @Singleton
     @Provides
-    fun provideDataStoreManager(@ApplicationContext context: Context):DataStoreManager = DataStoreManagerImpl(context)
+    fun provideDataStoreManager(@ApplicationContext context: Context): DataStoreManager = DataStoreManagerImpl(context)
 
     @Singleton
     @Provides
     fun provideOkHttpClientManager(typeConverter: TypeConverter) =
         OkHttpClientManager(typeConverter)
-
 }

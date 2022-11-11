@@ -6,5 +6,7 @@ import com.google.android.material.checkbox.MaterialCheckBox
 import com.resurrection.base.R
 
 class AppCheckBox @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.checkboxStyle
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = R.attr.checkboxStyle
 ) : MaterialCheckBox(context, attrs, defStyleAttr)

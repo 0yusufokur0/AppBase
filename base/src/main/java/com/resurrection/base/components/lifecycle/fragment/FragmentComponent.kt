@@ -13,7 +13,7 @@ class FragmentComponent<T>(
 ) : FragmentLifecycleEventObserver, ReadOnlyProperty<CoreFragment, T> {
 
     private var cachedValue: T? = null
-    private var cachedRef:CoreFragment? = null
+    private var cachedRef: CoreFragment? = null
 
     override fun getValue(thisRef: CoreFragment, property: KProperty<*>): T {
         cachedValue ?: run {

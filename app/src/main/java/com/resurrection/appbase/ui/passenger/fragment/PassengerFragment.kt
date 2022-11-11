@@ -39,6 +39,4 @@ class PassengerFragment : CoreFragment(R.layout.fragment_passenger) {
             }
         }
     }
-
-
 }

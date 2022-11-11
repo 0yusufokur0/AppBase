@@ -6,14 +6,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-class BaseAdapter<Model,VDB:ViewDataBinding>(val layoutResource:Int): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class BaseAdapter<Model, VDB : ViewDataBinding>(val layoutResource: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val currentList = arrayListOf<Model>()
     private lateinit var binding: VDB
 
-    private var bindViewFunction :(VDB,Model) -> Unit = { viewDataBinding,model->  }
+    private var bindViewFunction: (VDB, Model) -> Unit = { viewDataBinding, model -> }
 
-    fun setViewBindFun(bind:(VDB,Model) -> Unit){
+    fun setViewBindFun(bind: (VDB, Model) -> Unit) {
         bindViewFunction = bind
     }
 
@@ -25,20 +25,19 @@ class BaseAdapter<Model,VDB:ViewDataBinding>(val layoutResource:Int): RecyclerVi
             false
         )
 
-        return object :RecyclerView.ViewHolder(binding.root){ }
+        return object : RecyclerView.ViewHolder(binding.root) { }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val currentItem = currentList.get(position)
-        bindViewFunction.invoke(binding,currentItem)
+        bindViewFunction.invoke(binding, currentItem)
     }
 
     override fun getItemCount(): Int = currentList.size
 
-    fun setList(list:ArrayList<Model>){
+    fun setList(list: ArrayList<Model>) {
         currentList.clear()
         currentList.addAll(list)
         notifyDataSetChanged()
     }
-
 }

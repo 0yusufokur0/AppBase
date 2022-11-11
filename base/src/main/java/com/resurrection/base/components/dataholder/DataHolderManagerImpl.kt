@@ -2,20 +2,15 @@ package com.resurrection.base.components.dataholder
 
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Lifecycle.Event.*
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleOwner
 import com.resurrection.base.components.lifecycle.util.addObserver
 import com.resurrection.base.utils.BaseConstants
 import java.io.Serializable
-import javax.inject.Inject
 
 class DataHolderManagerImpl : DataHolderManager {
 
     override val manager = Bundle()
-
 
     override fun init(lifecycle: Lifecycle) {
         lifecycle.addObserver { source, event ->
@@ -112,13 +107,12 @@ class DataHolderManagerImpl : DataHolderManager {
     override fun getCharSequenceArrayList(key: String): ArrayList<CharSequence>? =
         handleGet(key, null, manager::getCharSequenceArrayList)
 
-
     private fun <T> handleGet(key: String, defValue: T, getValue: (String) -> T?): T {
 
         if (contains(key)) {
             getValue(key)?.let {
                 return it
-            }?:run {
+            } ?: run {
                 return defValue
             }
         } else {

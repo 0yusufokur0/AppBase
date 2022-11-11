@@ -1,6 +1,5 @@
 package com.resurrection.appbase.di.components.viewmodel
 
-import com.resurrection.appbase.di.components.usecase.UseCaseComponent
 import dagger.hilt.DefineComponent
 import dagger.hilt.android.components.ViewModelComponent
 

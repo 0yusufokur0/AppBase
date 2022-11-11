@@ -1,6 +1,5 @@
 package com.resurrection.appbase.dog.ui
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.resurrection.appbase.dog.data.model.DogModel
 import com.resurrection.appbase.dog.usecase.GetDogUseCase
@@ -16,9 +15,7 @@ class DogViewModel @Inject constructor(
 
     val dog = liveData<Resource<DogModel>>()
 
-    fun getDog() =  dog.fetchData(
+    fun getDog() = dog.fetchData(
         request = dogUseCase::invoke
     )
-
-
 }

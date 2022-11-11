@@ -10,9 +10,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ActivityContext
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityScoped
-import javax.inject.Singleton
 
 @Module
 @InstallIn(ActivityComponent::class)
@@ -20,10 +18,9 @@ class ActivityModule {
 
     @Provides
     @ActivityScoped
-     fun provideLoadingIndicator(@ActivityContext context: Context) : LoadingIndicator = LoadingIndicatorImpl(context)
+    fun provideLoadingIndicator(@ActivityContext context: Context): LoadingIndicator = LoadingIndicatorImpl(context)
 
     @Provides
     @ActivityScoped
-     fun provideAlertDialogManager(@ActivityContext context: Context) : AlertDialogManager = AlertDialogManagerImpl(context)
-
+    fun provideAlertDialogManager(@ActivityContext context: Context): AlertDialogManager = AlertDialogManagerImpl(context)
 }

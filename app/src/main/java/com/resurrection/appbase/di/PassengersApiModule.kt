@@ -19,19 +19,18 @@ class PassengersApiModule {
         private const val BASE_URL = "https://api.instantwebtools.net/v1/"
     }
 
-
     @Provides
     @Singleton
     fun providePassengersApiService(): PassengersApiService = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .client(OkHttpClient.Builder().also { client ->
-            val logging = HttpLoggingInterceptor()
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-            client.addInterceptor(logging)
-        }.build())
+        .client(
+            OkHttpClient.Builder().also { client ->
+                val logging = HttpLoggingInterceptor()
+                logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+                client.addInterceptor(logging)
+            }.build()
+        )
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(PassengersApiService::class.java)
-
-
 }

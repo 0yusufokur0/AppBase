@@ -1,9 +1,6 @@
 package com.resurrection.base.utils
 
-import android.util.Log
 import kotlin.reflect.full.declaredMemberFunctions
-import kotlin.reflect.full.functions
-import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
 
@@ -26,25 +23,25 @@ import kotlin.reflect.jvm.isAccessible
     return isValid
 }*/
 
-fun checkAreNotNull(vararg any:Any?): Boolean {
+fun checkAreNotNull(vararg any: Any?): Boolean {
     any.forEach {
-        it?: run {
+        it ?: run {
             return false
         }
     }
     return true
 }
 
-fun Any?.isNotNull():Boolean{
+fun Any?.isNotNull(): Boolean {
     this?.let {
         return true
-    }?: run {
+    } ?: run {
         return false
     }
-}fun Any?.isNull():Boolean{
+} fun Any?.isNull(): Boolean {
     this?.let {
         return false
-    }?: run {
+    } ?: run {
         return true
     }
 }
@@ -79,7 +76,6 @@ inline fun <reified T : Any, R> T.getPrivateProperty(name: String): R? =
         ?.apply { isAccessible = true }
         ?.get(this) as R?
 
-
 inline fun <reified T> T.callPrivateFunctionWithIndex(index: Int, vararg args: Any?): Any? {
     return T::class
         .declaredMemberFunctions
@@ -88,7 +84,7 @@ inline fun <reified T> T.callPrivateFunctionWithIndex(index: Int, vararg args: A
         .call(*args)
 }
 
-inline fun <reified T:Any> T.getPrivatePropertyValueByIndex(index: Int): Any? {
+inline fun <reified T : Any> T.getPrivatePropertyValueByIndex(index: Int): Any? {
     return T::class
         .memberProperties
         .toList()[index]
@@ -96,21 +92,21 @@ inline fun <reified T:Any> T.getPrivatePropertyValueByIndex(index: Int): Any? {
         .get(this)
 }
 
-inline fun <reified  T> T.getFunctionIndexByName(name:String): Int? {
-    val functionList =  T::class.declaredMemberFunctions
+inline fun <reified T> T.getFunctionIndexByName(name: String): Int? {
+    val functionList = T::class.declaredMemberFunctions
     functionList.forEachIndexed { index, kFunction ->
-        if (kFunction.name == name){
+        if (kFunction.name == name) {
             return index
         }
     }
     return null
 }
 
-inline fun <reified  T:Any> T.getPropertyIndexByName(name:String): Int? {
+inline fun <reified T : Any> T.getPropertyIndexByName(name: String): Int? {
 
-    val propertyList =  T::class.memberProperties
+    val propertyList = T::class.memberProperties
     propertyList.forEachIndexed { index, kProperty ->
-        if (kProperty.name == name){
+        if (kProperty.name == name) {
             return index
         }
     }

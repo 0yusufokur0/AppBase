@@ -5,5 +5,5 @@ import com.resurrection.base.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface SamplesRepository {
-    suspend fun getSampleList():Flow<Resource<List<SampleModel>>>
+    suspend fun getSampleList(): Flow<Resource<List<SampleModel>>>
 }

@@ -7,7 +7,6 @@ import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.network.NetworkManager
 import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.utils.BaseConstants
-import javax.inject.Inject
 
 class AppState(
     private val context: Context,

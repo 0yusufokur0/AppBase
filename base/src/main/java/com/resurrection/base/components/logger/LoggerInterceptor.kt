@@ -7,7 +7,6 @@ import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
 import java.nio.charset.StandardCharsets
 
-
 open class LoggerInterceptor(private val loggerManager: LoggerManager) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -41,31 +40,30 @@ open class LoggerInterceptor(private val loggerManager: LoggerManager) : Interce
 
         val requestLogString =
             "\n" +
-                    "\t URL: $requestUrl \n" +
-                    "\t Method: $requestMethod \n" +
-                    "\t Headers: $requestHeaders \n" +
-                    "\t Body: $requestBody \n"
+                "\t URL: $requestUrl \n" +
+                "\t Method: $requestMethod \n" +
+                "\t Headers: $requestHeaders \n" +
+                "\t Body: $requestBody \n"
 
         val responseLogString =
             "\n" +
-                    "\t Headers: $responseHeaders \n" +
-                    "\t Message: $responseMessage \n" +
-                    "\t Code: $responseCode \n" +
-                    "\t Body: $responseBody \n"
+                "\t Headers: $responseHeaders \n" +
+                "\t Message: $responseMessage \n" +
+                "\t Code: $responseCode \n" +
+                "\t Body: $responseBody \n"
 
         val resultLogString =
             "New Request Started... \n" +
-                    "┌────── Request ────────────────────────────────────────────────────────────────────────" +
-                    "\n" +
-                    requestTime +
-                    requestLogString +
-                    "└───────────────────────────────────────────────────────────────────────────────────────" +
-                    "\n" +
-                    "┌────── Response ───────────────────────────────────────────────────────────────────────" +
-                    responseLogString +
-                    "└───────────────────────────────────────────────────────────────────────────────────────"
+                "┌────── Request ────────────────────────────────────────────────────────────────────────" +
+                "\n" +
+                requestTime +
+                requestLogString +
+                "└───────────────────────────────────────────────────────────────────────────────────────" +
+                "\n" +
+                "┌────── Response ───────────────────────────────────────────────────────────────────────" +
+                responseLogString +
+                "└───────────────────────────────────────────────────────────────────────────────────────"
 
         loggerManager.d(resultLogString)
     }
-
 }

@@ -10,7 +10,7 @@ import com.resurrection.base.extensions.delegated.viewdatabinding.dataBinding
 import com.resurrection.base.extensions.delegated.viewmodel.viewModel
 import javax.inject.Inject
 
-class LoggerMonitorActivity : CoreActivity(R.layout.activity_logger_monitor){
+class LoggerMonitorActivity : CoreActivity(R.layout.activity_logger_monitor) {
 
     val binding by dataBinding<ActivityLoggerMonitorBinding>()
     val viewModel by viewModel<LoggerMonitorViewModel>()
@@ -19,8 +19,5 @@ class LoggerMonitorActivity : CoreActivity(R.layout.activity_logger_monitor){
     lateinit var analyticsLogger: AnalyticsLoggerManagerImpl
 
     override fun init(savedInstanceState: Bundle?) {
-
     }
-
-
 }

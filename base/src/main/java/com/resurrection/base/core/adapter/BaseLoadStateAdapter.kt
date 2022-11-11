@@ -14,7 +14,6 @@ abstract class BaseLoadStateAdapter<T : ViewDataBinding>(private val layoutResou
 
     abstract fun bindLoadState(binding: T, loadState: LoadState)
 
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         loadState: LoadState
@@ -32,7 +31,6 @@ abstract class BaseLoadStateAdapter<T : ViewDataBinding>(private val layoutResou
     override fun onBindViewHolder(holder: BaseLoadStateViewHolder<T>, loadState: LoadState) =
         holder.bind(loadState)
 
-
     class BaseLoadStateViewHolder<T : ViewDataBinding>(
         private val binding: T,
         private val bindLoadState: ((binding: T, loadState: LoadState) -> Unit)?
@@ -41,6 +39,4 @@ abstract class BaseLoadStateAdapter<T : ViewDataBinding>(private val layoutResou
             bindLoadState?.invoke(binding, loadState)
         }
     }
-
-
 }

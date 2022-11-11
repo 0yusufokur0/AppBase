@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class CheeseViewModel @Inject constructor(private var cheeseDao: CheeseDao) : BaseViewModel() {
 
@@ -23,7 +22,8 @@ class CheeseViewModel @Inject constructor(private var cheeseDao: CheeseDao) : Ba
         CoroutineScope(Dispatchers.IO).launch {
             cheeseDao.deleteAllCheese()
             cheeseDao.insert(
-                CHEESE_DATA.map { Cheese(id = 0, name = it) })
+                CHEESE_DATA.map { Cheese(id = 0, name = it) }
+            )
         }
     }
 
@@ -55,7 +55,6 @@ class CheeseViewModel @Inject constructor(private var cheeseDao: CheeseDao) : Ba
                 }
         }
         .cachedIn(viewModelScope)
-
 
     fun insert(text: CharSequence) = CoroutineScope(Dispatchers.IO).launch {
         cheeseDao.insert(Cheese(id = 0, name = text.toString()))

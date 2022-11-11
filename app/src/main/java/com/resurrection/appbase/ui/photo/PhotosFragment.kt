@@ -7,13 +7,7 @@ import com.resurrection.appbase.databinding.FragmentPhotosBinding
 import com.resurrection.base.core.fragment.CoreFragment
 import com.resurrection.base.extensions.delegated.viewdatabinding.dataBinding
 import com.resurrection.base.extensions.delegated.viewmodel.viewModel
-import com.resurrection.base.utils.getFunctionIndexByName
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.runBlocking
-import kotlin.reflect.full.declaredMemberFunctions
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.isAccessible
-
 
 @AndroidEntryPoint
 class PhotosFragment : CoreFragment(R.layout.fragment_photos) {
@@ -33,6 +27,5 @@ class PhotosFragment : CoreFragment(R.layout.fragment_photos) {
 /*
         binding.textView.text = viewModel.photos.getFunctionIndexByName("postValue").toString()
 */
-
     }
 }

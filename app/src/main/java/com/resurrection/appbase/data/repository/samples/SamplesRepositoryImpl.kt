@@ -11,5 +11,4 @@ class SamplesRepositoryImpl @Inject constructor(
 ) : SamplesRepository {
 
     override suspend fun getSampleList() = flow { emit(Resource.Success(samplesDummyData)) }
-
 }

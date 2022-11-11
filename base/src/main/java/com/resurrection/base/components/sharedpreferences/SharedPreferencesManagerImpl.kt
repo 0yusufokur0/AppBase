@@ -6,7 +6,6 @@ import com.resurrection.base.components.typeconverter.TypeConverter
 import java.lang.Double.doubleToRawLongBits
 import java.lang.Double.longBitsToDouble
 
-
 class SharedPreferencesManagerImpl(
     context: Context,
     private val typeConverter: TypeConverter
@@ -87,6 +86,4 @@ class SharedPreferencesManagerImpl(
 
     override fun <Model> getObject(key: String, clazz: Class<Model>): Model? =
         manager.getString(key, null)?.let { typeConverter.fromJson(it, clazz) }
-
-
 }

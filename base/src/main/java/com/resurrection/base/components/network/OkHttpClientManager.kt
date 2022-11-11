@@ -9,7 +9,6 @@ import okhttp3.Headers.Companion.toHeaders
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
-import javax.inject.Inject
 
 class OkHttpClientManager(
     val typeConverter: TypeConverter
@@ -23,7 +22,6 @@ class OkHttpClientManager(
 
     private lateinit var okHttpClient: OkHttpClient
     private lateinit var baseUrl: String
-
 
     fun init(okHttpClient: OkHttpClient, baseUrl: String) {
         this.baseUrl = baseUrl

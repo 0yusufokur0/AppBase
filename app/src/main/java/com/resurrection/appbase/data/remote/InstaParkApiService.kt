@@ -20,5 +20,4 @@ interface InstaParkApiService {
 
     @GET("users/{id}")
     suspend fun getUser(@Path("id") id: String): Response<UsersModelItem>
-
 }

@@ -12,8 +12,8 @@ class SamplesRecyclerViewAdapter : BaseAdapter<SampleModel, ItemSampleBinding>(
     layoutResource = R.layout.item_sample,
     itemId = BR.sampleItem
 ) {
-    private var lastExpandedItemBinding:ItemSampleBinding? = null
-    private var lastExpandedItemModel:SampleModel? = null
+    private var lastExpandedItemBinding: ItemSampleBinding? = null
+    private var lastExpandedItemModel: SampleModel? = null
     override fun bindItem(binding: ItemSampleBinding, item: SampleModel) = with(binding) {
         binding.title.text = item.title
         childItemRecyclerView.adapter = SampleChildRecyclerViewAdapter().apply {
@@ -40,5 +40,4 @@ class SamplesRecyclerViewAdapter : BaseAdapter<SampleModel, ItemSampleBinding>(
             enableTransitionType(LayoutTransition.CHANGING)
         }
     }
-
 }

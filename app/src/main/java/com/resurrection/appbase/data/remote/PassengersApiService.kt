@@ -11,6 +11,4 @@ interface PassengersApiService {
         @Query("page") page: Int,
         @Query("size") size: Int = 10
     ): PassengersResponse
-
 }
-

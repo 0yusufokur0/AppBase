@@ -9,10 +9,7 @@ import com.resurrection.base.components.appstate.AppState
 import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.datastore.DataStoreManager
 import com.resurrection.base.components.logger.LoggerManager
-import com.resurrection.base.components.security.BiometricManager
-import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
-import com.resurrection.base.components.typeconverter.TypeConverter
 import com.resurrection.base.components.widget.alertdialog.AlertDialogManager
 import com.resurrection.base.components.widget.loadingindicator.LoadingIndicator
 import com.resurrection.base.extensions.observeData
@@ -52,9 +49,9 @@ abstract class CoreActivity @ContentView constructor(@LayoutRes val layoutRes: I
         init(savedInstanceState)
     }
 
-    private fun initComponents(){
+    private fun initComponents() {
         dataHolder.init(lifecycle)
-        loggerManager.initActivity(lifecycle,localClassName)
+        loggerManager.initActivity(lifecycle, localClassName)
     }
 
     inline fun <T> LiveData<Resource<T>>.observeData(

@@ -15,9 +15,7 @@ import com.resurrection.base.components.appstate.AppState
 import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.datastore.DataStoreManager
 import com.resurrection.base.components.logger.LoggerManager
-import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
-import com.resurrection.base.components.typeconverter.TypeConverter
 import com.resurrection.base.components.widget.alertdialog.AlertDialogManager
 import com.resurrection.base.components.widget.loadingindicator.LoadingIndicator
 import com.resurrection.base.extensions.observeData
@@ -59,7 +57,7 @@ abstract class CoreFragment @ContentView constructor(@LayoutRes val layoutRes: I
 
     private val lifecycleObservers = mutableListOf<FragmentLifecycleEventObserver>()
 
-    fun addLifecycleObserver(observer: FragmentLifecycleEventObserver)  = lifecycleObservers.add(observer)
+    fun addLifecycleObserver(observer: FragmentLifecycleEventObserver) = lifecycleObservers.add(observer)
 
     fun removeLifecycleObserver(observer: FragmentLifecycleEventObserver) = lifecycleObservers.remove(observer)
 

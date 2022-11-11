@@ -1,10 +1,9 @@
 package com.resurrection.base.components.logger.analytics
 
 import com.resurrection.base.components.logger.LoggerManager
-import javax.inject.Inject
 
 class AnalyticsLoggerManagerImpl constructor(
-      private val loggerManager: LoggerManager
+    private val loggerManager: LoggerManager
 ) : AnalyticsLoggerManager {
 
     override fun debug(tag: String, message: String) {
@@ -22,5 +21,4 @@ class AnalyticsLoggerManagerImpl constructor(
     override fun push(analyticsLogType: AnalyticsLogType, tag: String, message: String) {
         TODO("Not yet implemented")
     }
-
 }

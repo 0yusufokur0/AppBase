@@ -12,7 +12,6 @@ abstract class BaseAdapter<Model : Any, VDB : ViewDataBinding>(
     private val currentList: ArrayList<Model> = arrayListOf(),
 ) : CoreAdapter<Model, VDB>(layoutResource, itemId, currentList) {
 
-
     open fun addAll(list: List<Model>) {
         val diffUtil = BaseDiffUtil(currentList, list)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
@@ -66,13 +65,13 @@ abstract class BaseAdapter<Model : Any, VDB : ViewDataBinding>(
                     selector?.let {
                         for (item in currentList)
                             if (it.invoke(item).toString().lowercase(Locale.getDefault())
-                                    .contains(filterPattern)
+                                .contains(filterPattern)
                             )
                                 filteredList.add(item)
                     } ?: run {
                         for (item in currentList)
                             if (item.toString().lowercase(Locale.getDefault())
-                                    .contains(filterPattern)
+                                .contains(filterPattern)
                             )
                                 filteredList.add(item)
                     }
@@ -89,5 +88,4 @@ abstract class BaseAdapter<Model : Any, VDB : ViewDataBinding>(
         }
         mFilter.filter(constraint)
     }
-
 }

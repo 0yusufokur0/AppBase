@@ -16,5 +16,5 @@ interface AlertDialogManager {
         neutralButtonClickListener: (() -> Unit)? = null
     ): AlertDialog
 
-    fun show(builder:(MaterialAlertDialogBuilder)->Unit): AlertDialog
+    fun show(builder: (MaterialAlertDialogBuilder) -> Unit): AlertDialog
 }

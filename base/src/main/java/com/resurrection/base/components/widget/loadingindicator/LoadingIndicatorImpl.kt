@@ -23,7 +23,7 @@ class LoadingIndicatorImpl(
         createAlertDialog()
     }
 
-   private fun createAlertDialog() {
+    private fun createAlertDialog() {
         alertDialog = MaterialAlertDialogBuilder(context).apply {
             setCancelable(false)
             setView(alertDialogBinding.root)

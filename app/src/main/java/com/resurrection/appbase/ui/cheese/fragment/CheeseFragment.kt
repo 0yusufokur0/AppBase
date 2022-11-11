@@ -65,7 +65,8 @@ class CheeseFragment : CoreFragment(R.layout.fragment_cheese,) {
             }
 
             override fun onMove(
-                recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean = false
 

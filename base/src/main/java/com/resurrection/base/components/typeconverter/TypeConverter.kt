@@ -9,5 +9,4 @@ class TypeConverter {
     fun <T> toJson(obj: T): String = gson.toJson(obj)
 
     fun <T> fromJson(json: String, clazz: Class<T>): T = gson.fromJson(json, clazz)
-
 }

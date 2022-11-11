@@ -9,6 +9,4 @@ interface AnalyticsLoggerManager {
     fun performance(tag: String, message: String)
 
     fun push(analyticsLogType: AnalyticsLogType, tag: String, message: String)
-
-
 }

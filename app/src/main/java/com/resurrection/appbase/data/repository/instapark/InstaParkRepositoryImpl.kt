@@ -1,11 +1,5 @@
 package com.resurrection.appbase.data.repository.instapark
 
-import com.resurrection.appbase.data.model.photos.PhotoModel
-import com.resurrection.appbase.data.remote.InstaParkApiService
-import com.resurrection.base.components.network.OkHttpClientManager
-import javax.inject.Inject
-
-
 /*
 class InstaParkRepositoryImpl @Inject constructor(
     private val instaParkApiService: InstaParkApiService,

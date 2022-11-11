@@ -10,5 +10,4 @@ object DateTimeUtils {
         val sdf = java.text.SimpleDateFormat(pattern)
         return sdf.format(date)
     }
-
 }

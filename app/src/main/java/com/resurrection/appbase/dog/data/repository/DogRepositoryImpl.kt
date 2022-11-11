@@ -7,8 +7,7 @@ import com.resurrection.base.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-
-class DogRepositoryImpl @Inject constructor (private val dogApiService: DogApiService) :DogRepository {
+class DogRepositoryImpl @Inject constructor(private val dogApiService: DogApiService) : DogRepository {
     override suspend fun getDog(): Flow<Resource<DogModel>> {
         return resourcefulFlowOfRemote(dogApiService::getDog)
     }

@@ -25,6 +25,4 @@ class MainActivity : CoreActivity(R.layout.activity_main) {
         transaction.addToBackStack(null)
         transaction.commit()*/
     }
-
 }
-

@@ -15,7 +15,7 @@ import com.resurrection.base.utils.fragment.FragmentLifecycleEvent
 import java.text.SimpleDateFormat
 import java.util.*
 
-class LoggerManagerImpl(context: Context): LoggerManager{
+class LoggerManagerImpl(context: Context) : LoggerManager {
 
     private var saveState = false
     private val _logList = mutableListOf<String>()
@@ -27,8 +27,6 @@ class LoggerManagerImpl(context: Context): LoggerManager{
     private val logPath =
         Environment.getExternalStorageDirectory().absolutePath + "/" + appName + "/Logs"
     val logList: List<String> = _logList
-
-
 
     override fun initApp(saveState: Boolean) {
         this.saveState = saveState
@@ -52,7 +50,7 @@ class LoggerManagerImpl(context: Context): LoggerManager{
     override fun initFragment(lifecycleFragment: CoreFragment, fragmentName: String) {
         this.fragmentName = fragmentName
         lifecycleFragment.addObserver { owner, event ->
-            when (event){
+            when (event) {
                 FragmentLifecycleEvent.ON_CREATE -> fragmentOnCreate()
                 FragmentLifecycleEvent.ON_CREATE_VIEW -> fragmentOnCreateView()
                 FragmentLifecycleEvent.ON_START -> fragmentOnStart()
@@ -61,7 +59,7 @@ class LoggerManagerImpl(context: Context): LoggerManager{
                 FragmentLifecycleEvent.ON_STOP -> fragmentOnStop()
                 FragmentLifecycleEvent.ON_DESTROY_VIEW -> fragmentOnDestroyView()
                 FragmentLifecycleEvent.ON_DESTROY -> fragmentOnDestroy()
-                else ->Unit
+                else -> Unit
             }
         }
     }

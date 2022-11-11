@@ -23,7 +23,5 @@ open class BaseViewHolder<Model, VDB : ViewDataBinding>(
                 longClick(item)
             }
         }
-
-
     }
 }

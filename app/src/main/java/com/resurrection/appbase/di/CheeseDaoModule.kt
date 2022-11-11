@@ -23,6 +23,4 @@ object CheeseDaoModule {
     @Provides
     @Singleton
     fun provideCheeseDao(cheeseDatabase: CheeseDatabase): CheeseDao = cheeseDatabase.cheeseDao()
-
-
 }

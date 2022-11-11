@@ -9,20 +9,25 @@ val samplesDummyData = arrayListOf<SampleModel>(
     SampleModel(
         title = "Passengers",
         description = "Passengers coming from REST API and" +
-                " REST API including GET, POST, DELETE, PUT, PATCH." +
-                " Additionally, This API is accessible with HTTPS too." +
-                " All the endpoints have separate documentation on this page:" +
-                " https://www.instantwebtools.net/fake-rest-api",
-        examples = listOf(SampleChildItemModel(
-            name = "First Sample",
-            navigationDirections = NavigationDirections(R.id.passengerFragment)
-        ))
-    ),SampleModel(
+            " REST API including GET, POST, DELETE, PUT, PATCH." +
+            " Additionally, This API is accessible with HTTPS too." +
+            " All the endpoints have separate documentation on this page:" +
+            " https://www.instantwebtools.net/fake-rest-api",
+        examples = listOf(
+            SampleChildItemModel(
+                name = "First Sample",
+                navigationDirections = NavigationDirections(R.id.passengerFragment)
+            )
+        )
+    ),
+    SampleModel(
         title = "UI Components",
         description = "Alert Dialog and Loading Indicator",
-        examples = listOf(SampleChildItemModel(
-            name = "First Sample",
-            navigationDirections = NavigationDirections(R.id.passengerFragment)
-        ))
+        examples = listOf(
+            SampleChildItemModel(
+                name = "First Sample",
+                navigationDirections = NavigationDirections(R.id.passengerFragment)
+            )
+        )
     )
 )

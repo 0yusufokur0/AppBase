@@ -5,7 +5,7 @@ import com.resurrection.base.core.fragment.CoreFragment
 
 interface LoggerManager {
     fun initApp(saveState: Boolean)
-    fun initActivity(lifecycle: Lifecycle,activityName: String)
+    fun initActivity(lifecycle: Lifecycle, activityName: String)
     fun initFragment(lifecycleFragment: CoreFragment, fragmentName: String)
 
     fun d(message: String)

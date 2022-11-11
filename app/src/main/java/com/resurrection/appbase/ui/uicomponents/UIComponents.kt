@@ -13,5 +13,4 @@ class UIComponents : CoreFragment(R.layout.fragment_ui_components) {
 
     override fun init(view: View, savedInstanceState: Bundle?) {
     }
-
 }

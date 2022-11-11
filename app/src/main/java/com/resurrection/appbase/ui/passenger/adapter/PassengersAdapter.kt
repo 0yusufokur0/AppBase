@@ -42,7 +42,7 @@ class PassengersAdapter :
             imageViewAirlinesLogo.loadImageWithRoundedCorner(item.airline[0].logo)
 */
             textViewHeadquarters.text = item.airline[0].head_quaters
-            textViewNameWithTrips.text =item.name + item.trips
+            textViewNameWithTrips.text = item.name + item.trips
         }
     }
 

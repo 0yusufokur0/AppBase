@@ -1,6 +1,5 @@
 package com.resurrection.base.extensions
 
-
 import android.app.Service
 import android.content.Context
 import android.view.View

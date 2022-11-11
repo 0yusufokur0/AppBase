@@ -1,10 +1,7 @@
 package com.resurrection.base.core.application
 
-import android.content.Intent
-import android.os.Process
 import androidx.multidex.MultiDexApplication
 import com.resurrection.base.components.appstate.AppState
-import com.resurrection.base.components.crashtracker.CrashTrackerActivity
 import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.logger.LoggerManager
 import com.resurrection.base.components.network.NetworkManager
@@ -14,7 +11,6 @@ import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
 import com.resurrection.base.components.typeconverter.TypeConverter
 import javax.inject.Inject
-import kotlin.system.exitProcess
 
 abstract class BaseApplication : MultiDexApplication() {
 
@@ -47,7 +43,7 @@ abstract class BaseApplication : MultiDexApplication() {
 
     abstract fun init()
 
-    abstract fun crashListener(thread: Thread,throwable: Throwable)
+    abstract fun crashListener(thread: Thread, throwable: Throwable)
 
     override fun onCreate() {
         super.onCreate()
@@ -60,5 +56,4 @@ abstract class BaseApplication : MultiDexApplication() {
             crashListener(thread, throwable)
         }
     }
-
 }

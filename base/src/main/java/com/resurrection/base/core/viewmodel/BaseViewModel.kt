@@ -9,7 +9,6 @@ import com.resurrection.base.components.security.BiometricManager
 import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
 import com.resurrection.base.components.typeconverter.TypeConverter
-import com.resurrection.base.components.widget.loadingindicator.LoadingIndicator
 import com.resurrection.base.utils.Resource
 import com.resurrection.base.utils.callPrivateFunctionWithIndex
 import kotlinx.coroutines.flow.Flow
@@ -45,7 +44,6 @@ abstract class BaseViewModel : ViewModel() {
     @Inject
     lateinit var typeConverter: TypeConverter
 
-
     inline fun <T> LiveData<Resource<T>>.fetchData(
         crossinline condition: () -> Boolean = { true },
         crossinline request: suspend () -> Flow<Resource<T>>,
@@ -77,9 +75,8 @@ abstract class BaseViewModel : ViewModel() {
 
     fun <T> liveData(): LiveData<T> = liveData { }
 
-    protected fun <T> LiveData<T>.postValue(data: T) = this.callPrivateFunctionWithIndex(11, this,data)
+    protected fun <T> LiveData<T>.postValue(data: T) = this.callPrivateFunctionWithIndex(11, this, data)
 
     @PublishedApi
     internal fun <T> LiveData<Resource<T>>.accessPostValue(data: Resource<T>) = postValue(data)
-
 }

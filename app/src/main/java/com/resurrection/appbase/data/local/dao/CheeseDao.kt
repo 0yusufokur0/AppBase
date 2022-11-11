@@ -7,7 +7,6 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.resurrection.appbase.data.model.cheese.Cheese
 
-
 @Dao
 interface CheeseDao {
 

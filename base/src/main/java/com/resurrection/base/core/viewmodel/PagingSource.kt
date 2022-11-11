@@ -3,7 +3,6 @@ package com.resurrection.base.core.viewmodel
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 
-
 fun <ResponseModel, ListItemModel : Any> pagingDataSource(
     request: suspend (nextPageNumber: Int) -> ResponseModel,
     data: ((ResponseModel) -> List<ListItemModel>),
@@ -32,7 +31,6 @@ fun <ResponseModel, ListItemModel : Any> pagingDataSource(
         override fun getRefreshKey(state: PagingState<Int, ListItemModel>): Int? {
             return null
         }
-
     }
 
     return pagingSourceObject

@@ -10,10 +10,9 @@ import javax.inject.Inject
 @HiltViewModel
 class SampleListViewModel @Inject constructor(
     private val samplesRepositoryImpl: SamplesRepositoryImpl
-): BaseViewModel() {
+) : BaseViewModel() {
 
     val samplesLiveData = liveData<Resource<List<SampleModel>>>()
 
     fun getSampleList() = samplesLiveData.fetchData(request = samplesRepositoryImpl::getSampleList)
-
 }

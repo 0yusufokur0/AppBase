@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import dagger.hilt.android.internal.managers.ViewComponentManager
 import dagger.hilt.android.internal.managers.ViewComponentManager.FragmentContextWrapper
 
 abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
@@ -18,7 +17,7 @@ abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
     private var itemClick: ((Model) -> Unit)? = null
     private var itemLongClick: ((Model) -> Boolean)? = null
     private lateinit var binding: VDB
-    lateinit var activity:Activity private set
+    lateinit var activity: Activity private set
 
     open fun setOnItemClickListener(itemClick: (Model) -> Unit) {
         this.itemClick = itemClick
@@ -46,7 +45,7 @@ abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
 
     private fun getActivityByView(): Activity {
         val context = binding.root.context
-        val activity = when(context) {
+        val activity = when (context) {
             is FragmentContextWrapper -> context.baseContext
             else -> context
         }

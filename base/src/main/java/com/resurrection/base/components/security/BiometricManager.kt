@@ -39,7 +39,6 @@ class BiometricManager {
                     initBiometricPrompt(title, subtitle, description)
                     biometricIsAvailable()
                 } else biometricIsUnAvailable()
-
             }
             setBiometricPrompt(activity, success, error)
         }
@@ -54,7 +53,8 @@ class BiometricManager {
         success: (BiometricPrompt.AuthenticationResult) -> Unit,
         error: () -> Unit
     ) {
-        biometricPrompt = BiometricPrompt(activity, executor,
+        biometricPrompt = BiometricPrompt(
+            activity, executor,
             object : BiometricPrompt.AuthenticationCallback() {
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
@@ -71,7 +71,8 @@ class BiometricManager {
                     super.onAuthenticationFailed()
                     error()
                 }
-            })
+            }
+        )
     }
 
     private fun initBiometricPrompt(

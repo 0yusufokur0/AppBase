@@ -1,7 +1,6 @@
 package com.resurrection.base.components.crashtracker
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import com.resurrection.base.R
 import com.resurrection.base.core.activity.CoreActivity
 import com.resurrection.base.databinding.ActivityCrashTrackerBinding
@@ -16,6 +15,5 @@ class CrashTrackerActivity : CoreActivity(R.layout.activity_crash_tracker) {
     val viewModel by viewModel<CrashTrackerViewModel>()
 
     override fun init(savedInstanceState: Bundle?) {
-
     }
 }

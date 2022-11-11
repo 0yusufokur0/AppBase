@@ -3,8 +3,6 @@ package com.resurrection.base.widgets
 import android.content.Context
 import android.util.AttributeSet
 import com.google.android.material.imageview.ShapeableImageView
-import com.resurrection.base.R
-
 
 class AppImageView @JvmOverloads constructor(
     context: Context,

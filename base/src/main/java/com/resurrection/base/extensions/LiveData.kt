@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import com.resurrection.base.utils.Resource
 import com.resurrection.base.utils.Status
 
-
 inline fun <T> LiveData<Resource<T>>.observeData(
     lifecycleOwner: LifecycleOwner,
     crossinline success: (T?) -> Unit = { },

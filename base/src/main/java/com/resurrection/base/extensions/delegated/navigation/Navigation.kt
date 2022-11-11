@@ -12,4 +12,3 @@ fun CoreActivity.navController(@IdRes id: Int) = activityComponent { (supportFra
 
 fun Activity.navController(@IdRes id: Int): Lazy<NavController> =
     lazy { findNavController(id) }
-

@@ -14,7 +14,8 @@ import javax.inject.Inject
 class PassengerViewModel @Inject constructor(private val passengersApiService: PassengersApiService) :
     BaseViewModel() {
 
-    val passengers = Pager(config = PagingConfig(pageSize = 10, prefetchDistance = 2),
+    val passengers = Pager(
+        config = PagingConfig(pageSize = 10, prefetchDistance = 2),
         pagingSourceFactory = {
             pagingDataSource(
                 request = { passengersApiService.getPassengersData(it) },
@@ -23,5 +24,4 @@ class PassengerViewModel @Inject constructor(private val passengersApiService: P
             )
         }
     ).flow.cachedIn(viewModelScope)
-
 }

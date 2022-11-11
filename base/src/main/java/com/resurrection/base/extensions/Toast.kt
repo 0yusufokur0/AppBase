@@ -20,7 +20,6 @@ fun Fragment.toastLong(message: Int?) = toastLong(requireContext(), message)
 fun Fragment.toastLong(message: String?) = toastLong(requireContext(), message)
 fun Fragment.toastLong(message: Any?) = toastLong(requireContext(), message)
 
-
 @JvmName("toastLong1")
 private fun toastLong(context: Context, message: String?) = toast(context, message, Toast.LENGTH_LONG)
 

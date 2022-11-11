@@ -6,11 +6,9 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 
 class NetworkManager(
-     val context: Context,
+    val context: Context,
 ) {
 
     private val connectivityManager =
@@ -38,29 +36,26 @@ class NetworkManager(
     fun setNetworkStateListener(available: () -> Unit, unAvailable: () -> Unit) {
 
         connectivityManager.registerDefaultNetworkCallback(object :
-            ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                super.onAvailable(network)
-                available()
-            }
+                ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: Network) {
+                    super.onAvailable(network)
+                    available()
+                }
 
-            override fun onLost(network: Network) {
-                super.onLost(network)
-                unAvailable()
-            }
+                override fun onLost(network: Network) {
+                    super.onLost(network)
+                    unAvailable()
+                }
 
-            override fun onLosing(network: Network, maxMsToLive: Int) {
-                super.onLosing(network, maxMsToLive)
-                unAvailable()
-            }
+                override fun onLosing(network: Network, maxMsToLive: Int) {
+                    super.onLosing(network, maxMsToLive)
+                    unAvailable()
+                }
 
-            override fun onUnavailable() {
-                super.onUnavailable()
-                unAvailable()
-            }
-
-        })
+                override fun onUnavailable() {
+                    super.onUnavailable()
+                    unAvailable()
+                }
+            })
     }
-
 }
-

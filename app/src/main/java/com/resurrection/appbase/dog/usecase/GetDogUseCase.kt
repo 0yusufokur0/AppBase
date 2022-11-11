@@ -9,6 +9,6 @@ import javax.inject.Inject
 
 class GetDogUseCase @Inject constructor(
     private val dogRepository: DogRepository
-    ) {
-    suspend operator fun invoke(): Flow<Resource<DogModel>> = flow {  }/* dogRepository.getDog()*/
+) {
+    suspend operator fun invoke(): Flow<Resource<DogModel>> = flow { } /* dogRepository.getDog()*/
 }

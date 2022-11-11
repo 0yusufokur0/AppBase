@@ -2,7 +2,6 @@ package com.resurrection.base.components.sharedpreferences
 
 import android.content.SharedPreferences
 
-
 /**
  *
  * This class that store key-value pairs in a [SharedPreferences].
@@ -165,5 +164,4 @@ interface SharedPreferencesManager {
      * @return a Serializable or default value
      * */
     fun <Model> getObject(key: String, clazz: Class<Model>): Model?
-
 }
