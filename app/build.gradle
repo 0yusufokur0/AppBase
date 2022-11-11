@@ -9,12 +9,12 @@ apply plugin: 'kotlin-android'
 apply from: "scripts/setup_gradle.gradle"
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.resurrection.appbase"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
