@@ -23,150 +23,201 @@ android {
     }
 
 
-    def variantConfig = new VariantConfig("dev", "https://jsonplaceholder.typicode.com", false, true, ".")
-    flavorDimensions 'productFlavors'
+    def fieldCreator = new FieldCreator()
+    flavorDimensions 'env'
+    fieldCreator
+            .addString("string", "string")
+            .addInteger("int1", 1)
+            .addBoolean("boolean1", true)
+            .addFloat("float1", 1f)
+            .addChar("char1", 'c')
+            .addResource("resource1", "resorce")
+            .addStringList("string1", "strList", "sdfasd")
+            .addIntegerList("in1t", 1, 1, 2, 3, 4, 23, 42, 34)
+            .addBooleanList("boolean1", true, false, false, false, true)
+            .addFloatList("float1123", 1.0f, 2.0f)
+            .addCharList("char11", 'c', 'c')
 
     productFlavors {
         dev {
-            variantConfig.setVariantName("dev")
-            variantConfig.setCheckRootEnabled(true)
-            variantConfig.setLoggerEnabled(true)
-            variantConfig.setGoogleApiKey("asdasd")
+            dimension 'env'
+            fieldCreator
+                    .addIntegerList("in1t", 1, 1, 2, 3, 4, 23, 42, 34)
+                    .addBooleanList("boolean1", true, false, false, false, true)
+                    .addFloatList("float1123", 1.0f, 2.0f)
+                    .addCharList("char11", 'F', 'F')
+
         }
-        preProd {
-            variantConfig.setVariantName("preProd")
-            variantConfig.setCheckRootEnabled(true)
-            variantConfig.setLoggerEnabled(true)
-            variantConfig.setGoogleApiKey("asd")
+        preprod {
+            dimension 'env'
         }
         prod {
-            variantConfig.setVariantName("prod")
-            variantConfig.setCheckRootEnabled(true)
-            variantConfig.setLoggerEnabled(true)
-            variantConfig.setGoogleApiKey("asdasd")
+            dimension 'env'
         }
     }
 
     applicationVariants.all { variant ->
-        variant.buildConfigField("String", "VARIANT_NAME", '"' + variantConfig.getVariantName() + '"')
-        variant.buildConfigField("String", "API_URL", '"' + String.valueOf(variantConfig.getApiUrl()) + '"')
-        variant.buildConfigField("Boolean", "CHECK_ROOT_ENABLED", String.valueOf(variantConfig.getCheckRootEnabled().toString()))
-        variant.buildConfigField("Boolean", "LOGGER_ENABLED", String.valueOf(variantConfig.getLoggerEnabled()))
-        variant.buildConfigField("String", "GOOGLE_API_KEY", '"' + String.valueOf(variantConfig.getGoogleApiKey()) + '"')
+        fieldCreator.create(variant)
     }
 
 }
 
-dependencies {
-    // Base
-    implementation project(':base')
+class FieldCreator {
+    private final HashMap<String, String> stringHashMap = new HashMap<>()
+    private final HashMap<String, Integer> intHashMap = new HashMap<>()
+    private final HashMap<String, Boolean> booleanHashMap = new HashMap<>()
+    private final HashMap<String, Float> floatHashMap = new HashMap<>()
+    private final HashMap<String, Character> charHashMap = new HashMap<>()
+    private final HashMap<String, String> resourceHashMap = new HashMap<>()
+    private final HashMap<String, ArrayList<String>> stringListHashMap = new HashMap<>()
+    private final HashMap<String, ArrayList<Integer>> intListHashMap = new HashMap<>()
+    private final HashMap<String, ArrayList<Boolean>> booleanListHashMap = new HashMap<>()
+    private final HashMap<String, ArrayList<Float>> floatListHashMap = new HashMap<>()
+    private final HashMap<String, ArrayList<Character>> charListHashMap = new HashMap<>()
 
-    // kotlin reflect
-    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.10'
+    FieldCreator addString(String key, String value) {
+        stringHashMap.remove(key)
+        stringHashMap.put(key, value)
+        return this
+    }
 
-    //Paging 3 - https://developer.android.com/topic/libraries/architecture/paging
-    implementation("androidx.paging:paging-runtime:3.1.1")
+    FieldCreator addInteger(String key, int value) {
+        intHashMap.remove(key)
+        intHashMap.put(key, value)
+        return this
+    }
 
-    implementation("androidx.room:room-runtime:2.4.2")
-    annotationProcessor("androidx.room:room-compiler:2.4.2")
-    implementation "androidx.room:room-ktx:2.4.2"
-    kapt "androidx.room:room-compiler:2.4.2"
-    implementation("androidx.room:room-paging:2.4.2")
-    // Okhttp
-    implementation('com.squareup.okhttp3:okhttp:4.9.1')
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    FieldCreator addBoolean(String key, boolean value) {
+        booleanHashMap.remove(key)
+        booleanHashMap.put(key, value)
+        return this
+    }
 
-    // DataBinding
-    kapt 'com.android.databinding:compiler:3.2.0'
+    FieldCreator addFloat(String key, float value) {
+        floatHashMap.remove(key)
+        floatHashMap.put(key, value)
+        return this
+    }
 
-    //Coil
-    implementation "io.coil-kt:coil:1.4.0"
+    FieldCreator addChar(String key, String value) {
+        charHashMap.remove(key)
+        charHashMap.put(key, Character.valueOf(value.charAt(0)))
+        return this
+    }
 
-    // Constraint Layout
-    implementation "com.android.support.constraint:constraint-layout:2.0.4"
+    FieldCreator addResource(String key, String value) {
+        resourceHashMap.remove(key)
+        resourceHashMap.put(key, value)
+        return this
+    }
 
-    // Multidex
-    implementation "androidx.multidex:multidex:2.0.1"
+    FieldCreator addStringList(String key, String... value) {
+        def list = new ArrayList<String>()
+        list.addAll(value)
+        stringListHashMap.remove(key)
+        stringListHashMap.put(key, list)
+        return this
+    }
 
-    // Dagger Hilt
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-compiler:2.44"
+    FieldCreator addIntegerList(String key, int ... value) {
+        def list = new ArrayList<Integer>()
+        list.addAll(value)
+        intListHashMap.remove(key)
+        intListHashMap.put(key, list)
+        return this
+    }
 
-    // Gson
-    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    FieldCreator addBooleanList(String key, boolean ... value) {
+        def list = new ArrayList<Boolean>()
+        list.addAll(value)
+        booleanListHashMap.remove(key)
+        booleanListHashMap.put(key, list)
+        return this
+    }
 
-    //Recyclerview
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    FieldCreator addFloatList(String key, float ... value) {
+        def list = new ArrayList<Float>()
+        list.addAll(value)
+        floatListHashMap.remove(key)
+        floatListHashMap.put(key, list)
+        return this
+    }
 
-    // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    FieldCreator addCharList(String key, String... value) {
+        def list = new ArrayList<Character>()
+        list.addAll(value)
+        charListHashMap.remove(key)
+        charListHashMap.put(key, list)
+        return this
+    }
 
-    // Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
 
-    // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:2.4.1"
-    implementation "androidx.navigation:navigation-ui-ktx:2.4.1"
+    void create(Object variant) {
+        intHashMap.each { key, value ->
+            variant.buildConfigField('int', key, String.valueOf(value))
+        }
+        stringHashMap.each { key, value ->
+            variant.buildConfigField("String", key, '"' + String.valueOf(value) + '"')
+        }
+        booleanHashMap.each { key, value ->
+            variant.buildConfigField("boolean", key, String.valueOf(value))
+        }
+        floatHashMap.each { key, value ->
+            variant.buildConfigField("float", key, String.valueOf(value + "f"))
+        }
+        charHashMap.each { key, value ->
+            variant.buildConfigField("char", key, "'" + value + "'")
+        }
+        resourceHashMap.each { key, value ->
+            variant.resValue "string", key, value
+        }
+        stringListHashMap.each { key, value ->
+            String result = "{"
+            value.each { item ->
+                result += String.valueOf('"' + item + '"') + ","
+            }
+            result = result.substring(0, result.length() - 1)
+            result += "}"
 
-    // Legacy
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+            variant.buildConfigField "String[]", key, result
+        }
+        intListHashMap.each { key, value ->
+            String result = "{"
+            value.each { item ->
+                result += String.valueOf(item) + ","
+            }
+            result = result.substring(0, result.length() - 1)
+            result += "}"
+
+            variant.buildConfigField "int[]", key, result
+        }
+        booleanListHashMap.each { key, value ->
+            String result = "{"
+            value.each { item ->
+                result += String.valueOf(item) + ','
+            }
+            result = result.substring(0, result.length() - 1)
+            result += "}"
+            variant.buildConfigField "boolean[]", key, result
+        }
+        floatListHashMap.each { key, value ->
+            String result = "{"
+            value.each { item ->
+                result += String.valueOf(item + "f") + ','
+            }
+            result = result.substring(0, result.length() - 1)
+            result += "}"
+            variant.buildConfigField "float[]", key, result
+        }
+        charListHashMap.each { key, value ->
+            String result = "{"
+            value.each { item ->
+                result += "'" + item + "'" + ','
+            }
+            result = result.substring(0, result.length() - 1)
+            result += "}"
+            variant.buildConfigField "char[]", key, result
+        }
+    }
 }
 
-
-class VariantConfig {
-    private String variantName
-    private String apiUrl
-    private boolean loggerEnabled
-    private boolean checkRootEnabled
-    private String googleApiKey
-
-    VariantConfig(String variantName, String apiUrl, boolean loggerEnabled, boolean checkRootEnabled, String googleApiKey) {
-        this.variantName = variantName
-        this.apiUrl = apiUrl
-        this.loggerEnabled = loggerEnabled
-        this.checkRootEnabled = checkRootEnabled
-        this.googleApiKey = googleApiKey
-    }
-
-    String getVariantName() {
-        return variantName
-    }
-
-    void setVariantName(String variantName) {
-        this.variantName = variantName
-    }
-
-    String getApiUrl() {
-        return apiUrl
-    }
-
-    void setApiUrl(String apiUrl) {
-        this.apiUrl = apiUrl
-    }
-
-    boolean getLoggerEnabled() {
-        return loggerEnabled
-    }
-
-    void setLoggerEnabled(boolean loggerEnabled) {
-        this.loggerEnabled = loggerEnabled
-    }
-
-    boolean getCheckRootEnabled() {
-        return checkRootEnabled
-    }
-
-    void setCheckRootEnabled(boolean checkRootEnabled) {
-        this.checkRootEnabled = checkRootEnabled
-    }
-
-    String getGoogleApiKey() {
-        return googleApiKey
-    }
-
-    void setGoogleApiKey(String googleApiKey) {
-        this.googleApiKey = googleApiKey
-    }
-}
