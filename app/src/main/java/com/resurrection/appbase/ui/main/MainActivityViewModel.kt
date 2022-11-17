@@ -1,5 +1,5 @@
 package com.resurrection.appbase.ui.main
 
-import com.resurrection.base.core.viewmodel.BaseViewModel
+import com.resurrection.base.core.viewmodel.CoreViewModel
 
-class MainActivityViewModel : BaseViewModel()
+class MainActivityViewModel : CoreViewModel()

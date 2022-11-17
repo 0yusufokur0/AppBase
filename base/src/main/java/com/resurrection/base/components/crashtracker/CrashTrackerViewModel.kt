@@ -1,5 +1,5 @@
 package com.resurrection.base.components.crashtracker
 
-import com.resurrection.base.core.viewmodel.BaseViewModel
+import com.resurrection.base.core.viewmodel.CoreViewModel
 
-class CrashTrackerViewModel : BaseViewModel()
+class CrashTrackerViewModel : CoreViewModel()

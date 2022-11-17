@@ -5,12 +5,8 @@ import com.resurrection.base.components.appstate.AppState
 import com.resurrection.base.components.dataholder.DataHolderManager
 import com.resurrection.base.components.logger.LoggerManager
 import com.resurrection.base.components.network.NetworkManager
-import com.resurrection.base.components.security.BiometricManager
-import com.resurrection.base.components.security.SecurityManager
 import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
-import com.resurrection.base.components.typeconverter.TypeConverter
 import com.resurrection.base.utils.Resource
-import com.resurrection.base.utils.callPrivateFunctionWithIndex
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
@@ -18,7 +14,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-abstract class BaseViewModel : ViewModel() {
+abstract class CoreViewModel : ViewModel() {
 
     @Inject
     lateinit var appState: AppState
@@ -35,21 +31,28 @@ abstract class BaseViewModel : ViewModel() {
     @Inject
     lateinit var networkManager: NetworkManager
 
-    @Inject
-    lateinit var securityManager: SecurityManager
-
-    @Inject
-    lateinit var biometricManager: BiometricManager
-
-    @Inject
-    lateinit var typeConverter: TypeConverter
-
-    inline fun <T> LiveData<Resource<T>>.fetchData(
+    inline fun <T> MutableLiveData<Resource<T>>.fetchData(
         crossinline condition: () -> Boolean = { true },
         crossinline request: suspend () -> Flow<Resource<T>>,
-        crossinline success: (Resource<T>) -> Unit = { this.accessPostValue(it) },
-        crossinline loading: () -> Unit = { this.accessPostValue(Resource.Loading()) },
-        crossinline error: (Throwable) -> Unit = { this.accessPostValue(Resource.Error(it)) }
+        crossinline success: (Resource<T>) -> Unit = { this.postValue(it) },
+        crossinline loading: () -> Unit = { this.postValue(Resource.Loading()) },
+        crossinline error: (Throwable) -> Unit = { this.postValue(Resource.Error(it)) }
+    ) = viewModelScope.launch {
+        if (condition()) {
+            request()
+                .onStart { loading() }
+                .catch { error(it) }
+                .collect { success(it) }
+        }
+    }
+
+    @JvmName("fetchDataT")
+    fun <T> MutableLiveData<T>.fetchData(
+        condition: () -> Boolean = { true },
+        request: suspend () -> Flow<T>,
+        success: (T) -> Unit = { },
+        loading: () -> Unit = { },
+        error: (Throwable) -> Unit = { }
     ) = viewModelScope.launch {
         if (condition()) {
             request()
@@ -71,12 +74,5 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    fun <T> MutableLiveData<T>.toLiveData(): LiveData<T> = this
-
-    fun <T> liveData(): LiveData<T> = liveData { }
-
-    protected fun <T> LiveData<T>.postValue(data: T) = this.callPrivateFunctionWithIndex(11, this, data)
-
-    @PublishedApi
-    internal fun <T> LiveData<Resource<T>>.accessPostValue(data: Resource<T>) = postValue(data)
+    fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 }

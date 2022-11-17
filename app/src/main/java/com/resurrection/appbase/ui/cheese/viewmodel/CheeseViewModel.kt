@@ -6,7 +6,7 @@ import com.resurrection.appbase.data.dummy.CHEESE_DATA
 import com.resurrection.appbase.data.local.dao.CheeseDao
 import com.resurrection.appbase.data.model.cheese.Cheese
 import com.resurrection.appbase.data.model.cheese.CheeseListItem
-import com.resurrection.base.core.viewmodel.BaseViewModel
+import com.resurrection.base.core.viewmodel.CoreViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CheeseViewModel @Inject constructor(private var cheeseDao: CheeseDao) : BaseViewModel() {
+class CheeseViewModel @Inject constructor(private var cheeseDao: CheeseDao) : CoreViewModel() {
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
