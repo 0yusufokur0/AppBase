@@ -1,6 +1,5 @@
 package com.resurrection.appbase.ui.main.adapter
 
-import androidx.navigation.findNavController
 import com.resurrection.appbase.BR
 import com.resurrection.appbase.R
 import com.resurrection.appbase.data.model.sample.SampleChildItemModel
@@ -14,7 +13,7 @@ class SampleChildRecyclerViewAdapter : BaseAdapter<SampleChildItemModel, SampleC
 
     override fun bindItem(binding: SampleChildItemBinding, item: SampleChildItemModel) {
         binding.childItemButton.setOnClickListener {
-            activity.findNavController(R.id.mainFragmentContainerView).navigate(item.navigationDirections)
+            // activity.findNavController(R.id.mainFragmentContainerView).navigate(item.navigationDirections)
         }
     }
 }

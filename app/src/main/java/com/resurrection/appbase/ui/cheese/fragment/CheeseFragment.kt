@@ -42,7 +42,9 @@ class CheeseFragment : CoreFragment(R.layout.fragment_cheese,) {
             footer = loadStateAdapter
         )*/
         lifecycleScope.launch {
-            viewModel.allCheeses.collectLatest { adapter.submitData(it) }
+            viewModel.allCheeses.collectLatest {
+                adapter.submitData(it)
+            }
         }
 
         initAddButtonListener()
