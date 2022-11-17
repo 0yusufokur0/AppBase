@@ -26,7 +26,7 @@ android {
     def fieldCreator = new FieldCreator()
     flavorDimensions 'env'
     fieldCreator
-            .addString("string", "string")
+            .addString("API_URL", "https://www.google.com/")
             .addInteger("int1", 1)
             .addBoolean("boolean1", true)
             .addFloat("float1", 1f)
