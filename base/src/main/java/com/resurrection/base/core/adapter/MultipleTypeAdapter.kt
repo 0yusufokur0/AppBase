@@ -11,32 +11,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.internal.managers.ViewComponentManager
 import java.util.*
-import kotlin.collections.ArrayList
 
-abstract class MultipleTypeAdapter <Model : Any,>(
-    private var currentList: ArrayList<Model> = arrayListOf(),
-) : RecyclerView.Adapter<BaseViewHolder<Model, ViewDataBinding>>() {
+abstract class MultipleTypeAdapter<Model : Any> : RecyclerView.Adapter<BaseViewHolder<Model, ViewDataBinding>>() {
+
+    private var currentList: ArrayList<Model> = arrayListOf()
     private var layoutResource: Int = 0
     private var itemClick: ((Model) -> Unit)? = null
     private var itemLongClick: ((Model) -> Boolean)? = null
     private lateinit var binding: ViewDataBinding
     private var itemId: Int? = null
 
-    open fun setOnItemClickListener(itemClick: (Model) -> Unit) {
-        this.itemClick = itemClick
-    }
-
-    open fun setOnItemLongClickListener(itemLongClick: (Model) -> Boolean) {
-        this.itemLongClick = itemLongClick
-    }
-
-    abstract fun bindItem(binding: ViewDataBinding, item: Model)
     abstract fun getlayoutResourceAndBrId(item: Model): Pair<Int, Int?>
+    abstract fun getDiffUtilCallback(oldList: List<Model>, newList: List<Model>): DiffUtil.Callback?
+    abstract fun bindItem(binding: ViewDataBinding, item: Model)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Model, ViewDataBinding> {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseViewHolder<Model, ViewDataBinding> {
         val layoutInflater = LayoutInflater.from(parent.context)
         binding = DataBindingUtil.inflate(layoutInflater, layoutResource, parent, false)
-        getActivityByView()
         return BaseViewHolder(binding, itemId, this::bindItem, itemClick, itemLongClick)
     }
 
@@ -51,7 +45,16 @@ abstract class MultipleTypeAdapter <Model : Any,>(
         itemId = pair.second
         return position
     }
+
     override fun getItemCount() = currentList.size
+
+    open fun setOnItemClickListener(itemClick: (Model) -> Unit) {
+        this.itemClick = itemClick
+    }
+
+    open fun setOnItemLongClickListener(itemLongClick: (Model) -> Boolean) {
+        this.itemLongClick = itemLongClick
+    }
 
     fun getActivityByView(): Activity {
         val context = binding.root.context
@@ -63,7 +66,9 @@ abstract class MultipleTypeAdapter <Model : Any,>(
     }
 
     open fun addAll(list: List<Model>) {
-        val diffUtil = BaseDiffUtil(currentList, list)
+        val diffUtil = getDiffUtilCallback(currentList, list) ?: run {
+            BaseDiffUtil<Model>(currentList, list)
+        }
         val diffResult = DiffUtil.calculateDiff(diffUtil)
         currentList.addAll(list)
         diffResult.dispatchUpdatesTo(this)

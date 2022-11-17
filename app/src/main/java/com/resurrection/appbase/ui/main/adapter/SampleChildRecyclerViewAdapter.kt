@@ -4,9 +4,9 @@ import com.resurrection.appbase.BR
 import com.resurrection.appbase.R
 import com.resurrection.appbase.data.model.sample.SampleChildItemModel
 import com.resurrection.appbase.databinding.SampleChildItemBinding
-import com.resurrection.base.core.adapter.BaseAdapter
+import com.resurrection.base.core.adapter.CoreAdapter
 
-class SampleChildRecyclerViewAdapter : BaseAdapter<SampleChildItemModel, SampleChildItemBinding>(
+class SampleChildRecyclerViewAdapter : CoreAdapter<SampleChildItemModel, SampleChildItemBinding>(
     layoutResource = R.layout.sample_child_item,
     itemId = BR.childItem
 ) {
@@ -16,4 +16,9 @@ class SampleChildRecyclerViewAdapter : BaseAdapter<SampleChildItemModel, SampleC
             // activity.findNavController(R.id.mainFragmentContainerView).navigate(item.navigationDirections)
         }
     }
+
+    override fun getDiffUtilCallback(
+        oldList: List<SampleChildItemModel>,
+        newList: List<SampleChildItemModel>
+    ) = null
 }

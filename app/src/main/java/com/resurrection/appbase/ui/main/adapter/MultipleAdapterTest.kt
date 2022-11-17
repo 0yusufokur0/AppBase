@@ -1,6 +1,7 @@
 package com.resurrection.appbase.ui.main.adapter
 
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.DiffUtil
 import coil.loadAny
 import com.resurrection.appbase.R
 import com.resurrection.appbase.databinding.ImageItemBinding
@@ -16,6 +17,8 @@ class MultipleAdapterTest : MultipleTypeAdapter<String>() {
             Pair(R.layout.string_item, null)
         }
     }
+
+    override fun getDiffUtilCallback(oldList: List<String>, newList: List<String>): DiffUtil.Callback? = null
 
     override fun bindItem(binding: ViewDataBinding, item: String) {
         when (binding) {
