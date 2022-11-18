@@ -1,18 +1,16 @@
 package com.resurrection.base.components.lifecycle.util
 
-import androidx.lifecycle.LifecycleEventObserver
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.resurrection.base.components.lifecycle.activity.ActivityComponent
 import com.resurrection.base.components.lifecycle.fragment.FragmentComponent
-import com.resurrection.base.core.activity.CoreActivity
-import com.resurrection.base.core.fragment.CoreFragment
-import com.resurrection.base.utils.fragment.FragmentLifecycleEventObserver
 
-fun <T> CoreActivity.activityComponent(
-    observer: LifecycleEventObserver? = null,
+fun <T> AppCompatActivity.activityComponent(
+    observer: ActivityLifecycleEventObserver<T>? = null,
     instanceCreator: () -> T
 ) = ActivityComponent(instanceCreator, observer)
 
-fun <T> CoreFragment.fragmentComponent(
-    observer: FragmentLifecycleEventObserver? = null,
+fun <T> Fragment.fragmentComponent(
+    observer: FragmentLifecycleEventObserver<T>? = null,
     instanceCreator: () -> T
 ) = FragmentComponent(instanceCreator, observer)

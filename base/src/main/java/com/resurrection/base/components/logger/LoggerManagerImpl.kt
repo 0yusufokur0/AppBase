@@ -11,7 +11,6 @@ import com.resurrection.base.components.lifecycle.util.addObserver
 import com.resurrection.base.core.fragment.CoreFragment
 import com.resurrection.base.utils.createFile
 import com.resurrection.base.utils.createFolder
-import com.resurrection.base.utils.fragment.FragmentLifecycleEvent
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -49,16 +48,14 @@ class LoggerManagerImpl(context: Context) : LoggerManager {
 
     override fun initFragment(lifecycleFragment: CoreFragment, fragmentName: String) {
         this.fragmentName = fragmentName
-        lifecycleFragment.addObserver { owner, event ->
+        lifecycleFragment.viewLifecycleOwner.lifecycle.addObserver { owner, event ->
             when (event) {
-                FragmentLifecycleEvent.ON_CREATE -> fragmentOnCreate()
-                FragmentLifecycleEvent.ON_CREATE_VIEW -> fragmentOnCreateView()
-                FragmentLifecycleEvent.ON_START -> fragmentOnStart()
-                FragmentLifecycleEvent.ON_RESUME -> fragmentOnResume()
-                FragmentLifecycleEvent.ON_PAUSE -> fragmentOnPause()
-                FragmentLifecycleEvent.ON_STOP -> fragmentOnStop()
-                FragmentLifecycleEvent.ON_DESTROY_VIEW -> fragmentOnDestroyView()
-                FragmentLifecycleEvent.ON_DESTROY -> fragmentOnDestroy()
+                ON_CREATE -> fragmentOnCreate()
+                ON_START -> fragmentOnStart()
+                ON_RESUME -> fragmentOnResume()
+                ON_PAUSE -> fragmentOnPause()
+                ON_STOP -> fragmentOnStop()
+                ON_DESTROY -> fragmentOnDestroy()
                 else -> Unit
             }
         }
@@ -129,12 +126,10 @@ class LoggerManagerImpl(context: Context) : LoggerManager {
 
     // region Fragment lifecycle
     private fun fragmentOnCreate() = _logList.add("Fragment Create : $fragmentName")
-    private fun fragmentOnCreateView() = _logList.add("Fragment OnCreateView : $fragmentName")
     private fun fragmentOnStart() = d("Fragment OnStart : $fragmentName")
     private fun fragmentOnResume() = d("Fragment OnResume : $fragmentName")
     private fun fragmentOnPause() = d("Fragment OnPause : $fragmentName")
     private fun fragmentOnStop() = d("Fragment OnStop : $fragmentName")
-    private fun fragmentOnDestroyView() = d("Fragment OnDestroyView : $fragmentName")
     private fun fragmentOnDestroy() = d("Fragment OnDestroy : $fragmentName")
     // endregion
 
