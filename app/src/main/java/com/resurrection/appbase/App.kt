@@ -3,14 +3,13 @@ package com.resurrection.appbase
 import android.content.Intent
 import android.os.Process
 import com.resurrection.base.components.crashtracker.CrashTrackerActivity
-import com.resurrection.base.components.logger.LoggerInterceptor
 import com.resurrection.base.core.application.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 import kotlin.system.exitProcess
 
 @HiltAndroidApp
-class App : BaseApplication() {
+class App(override val crashListenerEnabled: Boolean = true) : BaseApplication() {
 
     override fun init() {
         initOkHttpClient()
@@ -26,8 +25,8 @@ class App : BaseApplication() {
         val okHttpClient =
             OkHttpClient()
                 .newBuilder()
-                .addInterceptor(LoggerInterceptor(loggerManager))
+                // .addInterceptor(LoggerInterceptor(loggerManager))
                 .build()
-        okHttpClientManager.init(okHttpClient, BuildConfig.API_URL)
+//        okHttpClientManager.init(okHttpClient, BuildConfig.API_URL)
     }
 }
