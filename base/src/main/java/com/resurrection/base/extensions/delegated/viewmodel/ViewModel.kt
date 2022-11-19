@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import com.resurrection.base.components.lifecycle.util.activityComponent
 import com.resurrection.base.components.lifecycle.util.fragmentComponent
-import com.resurrection.base.core.activity.CoreActivity
-import com.resurrection.base.core.fragment.CoreFragment
 import com.resurrection.base.core.viewmodel.CoreViewModel
 
 inline fun <reified VM : CoreViewModel> AppCompatActivity.viewModel(

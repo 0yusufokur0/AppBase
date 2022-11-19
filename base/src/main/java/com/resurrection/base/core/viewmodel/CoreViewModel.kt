@@ -1,11 +1,6 @@
 package com.resurrection.base.core.viewmodel
 
 import androidx.lifecycle.*
-import com.resurrection.base.components.appstate.AppState
-import com.resurrection.base.components.dataholder.DataHolderManager
-import com.resurrection.base.components.logger.LoggerManager
-import com.resurrection.base.components.network.NetworkManager
-import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
 import com.resurrection.base.utils.Resource
 import com.resurrection.base.utils.callPrivateFunctionWithIndex
 import kotlinx.coroutines.flow.Flow
@@ -13,24 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 abstract class CoreViewModel : ViewModel() {
-
-    @Inject
-    lateinit var appState: AppState
-
-    @Inject
-    lateinit var dataHolder: DataHolderManager
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferencesManager
-
-    @Inject
-    lateinit var loggerManager: LoggerManager
-
-    @Inject
-    lateinit var networkManager: NetworkManager
 
     inline fun <T> MutableLiveData<Resource<T>>.fetchData(
         crossinline condition: () -> Boolean = { true },

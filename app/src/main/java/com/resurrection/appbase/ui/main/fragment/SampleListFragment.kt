@@ -31,14 +31,14 @@ class SampleListFragment : CoreFragment(R.layout.fragment_sample_list) {
     private fun iniObservers() {
         viewModel.samplesLiveData.observeData(
             success = {
-                loadingIndicator.hide()
+                // loadingIndicator.hide()
                 it?.let { samples ->
                     sampleListAdapter.addAll(samples)
                 }
             }, loading = {
-            loadingIndicator.show()
+            // loadingIndicator.show()
         }, error = {
-            loadingIndicator.hide()
+            // loadingIndicator.hide()
         }
         )
     }
