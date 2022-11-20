@@ -14,7 +14,7 @@ import java.util.*
 
 abstract class MultipleTypeAdapter<Model : Any> : RecyclerView.Adapter<BaseViewHolder<Model, ViewDataBinding>>() {
 
-    private var currentList: ArrayList<Model> = arrayListOf()
+    protected var currentList: ArrayList<Model> = arrayListOf()
     private var layoutResource: Int = 0
     private var itemClick: ((Model) -> Unit)? = null
     private var itemLongClick: ((Model) -> Boolean)? = null
@@ -78,10 +78,18 @@ abstract class MultipleTypeAdapter<Model : Any> : RecyclerView.Adapter<BaseViewH
         currentList.add(item)
         notifyItemInserted(currentList.size - 1)
     }
+    open fun add(item: Model,position: Int) {
+        currentList.add(item)
+        notifyItemInserted(position)
+    }
 
     open fun remove(item: Model) {
         val position = currentList.indexOf(item)
         currentList.remove(item)
+        notifyItemRemoved(position)
+    }
+    open fun remove(position: Int) {
+        currentList.removeAt(position)
         notifyItemRemoved(position)
     }
 

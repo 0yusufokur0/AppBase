@@ -16,7 +16,7 @@ import kotlin.collections.ArrayList
 abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
     private val layoutResource: Int,
     private val itemId: Int?,
-    private var currentList: ArrayList<Model> = arrayListOf(),
+    protected var currentList: ArrayList<Model> = arrayListOf(),
 ) : RecyclerView.Adapter<BaseViewHolder<Model, VDB>>() {
 
     private var itemClick: ((Model) -> Unit)? = null
@@ -69,6 +69,16 @@ abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
     open fun add(item: Model) {
         currentList.add(item)
         notifyItemInserted(currentList.size - 1)
+    }
+
+    open fun add(item: Model,position: Int) {
+        currentList.add(item)
+        notifyItemInserted(position)
+    }
+
+    open fun remove(position: Int) {
+        currentList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     open fun remove(item: Model) {
