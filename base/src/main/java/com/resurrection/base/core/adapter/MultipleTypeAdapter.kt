@@ -1,19 +1,74 @@
 package com.resurrection.base.core.adapter
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.Filter
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.internal.managers.ViewComponentManager
 import java.util.*
 
-abstract class BaseAdapter<Model : Any, VDB : ViewDataBinding>(
-    layoutResource: Int,
-    itemId: Int? = null,
-    private val currentList: ArrayList<Model> = arrayListOf(),
-) : CoreAdapter<Model, VDB>(layoutResource, itemId, currentList) {
+abstract class MultipleTypeAdapter<Model : Any> : RecyclerView.Adapter<BaseViewHolder<Model, ViewDataBinding>>() {
+
+    protected var currentList: ArrayList<Model> = arrayListOf()
+    private var layoutResource: Int = 0
+    private var itemClick: ((Model) -> Unit)? = null
+    private var itemLongClick: ((Model) -> Boolean)? = null
+    private lateinit var binding: ViewDataBinding
+    private var itemId: Int? = null
+
+    abstract fun getlayoutResourceAndBrId(item: Model): Pair<Int, Int?>
+    abstract fun getDiffUtilCallback(oldList: List<Model>, newList: List<Model>): DiffUtil.Callback?
+    abstract fun bindItem(binding: ViewDataBinding, item: Model)
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseViewHolder<Model, ViewDataBinding> {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        binding = DataBindingUtil.inflate(layoutInflater, layoutResource, parent, false)
+        return BaseViewHolder(binding, itemId, this::bindItem, itemClick, itemLongClick)
+    }
+
+    override fun onBindViewHolder(holder: BaseViewHolder<Model, ViewDataBinding>, position: Int) {
+        holder.bind(currentList[position])
+        holder.itemView.isLongClickable = true
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        val pair = getlayoutResourceAndBrId(currentList.get(position))
+        layoutResource = pair.first
+        itemId = pair.second
+        return position
+    }
+
+    override fun getItemCount() = currentList.size
+
+    open fun setOnItemClickListener(itemClick: (Model) -> Unit) {
+        this.itemClick = itemClick
+    }
+
+    open fun setOnItemLongClickListener(itemLongClick: (Model) -> Boolean) {
+        this.itemLongClick = itemLongClick
+    }
+
+    fun getActivityByView(): Activity {
+        val context = binding.root.context
+        val activity = when (context) {
+            is ViewComponentManager.FragmentContextWrapper -> context.baseContext
+            else -> context
+        }
+        return activity as Activity
+    }
 
     open fun addAll(list: List<Model>) {
-        val diffUtil = BaseDiffUtil(currentList, list)
+        val diffUtil = getDiffUtilCallback(currentList, list) ?: run {
+            BaseDiffUtil<Model>(currentList, list)
+        }
         val diffResult = DiffUtil.calculateDiff(diffUtil)
         currentList.addAll(list)
         diffResult.dispatchUpdatesTo(this)
@@ -23,10 +78,18 @@ abstract class BaseAdapter<Model : Any, VDB : ViewDataBinding>(
         currentList.add(item)
         notifyItemInserted(currentList.size - 1)
     }
+    open fun add(item: Model,position: Int) {
+        currentList.add(item)
+        notifyItemInserted(position)
+    }
 
     open fun remove(item: Model) {
         val position = currentList.indexOf(item)
         currentList.remove(item)
+        notifyItemRemoved(position)
+    }
+    open fun remove(position: Int) {
+        currentList.removeAt(position)
         notifyItemRemoved(position)
     }
 
@@ -51,13 +114,13 @@ abstract class BaseAdapter<Model : Any, VDB : ViewDataBinding>(
     open fun <R : Comparable<R>> sort(selector: (Model) -> R?) {
         val mutable = currentList.toMutableList()
         mutable.sortBy { selector(it) }
-        addAll(mutable.toList() as ArrayList<Model>)
+        addAll(mutable.toList() as java.util.ArrayList<Model>)
     }
 
     open fun <R> filterBy(constraint: CharSequence, selector: ((Model) -> R?)? = null) {
         val mFilter = object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val filteredList = ArrayList<Model>()
+                val filteredList = java.util.ArrayList<Model>()
                 if (constraint == null || constraint.isEmpty()) filteredList.addAll(currentList)
                 else {
                     val filterPattern =

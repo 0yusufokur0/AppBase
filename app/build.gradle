@@ -8,7 +8,7 @@ plugins {
 }
 apply plugin: 'kotlin-android'
 apply from: "scripts/setup_gradle.gradle"
-
+apply from: "scripts/setup_dependencies.gradle"
 android {
     compileSdk 33
 

@@ -2,13 +2,14 @@ package com.resurrection.base.extensions.delegated.navigation
 
 import android.app.Activity
 import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.resurrection.base.components.lifecycle.activity.ActivityComponent
 import com.resurrection.base.components.lifecycle.util.activityComponent
-import com.resurrection.base.core.activity.CoreActivity
 
-fun CoreActivity.navController(@IdRes id: Int) = activityComponent { (supportFragmentManager.findFragmentById(id) as NavHostFragment).navController }
+fun AppCompatActivity.navController(@IdRes id: Int): ActivityComponent<NavController> =
+    activityComponent { (supportFragmentManager.findFragmentById(id) as NavHostFragment).navController }
 
-fun Activity.navController(@IdRes id: Int): Lazy<NavController> =
-    lazy { findNavController(id) }
+fun Activity.navController(@IdRes id: Int): Lazy<NavController> = lazy { findNavController(id) }

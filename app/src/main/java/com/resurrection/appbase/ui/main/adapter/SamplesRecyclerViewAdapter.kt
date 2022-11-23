@@ -5,10 +5,10 @@ import com.resurrection.appbase.BR
 import com.resurrection.appbase.R
 import com.resurrection.appbase.data.model.sample.SampleModel
 import com.resurrection.appbase.databinding.ItemSampleBinding
-import com.resurrection.base.core.adapter.BaseAdapter
+import com.resurrection.base.core.adapter.CoreAdapter
 import com.resurrection.base.extensions.setHorizontalLinearLayoutManager
 
-class SamplesRecyclerViewAdapter : BaseAdapter<SampleModel, ItemSampleBinding>(
+class SamplesRecyclerViewAdapter : CoreAdapter<SampleModel, ItemSampleBinding>(
     layoutResource = R.layout.item_sample,
     itemId = BR.sampleItem
 ) {
@@ -40,4 +40,6 @@ class SamplesRecyclerViewAdapter : BaseAdapter<SampleModel, ItemSampleBinding>(
             enableTransitionType(LayoutTransition.CHANGING)
         }
     }
+
+    override fun getDiffUtilCallback(oldList: List<SampleModel>, newList: List<SampleModel>) = null
 }
