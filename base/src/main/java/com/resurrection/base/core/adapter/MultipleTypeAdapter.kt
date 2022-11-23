@@ -78,7 +78,7 @@ abstract class MultipleTypeAdapter<Model : Any> : RecyclerView.Adapter<BaseViewH
         currentList.add(item)
         notifyItemInserted(currentList.size - 1)
     }
-    open fun add(item: Model,position: Int) {
+    open fun add(item: Model, position: Int) {
         currentList.add(item)
         notifyItemInserted(position)
     }

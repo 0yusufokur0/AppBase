@@ -71,7 +71,7 @@ abstract class CoreAdapter<Model : Any, VDB : ViewDataBinding>(
         notifyItemInserted(currentList.size - 1)
     }
 
-    open fun add(item: Model,position: Int) {
+    open fun add(item: Model, position: Int) {
         currentList.add(item)
         notifyItemInserted(position)
     }
