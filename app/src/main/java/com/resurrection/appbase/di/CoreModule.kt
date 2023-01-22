@@ -2,11 +2,10 @@ package com.resurrection.appbase.di
 
 import android.content.Context
 import com.resurrection.base.components.appstate.AppState
-import com.resurrection.base.components.datastore.DataStoreManagerImpl
-import com.resurrection.base.components.typeconverter.TypeConverter
-import com.resurrection.base.components.dataholder.DataHolderManager
-import com.resurrection.base.components.dataholder.DataHolderManagerImpl
-import com.resurrection.base.components.datastore.DataStoreManager
+import com.resurrection.base.components.dataholder.DataHolder
+import com.resurrection.base.components.dataholder.DataHolderImpl
+import com.resurrection.base.components.datastore.DataStore
+import com.resurrection.base.components.datastore.DataStoreImpl
 import com.resurrection.base.components.logger.LoggerManager
 import com.resurrection.base.components.logger.LoggerManagerImpl
 import com.resurrection.base.components.network.NetworkManager
@@ -14,8 +13,9 @@ import com.resurrection.base.components.network.OkHttpClientManager
 import com.resurrection.base.components.security.BiometricManager
 import com.resurrection.base.components.security.CryptographyManager
 import com.resurrection.base.components.security.SecurityManager
-import com.resurrection.base.components.sharedpreferences.SharedPreferencesManager
-import com.resurrection.base.components.sharedpreferences.SharedPreferencesManagerImpl
+import com.resurrection.base.components.sharedpreferences.SharedPreferences
+import com.resurrection.base.components.sharedpreferences.SharedPreferencesImpl
+import com.resurrection.base.components.typeconverter.TypeConverter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,21 +31,26 @@ class CoreModule {
     @Singleton
     fun provideAppState(
         @ApplicationContext context: Context,
-        dataHolderManager: DataHolderManager,
+        dataHolder: DataHolder,
         networkManager: NetworkManager,
         securityManager: SecurityManager
-    ) = AppState(context, dataHolderManager, networkManager, securityManager)
+    ) = AppState(context, dataHolder, networkManager, securityManager)
 
     @Provides
     @Singleton
-    fun provideDataHolder(): DataHolderManager = DataHolderManagerImpl()
+    fun provideDataHolder(): DataHolder = DataHolderImpl()
 
     @Singleton
     @Provides
     fun provideSharedPreferencesManager(
         @ApplicationContext context: Context,
         typeConverter: TypeConverter
-    ): SharedPreferencesManager = SharedPreferencesManagerImpl(context, typeConverter)
+    ): SharedPreferences = SharedPreferencesImpl(
+        context.getSharedPreferences(
+            context.packageName,
+            Context.MODE_PRIVATE
+        )
+    )
 
     @Singleton
     @Provides
@@ -53,7 +58,8 @@ class CoreModule {
 
     @Singleton
     @Provides
-    fun provideLogger(@ApplicationContext context: Context): LoggerManager = LoggerManagerImpl(context)
+    fun provideLogger(@ApplicationContext context: Context): LoggerManager =
+        LoggerManagerImpl(context)
 
     @Singleton
     @Provides
@@ -73,7 +79,7 @@ class CoreModule {
 
     @Singleton
     @Provides
-    fun provideDataStoreManager(@ApplicationContext context: Context): DataStoreManager = DataStoreManagerImpl(context)
+    fun provideDataStoreManager(@ApplicationContext context: Context): DataStore = DataStoreImpl(context)
 
     @Singleton
     @Provides

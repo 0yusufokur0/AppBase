@@ -8,16 +8,4 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primary_color">#2F50F4</color>
-    <!--     <color name="primary_color">#00527D</color>
-     -->
-    <color name="asdasd">#3656F4</color>
-
-    <color name="gray">#DFDFDF</color>
-    <color name="red">#F44336</color>
-    <color name="green">#4CAF50</color>
-    <color name="light_green">#47DDB9</color>
-    <color name="light_red">#FF7373</color>
-    <color name="yellow">#FFFF00</color>
-
 </resources>
